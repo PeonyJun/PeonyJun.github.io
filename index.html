@@ -400,7 +400,7 @@
             const updateLogContainer = document.getElementById('update-log-container');
             const updateLogContent = document.getElementById('update-log-content');
             
-            const configUrl = 'https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/proxy/version.json';
+            const configUrl = 'https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/proxy/version.json';
             
             try {
                 const response = await fetch(`${configUrl}?t=${new Date().getTime()}`);
