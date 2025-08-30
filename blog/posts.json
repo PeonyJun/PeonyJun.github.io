@@ -9,5 +9,14 @@
     "status": "published",
     "createdAt": "2025-08-30T03:10:35.630Z",
     "updatedAt": "2025-08-30T03:10:35.630Z"
+  },
+  {
+    "id": "post_1756524506856",
+    "title": "无敌战神",
+    "content": "非常牛逼",
+    "tags": [],
+    "status": "published",
+    "createdAt": "2025-08-30T03:28:26.856Z",
+    "updatedAt": "2025-08-30T03:28:26.856Z"
   }
 ]
