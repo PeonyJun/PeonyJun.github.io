@@ -192,7 +192,7 @@
             };
             
             const setupAdminUI = () => {
-                document.getElementById('dashboard-view').innerHTML = `<div class="page-header"><h2>仪表盘</h2></div><div class="stats-grid"><div class="stat-card"><i class="fa-solid fa-file-alt"></i><div class="info"><h4>已发布文章</h4><p id="published-posts-count">0</p></div></div><div class="stat-card"><i class="fa-solid fa-pencil-ruler"></i><div class="info"><h4>草稿箱</h4><p id="draft-posts-count">0</p></div></div><div class="stat-card"><i class="fa-solid fa-images"></i><div class="info"><h4>媒体文件</h4><p id="media-count">0</p></div></div></div>`;
+                document.getElementById('dashboard-view').innerHTML = `<div class="card"><div class="page-header"><h2>仪表盘</h2></div><div class="stats-grid"><div class="stat-card"><i class="fa-solid fa-file-alt"></i><div class="info"><h4>已发布文章</h4><p id="published-posts-count">0</p></div></div><div class="stat-card"><i class="fa-solid fa-pencil-ruler"></i><div class="info"><h4>草稿箱</h4><p id="draft-posts-count">0</p></div></div><div class="stat-card"><i class="fa-solid fa-images"></i><div class="info"><h4>媒体文件</h4><p id="media-count">0</p></div></div></div></div>`;
                 document.getElementById('posts-view').innerHTML = `<div class="page-header"><h2>文章管理</h2><button id="new-post-btn"><i class="fa-solid fa-plus"></i> 撰写新文章</button></div><div class="card"><div class="admin-table-wrapper"><table class="admin-table"><thead><tr><th>标题</th><th>状态</th><th>发布日期</th><th class="actions">操作</th></tr></thead><tbody id="post-list"></tbody></table></div></div>`;
                 document.getElementById('media-view').innerHTML = `<div class="card"><div class="page-header"><h2>媒体库</h2></div><div id="media-library"></div></div>`;
                 document.getElementById('editor-container').innerHTML = `<div class="card"><h2 id="editor-title">撰写新文章</h2><input type="hidden" id="post-id"><div class="form-group"><label for="post-title">标题</label><input type="text" id="post-title"></div><div class="form-group"><label for="post-content">内容 (支持HTML)</label><textarea id="post-content" rows="15"></textarea></div><div class="form-group"><label for="post-tags">标签 (用英文逗号分隔)</label><input type="text" id="post-tags"></div><div class="form-group"><label for="image-upload">上传图片到文章</label><input type="file" id="image-upload" accept="image/*"></div><div id="editor-actions"><button id="save-draft-btn" class="btn-secondary"><i class="fa-solid fa-save"></i> 保存草稿</button><button id="publish-btn" class="btn-success"><i class="fa-solid fa-rocket"></i> 发布文章</button><button id="cancel-edit-btn">取消</button><button id="delete-post-btn" class="btn-danger" style="display:none; margin-left: auto;"><i class="fa-solid fa-trash"></i> 删除文章</button></div></div>`;
@@ -210,7 +210,7 @@
                 const headingSelect = document.getElementById('setting-font-heading');
                 bodySelect.innerHTML = '';
                 headingSelect.innerHTML = '';
-                googleFonts.forEach(font => {
+                googleFonts.sort().forEach(font => {
                     bodySelect.innerHTML += `<option value="${font}">${font}</option>`;
                     headingSelect.innerHTML += `<option value="${font}">${font}</option>`;
                 });
