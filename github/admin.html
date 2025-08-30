@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>博客管理后台</title>
     <style>
-:root{--primary-color:#4a90e2;--primary-hover:#357abd;--danger-color:#d0021b;--success-color:#7ed321;--bg-color:#f0f2f5;--text-color:#4a4a4a;--heading-color:#1a1a1a;--card-bg:#ffffff;--border-color:#e1e4e8;--sidebar-bg:#24292e;--sidebar-text:#e1e4e8;--sidebar-hover-bg:#3f4448;--font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--shadow-sm:0 1px 2px 0 rgba(0,0,0,0.05);--shadow:0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);--shadow-lg:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05)}body{font-family:var(--font-sans);margin:0;background-color:var(--bg-color);color:var(--text-color)}*{box-sizing:border-box}#login-view{display:flex;justify-content:center;align-items:center;height:100vh}.login-box{width:90%;max-width:400px;padding:40px;background:var(--card-bg);box-shadow:var(--shadow-lg);border-radius:12px;text-align:center}.login-box h1{color:var(--heading-color);margin-bottom:1rem}.login-box input{width:100%;padding:12px;margin-bottom:1.5rem;border:1px solid var(--border-color);border-radius:8px}.login-box button{width:100%;padding:12px;background:var(--primary-color);color:#fff;border:0;border-radius:8px;cursor:pointer;font-size:1rem;font-weight:600;transition:background .2s}.login-box button:hover{background:var(--primary-hover)}#admin-view{display:none}#app-header{background:var(--card-bg);padding:0 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow-sm);position:sticky;top:0;z-index:100}#logo{font-size:1.5rem;font-weight:600;color:var(--heading-color)}#main-nav{display:flex}#main-nav a{padding:20px 16px;color:var(--text-color);font-weight:500;border-bottom:3px solid transparent;transition:border-color .2s,color .2s}#main-nav a.active,#main-nav a:hover{color:var(--primary-color);border-bottom-color:var(--primary-color)}#user-menu{display:flex;align-items:center;gap:1rem;}#user-menu button{background:none;border:none;cursor:pointer;font-weight:600;color:var(--text-color)}#mobile-menu-btn{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer}@media(max-width:860px){#main-nav{display:none;position:absolute;top:100%;left:0;background:var(--card-bg);width:100%;flex-direction:column;border-top:1px solid var(--border-color);box-shadow:var(--shadow)}#main-nav.active{display:flex}#mobile-menu-btn{display:block}}#main-content{padding:24px}.view{display:none}.view.active{display:block}.card{background:var(--card-bg);border-radius:12px;box-shadow:var(--shadow);margin-bottom:24px;padding:24px}.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}.stat-card{text-align:center}.stat-card h4{color:#777;margin:0 0 10px}.stat-card p{font-size:2.5rem;font-weight:bold;margin:0;color:var(--primary-color)}.page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}h2{margin:0;color:var(--heading-color)}.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:none;border-radius:8px;background:var(--primary-color);color:#fff;cursor:pointer;font-weight:600;transition:background .2s}.btn:hover{background:var(--primary-hover)}.btn-danger{background:var(--danger-color);background-color:var(--danger-color)}.btn-success{background:var(--success-color);background-color:var(--success-color)}.btn-secondary{background-color:#a0aec0}table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:12px 15px;text-align:left;border-bottom:1px solid var(--border-color)}th{background:#f9fafb}.status-badge{padding:4px 10px;border-radius:16px;font-size:12px;font-weight:600}.status-published{background-color:#e6fffa;color:#38a169}.status-draft{background-color:#feebc8;color:#9c4221}.status-scheduled{background-color:#ebf4ff;color:#3182ce}.form-group{margin-bottom:1.5rem}.form-group label{display:block;margin-bottom:8px;font-weight:600}input[type=text],input[type=password],input[type=color],input[type=datetime-local],textarea,select{width:100%;padding:10px;border:1px solid var(--border-color);border-radius:6px}.editor-grid{display:grid;grid-template-columns:1fr 320px;gap:24px}@media(max-width:1024px){.editor-grid{grid-template-columns:1fr}}.editor-main{display:flex;flex-direction:column}.editor-sidebar .card{position:sticky;top:88px}.media-library{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem}.media-item{position:relative;border-radius:8px;overflow:hidden;box-shadow:var(--shadow-sm)}.media-item img{width:100%;height:120px;object-fit:cover;display:block}.media-overlay{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);color:#fff;padding:8px;font-size:12px;text-align:center;opacity:0;transition:opacity .2s;display:flex;gap:10px;justify-content:center;align-items:center}.media-item:hover .media-overlay{opacity:1}.media-overlay button{background:rgba(0,0,0,0.5);color:white;border:none;padding:5px;cursor:pointer;border-radius:4px}.toast-container{position:fixed;top:20px;right:20px;z-index:9999}.toast{background-color:#fff;padding:15px 20px;border-radius:8px;box-shadow:var(--shadow-lg);margin-bottom:10px;opacity:0;transform:translateX(100%);animation:slideIn .5s forwards}.toast.success{border-left:4px solid var(--success-color)}.toast.error{border-left:4px solid var(--danger-color)}@keyframes slideIn{to{opacity:1;transform:translateX(0)}}
+:root{--primary-color:#4a90e2;--primary-hover:#357abd;--danger-color:#d0021b;--success-color:#7ed321;--bg-color:#f0f2f5;--text-color:#4a4a4a;--heading-color:#1a1a1a;--card-bg:#ffffff;--border-color:#e1e4e8;--font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--shadow-sm:0 1px 2px 0 rgba(0,0,0,0.05);--shadow:0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);--shadow-lg:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05)}body{font-family:var(--font-sans);margin:0;background-color:var(--bg-color);color:var(--text-color)}*{box-sizing:border-box}#login-view{display:flex;justify-content:center;align-items:center;height:100vh}.login-box{width:90%;max-width:400px;padding:40px;background:var(--card-bg);box-shadow:var(--shadow-lg);border-radius:12px;text-align:center}.login-box h1{color:var(--heading-color);margin-bottom:1rem}.login-box input{width:100%;padding:12px;margin-bottom:1.5rem;border:1px solid var(--border-color);border-radius:8px}.login-box button{width:100%;padding:12px;background:var(--primary-color);color:#fff;border:0;border-radius:8px;cursor:pointer;font-size:1rem;font-weight:600;transition:background .2s}.login-box button:hover:not(:disabled){background:var(--primary-hover)}.login-box button:disabled{background-color:#a0aec0;cursor:not-allowed}#admin-view{display:none}#app-header{background:var(--card-bg);padding:0 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow-sm);position:sticky;top:0;z-index:100}#logo{font-size:1.5rem;font-weight:600;color:var(--heading-color)}#main-nav{display:flex}#main-nav a{padding:20px 16px;color:var(--text-color);font-weight:500;border-bottom:3px solid transparent;transition:border-color .2s,color .2s}#main-nav a.active,#main-nav a:hover{color:var(--primary-color);border-bottom-color:var(--primary-color)}#user-menu{display:flex;align-items:center;gap:1rem}#user-menu button{background:none;border:none;cursor:pointer;font-weight:600;color:var(--text-color)}#mobile-menu-btn{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer}@media(max-width:860px){#main-nav{display:none;position:absolute;top:100%;left:0;background:var(--card-bg);width:100%;flex-direction:column;border-top:1px solid var(--border-color);box-shadow:var(--shadow)}#main-nav.active{display:flex}#mobile-menu-btn{display:block}}#main-content{padding:24px}.view{display:none}.view.active{display:block}.card{background:var(--card-bg);border-radius:12px;box-shadow:var(--shadow);margin-bottom:24px;padding:24px}.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}.stat-card{text-align:center}.stat-card h4{color:#777;margin:0 0 10px}.stat-card p{font-size:2.5rem;font-weight:bold;margin:0;color:var(--primary-color)}.page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}h2{margin:0;color:var(--heading-color)}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border:none;border-radius:8px;background:var(--primary-color);color:#fff;cursor:pointer;font-weight:600;transition:background .2s}.btn:hover:not(:disabled){background:var(--primary-hover)}.btn:disabled{background-color:#a0aec0;cursor:not-allowed}.btn-danger{background-color:var(--danger-color)}.btn-success{background-color:var(--success-color)}.btn-secondary{background-color:#a0aec0}table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:12px 15px;text-align:left;border-bottom:1px solid var(--border-color)}th{background:#f9fafb}.status-badge{padding:4px 10px;border-radius:16px;font-size:12px;font-weight:600}.status-published{background-color:#e6fffa;color:#38a169}.status-draft{background-color:#feebc8;color:#9c4221}.status-scheduled{background-color:#ebf4ff;color:#3182ce}.form-group{margin-bottom:1.5rem}.form-group label{display:block;margin-bottom:8px;font-weight:600}input[type=text],input[type=password],input[type=color],input[type=datetime-local],textarea,select{width:100%;padding:10px;border:1px solid var(--border-color);border-radius:6px}.editor-grid{display:grid;grid-template-columns:1fr 320px;gap:24px}@media(max-width:1024px){.editor-grid{grid-template-columns:1fr}}.editor-main{display:flex;flex-direction:column}.editor-sidebar .card{position:sticky;top:88px}.media-library{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem}.media-item{position:relative;border-radius:8px;overflow:hidden;box-shadow:var(--shadow-sm)}.media-item img{width:100%;height:120px;object-fit:cover;display:block}.media-overlay{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);color:#fff;padding:8px;font-size:12px;text-align:center;opacity:0;transition:opacity .2s;display:flex;gap:10px;justify-content:center;align-items:center}.media-item:hover .media-overlay{opacity:1}.media-overlay button{background:rgba(0,0,0,0.5);color:white;border:none;padding:5px;cursor:pointer;border-radius:4px}.toast-container{position:fixed;top:20px;right:20px;z-index:9999}.toast{background-color:#fff;padding:15px 20px;border-radius:8px;box-shadow:var(--shadow-lg);margin-bottom:10px;opacity:0;transform:translateX(100%);animation:slideIn .5s forwards}.toast.success{border-left:4px solid var(--success-color)}.toast.error{border-left:4px solid var(--danger-color)}@keyframes slideIn{to{opacity:1;transform:translateX(0)}}
     </style>
 </head>
 <body>
@@ -16,7 +16,7 @@
         <p>请输入您的GitHub Personal Access Token。</p>
         <input type="password" id="token-input" placeholder="具备 repo 权限的Token">
         <button id="login-btn">登录</button>
-        <p id="login-message" style="color:red; margin-top: 15px;"></p>
+        <p id="login-message" style="color:var(--primary-color); margin-top: 15px;"></p>
     </div>
 </div>
 
@@ -111,26 +111,29 @@
 
 <script>
 const GitHubAPI = {
-    BASE_URL: 'https://api.github.com',
+    BASE_URL: 'https.api.github.com',
+    encodeContent: (str) => btoa(unescape(encodeURIComponent(str))),
+    decodeContent: (str) => decodeURIComponent(escape(atob(str))),
     async request(token, endpoint, options = {}) {
-        const url = `${this.BASE_URL}${endpoint}`;
+        const url = `https://${this.BASE_URL}${endpoint}`;
         const headers = { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', ...options.headers };
         const response = await fetch(url, { ...options, headers });
         if (!response.ok) {
+            if (response.status === 404) return null;
             const error = await response.json();
             throw new Error(error.message || 'API request failed');
         }
-        if (response.status === 204 || response.headers.get("Content-Length") === "0") return null;
+        if (response.status === 204 || response.headers.get("Content-Length") === "0") return { content: null };
         return response.json();
     },
     async getFile(token, owner, repo, path) {
-        try {
-            const result = await this.request(token, `/repos/${owner}/${repo}/contents/${path}`);
-            return { content: atob(result.content), sha: result.sha };
-        } catch (error) { if (error.message.includes('Not Found')) return null; throw error; }
+        const result = await this.request(token, `/repos/${owner}/${repo}/contents/${path}`);
+        if (!result) return null;
+        return { content: this.decodeContent(result.content), sha: result.sha };
     },
-    updateFile: (token, owner, repo, path, content, sha, message) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`, { method: 'PUT', body: JSON.stringify({ message, content: btoa(unescape(encodeURIComponent(content))), sha }) }),
-    createFile: (token, owner, repo, path, content, message, isBinary = false) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`, { method: 'PUT', body: JSON.stringify({ message, content: isBinary ? content : btoa(unescape(encodeURIComponent(content))) }) }),
+    updateFile: (token, owner, repo, path, content, sha, message) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`, { method: 'PUT', body: JSON.stringify({ message, content: GitHubAPI.encodeContent(content), sha }) }),
+    createFile: (token, owner, repo, path, content, message) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`, { method: 'PUT', body: JSON.stringify({ message, content: GitHubAPI.encodeContent(content) }) }),
+    createBinaryFile: (token, owner, repo, path, content, message) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`, { method: 'PUT', body: JSON.stringify({ message, content }) }),
     deleteFile: (token, owner, repo, path, sha, message) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`, { method: 'DELETE', body: JSON.stringify({ message, sha }) }),
     getDirectory: (token, owner, repo, path) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`)
 };
@@ -142,12 +145,15 @@ const AdminApp = {
     init() {
         this.token = localStorage.getItem('github_token');
         if (this.token) this.start();
-        document.getElementById('login-btn').onclick = () => {
+        
+        const loginBtn = document.getElementById('login-btn');
+        loginBtn.onclick = () => {
             const tokenInput = document.getElementById('token-input').value;
             if(tokenInput) {
+                this.setLoading(loginBtn, true, '登录中...');
                 localStorage.setItem('github_token', tokenInput);
                 this.token = tokenInput;
-                this.start();
+                this.start().finally(() => this.setLoading(loginBtn, false, '登录'));
             }
         };
         document.getElementById('logout-btn').onclick = () => {
@@ -159,11 +165,12 @@ const AdminApp = {
     async start() {
         try {
             const user = await GitHubAPI.request(this.token, '/user');
+            if(!user) throw new Error('无效的Token');
             this.owner = user.login;
             this.repo = `${this.owner}.github.io`;
             this.basePath = window.location.pathname.split('/').filter(p => p && !p.endsWith('.html')).join('/');
             
-            await this.loadData();
+            await this.initializeOrLoadData();
             
             document.getElementById('login-view').style.display = 'none';
             document.getElementById('admin-view').style.display = 'block';
@@ -173,36 +180,62 @@ const AdminApp = {
             this.renderPostList();
             this.renderPageList();
         } catch (error) {
-            document.getElementById('login-message').textContent = `登录失败: ${error.message}`;
+            document.getElementById('login-message').textContent = `错误: ${error.message}`;
             localStorage.removeItem('github_token');
         }
     },
 
-    getPath: (fileName) => AdminApp.basePath ? `${AdminApp.basePath}/${fileName}` : fileName,
-    
-    async loadData() {
-        const [configResult, postsResult] = await Promise.all([
-            GitHubAPI.getFile(this.token, this.owner, this.repo, this.getPath('config.json')),
-            GitHubAPI.getFile(this.token, this.owner, this.repo, this.getPath('posts.json'))
-        ]);
+    async initializeOrLoadData() {
+        const loginMessage = document.getElementById('login-message');
+        loginMessage.textContent = '正在检查配置...';
+        const configPath = this.getPath('config.json');
         
-        if (configResult) {
-            this.config = JSON.parse(decodeURIComponent(escape(configResult.content)));
+        let configResult = await GitHubAPI.getFile(this.token, this.owner, this.repo, configPath);
+
+        if (!configResult) {
+            loginMessage.textContent = '首次运行，正在为您初始化博客...';
+            const defaultConfig = {
+                site: { title: `${this.owner}的博客`, description: "由GitHub驱动的博客" },
+                styling: { accentColor: "#4a90e2" },
+                comments: { repo: "", repoId: "", category: "", categoryId: "" },
+                advanced: { customCss: "" }
+            };
+            const defaultPosts = { posts: [], pages: [] };
+
+            const [configRes, postsRes] = await Promise.all([
+                GitHubAPI.createFile(this.token, this.owner, this.repo, configPath, JSON.stringify(defaultConfig, null, 2), 'feat: initialize blog configuration'),
+                GitHubAPI.createFile(this.token, this.owner, this.repo, this.getPath('posts.json'), JSON.stringify(defaultPosts, null, 2), 'feat: initialize posts database'),
+                GitHubAPI.createFile(this.token, this.owner, this.repo, this.getPath('images/.gitkeep'), '', 'feat: initialize images directory')
+            ]);
+            
+            this.config = defaultConfig;
+            this.configSha = configRes.content.sha;
+            this.postsData = defaultPosts;
+            this.postsSha = postsRes.content.sha;
+            loginMessage.textContent = '初始化成功!';
+        } else {
+            loginMessage.textContent = '配置加载成功，正在读取数据...';
+            this.config = JSON.parse(configResult.content);
             this.configSha = configResult.sha;
-        }
-        if (postsResult) {
-            this.postsData = JSON.parse(decodeURIComponent(escape(postsResult.content)));
-            this.postsSha = postsResult.sha;
+            const postsResult = await GitHubAPI.getFile(this.token, this.owner, this.repo, this.getPath('posts.json'));
+            if(postsResult){
+                this.postsData = JSON.parse(postsResult.content);
+                this.postsSha = postsResult.sha;
+            } else {
+                this.postsData = { posts: [], pages: [] };
+                this.postsSha = null; 
+            }
         }
         if (!this.postsData.pages) this.postsData.pages = [];
     },
     
+    getPath: (fileName) => AdminApp.basePath ? `${AdminApp.basePath}/${fileName}` : fileName,
+
     showView(viewId) {
         document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
         document.getElementById(`${viewId}-view`).classList.add('active');
         document.querySelectorAll('#main-nav a').forEach(a => a.classList.toggle('active', a.dataset.view === viewId));
-        const mobileNav = document.getElementById('main-nav');
-        if(mobileNav.classList.contains('active')) mobileNav.classList.remove('active');
+        document.getElementById('main-nav').classList.remove('active');
     },
 
     setupEventListeners() {
@@ -220,26 +253,47 @@ const AdminApp = {
         });
 
         document.getElementById('main-content').addEventListener('click', e => {
-            let btn;
-            if (btn = e.target.closest('#new-post-btn')) this.openEditor('post');
-            else if (btn = e.target.closest('#new-page-btn')) this.openEditor('page');
-            else if (btn = e.target.closest('#save-post-btn')) this.savePost();
-            else if (btn = e.target.closest('#save-settings-btn')) this.saveSettings();
-            else if (btn = e.target.closest('.edit-post-btn')) this.openEditor('post', btn.dataset.id);
-            else if (btn = e.target.closest('.edit-page-btn')) this.openEditor('page', btn.dataset.id);
-            else if (btn = e.target.closest('.copy-url-btn')) {
-                 navigator.clipboard.writeText(btn.dataset.url);
-                 this.showToast('URL已复制');
-            }
-            else if (btn = e.target.closest('.delete-img-btn')) {
-                 if(confirm('确定删除此图片吗？')) this.deleteImage(btn.dataset.path, btn.dataset.sha);
+            const btn = e.target.closest('button, label[for="image-upload-input"]');
+            if(!btn) return;
+
+            const handlers = {
+                'new-post-btn': () => this.openEditor('post'),
+                'new-page-btn': () => this.openEditor('page'),
+                'save-post-btn': () => this.savePost(btn),
+                'save-settings-btn': () => this.saveSettings(btn),
+                'edit-post-btn': () => this.openEditor('post', btn.dataset.id),
+                'edit-page-btn': () => this.openEditor('page', btn.dataset.id),
+                'copy-url-btn': () => {
+                     navigator.clipboard.writeText(btn.dataset.url);
+                     this.showToast('URL已复制');
+                },
+                'delete-img-btn': () => {
+                     if(confirm('确定删除此图片吗？')) this.deleteImage(btn, btn.dataset.path, btn.dataset.sha);
+                }
+            };
+            if (handlers[btn.id] || handlers[btn.classList[1]]) {
+                 (handlers[btn.id] || handlers[btn.classList[1]])();
             }
         });
         
         document.getElementById('post-status').onchange = (e) => {
             document.getElementById('publish-date-group').style.display = e.target.value === 'scheduled' ? 'block' : 'none';
         };
-        document.getElementById('image-upload-input').onchange = (e) => this.uploadImage(e.target.files[0]);
+        document.getElementById('image-upload-input').onchange = (e) => this.uploadImage(e.target.files[0], e.target.previousElementSibling);
+        
+        const titleInput = document.getElementById('post-title');
+        const slugInput = document.getElementById('post-slug');
+        let slugManuallyEdited = false;
+        slugInput.addEventListener('input', () => slugManuallyEdited = true);
+        titleInput.addEventListener('input', () => {
+            if (!slugManuallyEdited) {
+                slugInput.value = this.slugify(titleInput.value);
+            }
+        });
+        document.getElementById('new-post-btn').addEventListener('click', () => slugManuallyEdited = false);
+        document.querySelector('.page-header').addEventListener('click', (e) => {
+            if(e.target.matches('#new-page-btn')) slugManuallyEdited = false;
+        })
     },
     
     updateDashboard() {
@@ -247,52 +301,61 @@ const AdminApp = {
         document.getElementById('draft-posts-count').textContent = this.postsData.posts.filter(p => p.status === 'draft').length;
         document.getElementById('pages-count').textContent = this.postsData.pages.length;
         GitHubAPI.getDirectory(this.token, this.owner, this.repo, this.getPath('images'))
-            .then(files => document.getElementById('media-count').textContent = files.filter(f=>f.type==='file').length)
+            .then(files => {
+                if(files) document.getElementById('media-count').textContent = files.filter(f => f.type === 'file' && f.name !== '.gitkeep').length;
+            })
             .catch(() => document.getElementById('media-count').textContent = 'N/A');
     },
 
+    renderList(tbodyId, data, rowTemplate) {
+        const list = document.getElementById(tbodyId);
+        if (!list) return;
+        const sortedData = data.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+        list.innerHTML = sortedData.map(rowTemplate).join('');
+    },
+
     renderPostList() {
-        const list = document.getElementById('post-list');
-        list.innerHTML = this.postsData.posts
-            .sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
-            .map(post => `
-                <tr>
-                    <td>${post.title}</td>
-                    <td><span class="status-badge status-${post.status}">${post.status}</span></td>
-                    <td>${new Date(post.createdAt).toLocaleDateString()}</td>
-                    <td><button class="btn btn-secondary edit-post-btn" data-id="${post.id}">编辑</button></td>
-                </tr>
-            `).join('');
+        this.renderList('post-list', this.postsData.posts, post => `
+            <tr>
+                <td>${post.title}</td>
+                <td><span class="status-badge status-${post.status}">${post.status}</span></td>
+                <td>${new Date(post.createdAt).toLocaleDateString()}</td>
+                <td><button class="btn btn-secondary edit-post-btn" data-id="${post.id}">编辑</button></td>
+            </tr>`);
     },
 
     renderPageList() {
-        const list = document.getElementById('page-list');
-        list.innerHTML = this.postsData.pages.map(page => `
+        this.renderList('page-list', this.postsData.pages, page => `
             <tr>
                 <td>${page.title}</td>
                 <td>/${page.slug}</td>
                 <td><button class="btn btn-secondary edit-page-btn" data-id="${page.id}">编辑</button></td>
-            </tr>
-        `).join('');
+            </tr>`);
     },
 
     openEditor(type, id = null) {
         const isPost = type === 'post';
         const collection = isPost ? this.postsData.posts : this.postsData.pages;
-        const item = collection.find(p => p.id === id);
+        const item = id ? collection.find(p => p.id === id) : null;
         
         document.getElementById('editor-title').textContent = id ? `编辑${isPost?'文章':'页面'}` : `创建新${isPost?'文章':'页面'}`;
+        const fields = ['id','type','title','slug','content','tags','cover-image','meta-desc','status'];
+        fields.forEach(f => {
+            const el = document.getElementById(`post-${f}`);
+            if(el) el.value = '';
+        });
+        document.getElementById('post-pinned').checked = false;
+
         document.getElementById('post-id').value = item?.id || '';
         document.getElementById('post-type').value = type;
         document.getElementById('post-title').value = item?.title || '';
         document.getElementById('post-slug').value = item?.slug || '';
         document.getElementById('post-content').value = item?.content || '';
 
-        const postOnlyElements = ['post-tags', 'post-cover-image', 'post-pinned', 'post-meta-desc', 'post-status', 'publish-date-group'];
+        const postOnlyElements = ['tags','cover-image','pinned','meta-desc','status','publish-date-group'];
         postOnlyElements.forEach(elId => {
-            const element = document.getElementById(elId);
-            const label = document.querySelector(`label[for=${elId}]`);
-            const container = element.closest('.form-group') || element.parentElement;
+            const element = document.getElementById(`post-${elId}`) || document.getElementById(elId);
+            const container = element.closest('.form-group');
             if (container) container.style.display = isPost ? '' : 'none';
         });
 
@@ -312,131 +375,175 @@ const AdminApp = {
         this.showView('editor');
     },
 
-    async savePost() {
-        const id = document.getElementById('post-id').value;
-        const type = document.getElementById('post-type').value;
-        const isPost = type === 'post';
-        
-        let itemData = {
-            title: document.getElementById('post-title').value,
-            slug: document.getElementById('post-slug').value.trim() || this.slugify(document.getElementById('post-title').value),
-            content: document.getElementById('post-content').value,
-            updatedAt: new Date().toISOString()
-        };
-        if(isPost) {
-            Object.assign(itemData, {
-                tags: document.getElementById('post-tags').value.split(',').map(t => t.trim()).filter(Boolean),
-                coverImage: document.getElementById('post-cover-image').value.trim(),
-                pinned: document.getElementById('post-pinned').checked,
-                metaDescription: document.getElementById('post-meta-desc').value.trim(),
-                status: document.getElementById('post-status').value
-            });
-            if(itemData.status === 'scheduled') {
-                itemData.publishAt = new Date(document.getElementById('post-publish-date').value).toISOString();
-            }
-        }
-
-        const collection = isPost ? this.postsData.posts : this.postsData.pages;
-        const itemIndex = collection.findIndex(i => i.id === id);
-
-        if(itemIndex > -1) {
-            Object.assign(collection[itemIndex], itemData);
-        } else {
-            itemData.id = `${type}_${Date.now()}`;
-            itemData.createdAt = new Date().toISOString();
-            collection.push(itemData);
-        }
-
+    async savePost(btn) {
+        this.setLoading(btn, true);
         try {
-            const message = `docs: ${id ? 'update' : 'create'} ${type} ${itemData.title}`;
-            const res = await GitHubAPI.updateFile(this.token, this.owner, this.repo, this.getPath('posts.json'), JSON.stringify(this.postsData, null, 2), this.postsSha, message);
+            const id = document.getElementById('post-id').value;
+            const type = document.getElementById('post-type').value;
+            const isPost = type === 'post';
+            
+            let itemData = {
+                title: document.getElementById('post-title').value.trim(),
+                slug: document.getElementById('post-slug').value.trim() || this.slugify(document.getElementById('post-title').value),
+                content: document.getElementById('post-content').value,
+                updatedAt: new Date().toISOString()
+            };
+            if(!itemData.title) {
+                this.showToast('标题不能为空', 'error');
+                return;
+            }
+
+            if(isPost) {
+                Object.assign(itemData, {
+                    tags: document.getElementById('post-tags').value.split(',').map(t => t.trim()).filter(Boolean),
+                    coverImage: document.getElementById('post-cover-image').value.trim(),
+                    pinned: document.getElementById('post-pinned').checked,
+                    metaDescription: document.getElementById('post-meta-desc').value.trim(),
+                    status: document.getElementById('post-status').value
+                });
+                if(itemData.status === 'scheduled') {
+                    const dateVal = document.getElementById('post-publish-date').value;
+                    if(!dateVal) { this.showToast('请选择定时发布时间', 'error'); return; }
+                    itemData.publishAt = new Date(dateVal).toISOString();
+                }
+            }
+
+            const collection = isPost ? this.postsData.posts : this.postsData.pages;
+            const itemIndex = id ? collection.findIndex(i => i.id === id) : -1;
+
+            if(itemIndex > -1) {
+                Object.assign(collection[itemIndex], itemData);
+            } else {
+                itemData.id = `${type}_${Date.now()}`;
+                itemData.createdAt = new Date().toISOString();
+                collection.push(itemData);
+            }
+
+            const res = await GitHubAPI.updateFile(this.token, this.owner, this.repo, this.getPath('posts.json'), JSON.stringify(this.postsData, null, 2), this.postsSha, `docs: ${id ? 'update' : 'create'} ${type} ${itemData.title}`);
             this.postsSha = res.content.sha;
+            
             this.showToast('保存成功');
             if(isPost) this.renderPostList(); else this.renderPageList();
             this.updateDashboard();
             this.showView(isPost ? 'posts' : 'pages');
         } catch(error) {
             this.showToast(`保存失败: ${error.message}`, 'error');
+        } finally {
+            this.setLoading(btn, false);
         }
     },
     
-    slugify: text => text.toString().toLowerCase().trim()
-        .replace(/\s+/g, '-')
-        .replace(/[^\w\-]+/g, '')
-        .replace(/\-\-+/g, '-'),
+    slugify: text => text.toString().toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-'),
 
     async renderMediaLibrary() {
         const libraryEl = document.getElementById('media-library');
         libraryEl.innerHTML = '<p>加载中...</p>';
         try {
             const files = await GitHubAPI.getDirectory(this.token, this.owner, this.repo, this.getPath('images'));
-            libraryEl.innerHTML = files.filter(f=>f.type==='file').map(file => `
+            if(!files) {
+                 libraryEl.innerHTML = '<p>媒体库为空。请上传第一张图片。</p>';
+                 return;
+            }
+            libraryEl.innerHTML = files.filter(f=>f.type==='file' && f.name !== '.gitkeep').map(file => `
                 <div class="media-item">
-                    <img src="${file.download_url}" alt="${file.name}">
+                    <img src="${file.download_url}" alt="${file.name}" loading="lazy">
                     <div class="media-overlay">
                         <button class="copy-url-btn" title="复制URL" data-url="${file.download_url}">📋</button>
                         <button class="delete-img-btn" title="删除图片" data-path="${file.path}" data-sha="${file.sha}">🗑️</button>
                     </div>
                 </div>
             `).join('');
-        } catch (error) { libraryEl.innerHTML = `<p>加载媒体库失败: ${error.message}</p>`;}
+        } catch (error) { libraryEl.innerHTML = `<p style="color:red">加载媒体库失败: ${error.message}</p>`;}
     },
 
-    async uploadImage(file) {
+    async uploadImage(file, btn) {
         if (!file) return;
+        this.setLoading(btn, true, '上传中...');
         const reader = new FileReader();
         reader.onload = async (e) => {
             const content = e.target.result.split(',')[1];
             const path = this.getPath(`images/${Date.now()}_${file.name}`);
             try {
-                await GitHubAPI.createFile(this.token, this.owner, this.repo, path, content, 'feat: upload image', true);
+                await GitHubAPI.createBinaryFile(this.token, this.owner, this.repo, path, content, `feat: upload image ${file.name}`);
                 this.showToast('图片上传成功');
-                this.renderMediaLibrary();
+                await this.renderMediaLibrary();
                 this.updateDashboard();
-            } catch (error) { this.showToast(`上传失败: ${error.message}`, 'error'); }
+            } catch (error) { 
+                this.showToast(`上传失败: ${error.message}`, 'error'); 
+            } finally {
+                this.setLoading(btn, false, '上传图片');
+            }
         };
         reader.readAsDataURL(file);
     },
 
-    async deleteImage(path, sha) {
+    async deleteImage(btn, path, sha) {
+        this.setLoading(btn, true);
         try {
-            await GitHubAPI.deleteFile(this.token, this.owner, this.repo, path, sha, 'feat: delete image');
+            await GitHubAPI.deleteFile(this.token, this.owner, this.repo, path, sha, `feat: delete image ${path}`);
             this.showToast('图片删除成功');
-            this.renderMediaLibrary();
+            await this.renderMediaLibrary();
             this.updateDashboard();
-        } catch(error) { this.showToast(`删除失败: ${error.message}`, 'error'); }
+        } catch(error) { 
+            this.showToast(`删除失败: ${error.message}`, 'error');
+            this.setLoading(btn, false);
+        }
     },
     
     populateSettings() {
-        document.getElementById('setting-title').value = this.config.site.title;
-        document.getElementById('setting-description').value = this.config.site.description;
-        document.getElementById('setting-accent-color').value = this.config.styling.accentColor;
-        document.getElementById('setting-comments-repo').value = this.config.comments.repo;
-        document.getElementById('setting-comments-repoid').value = this.config.comments.repoId;
-        document.getElementById('setting-comments-category').value = this.config.comments.category;
-        document.getElementById('setting-comments-categoryid').value = this.config.comments.categoryId;
-        document.getElementById('setting-custom-css').value = this.config.advanced?.customCss || '';
+        const c = this.config;
+        document.getElementById('setting-title').value = c.site.title;
+        document.getElementById('setting-description').value = c.site.description;
+        document.getElementById('setting-accent-color').value = c.styling.accentColor;
+        document.getElementById('setting-comments-repo').value = c.comments.repo;
+        document.getElementById('setting-comments-repoid').value = c.comments.repoId;
+        document.getElementById('setting-comments-category').value = c.comments.category;
+        document.getElementById('setting-comments-categoryid').value = c.comments.categoryId;
+        document.getElementById('setting-custom-css').value = c.advanced?.customCss || '';
     },
 
-    async saveSettings() {
-        const newConfig = JSON.parse(JSON.stringify(this.config));
-        newConfig.site.title = document.getElementById('setting-title').value;
-        newConfig.site.description = document.getElementById('setting-description').value;
-        newConfig.styling.accentColor = document.getElementById('setting-accent-color').value;
-        newConfig.comments.repo = document.getElementById('setting-comments-repo').value;
-        newConfig.comments.repoId = document.getElementById('setting-comments-repoid').value;
-        newConfig.comments.category = document.getElementById('setting-comments-category').value;
-        newConfig.comments.categoryId = document.getElementById('setting-comments-categoryid').value;
-        if(!newConfig.advanced) newConfig.advanced = {};
-        newConfig.advanced.customCss = document.getElementById('setting-custom-css').value;
-
+    async saveSettings(btn) {
+        this.setLoading(btn, true);
         try {
+            const newConfig = {
+                site: {
+                    title: document.getElementById('setting-title').value,
+                    description: document.getElementById('setting-description').value,
+                },
+                styling: {
+                    accentColor: document.getElementById('setting-accent-color').value,
+                },
+                comments: {
+                    repo: document.getElementById('setting-comments-repo').value,
+                    repoId: document.getElementById('setting-comments-repoid').value,
+                    category: document.getElementById('setting-comments-category').value,
+                    categoryId: document.getElementById('setting-comments-categoryid').value,
+                },
+                advanced: {
+                    customCss: document.getElementById('setting-custom-css').value
+                }
+            };
+            
             const res = await GitHubAPI.updateFile(this.token, this.owner, this.repo, this.getPath('config.json'), JSON.stringify(newConfig, null, 2), this.configSha, 'docs: update config');
             this.configSha = res.content.sha;
             this.config = newConfig;
             this.showToast('设置已保存');
         } catch(error) {
             this.showToast(`保存失败: ${error.message}`, 'error');
+        } finally {
+            this.setLoading(btn, false);
+        }
+    },
+
+    setLoading(button, isLoading, text = null) {
+        if (!button) return;
+        if (isLoading) {
+            button.disabled = true;
+            button.dataset.originalText = button.textContent;
+            button.textContent = text || '加载中...';
+        } else {
+            button.disabled = false;
+            button.textContent = text || button.dataset.originalText;
         }
     },
 
@@ -452,6 +559,5 @@ const AdminApp = {
 
 AdminApp.init();
 </script>
-
 </body>
 </html>
