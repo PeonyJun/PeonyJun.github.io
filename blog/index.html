@@ -82,6 +82,10 @@
                 localStorage.setItem('theme', newTheme);
                 applyTheme(newTheme);
             });
+            
+            const sanitizeContent = (html) => {
+                return html.replace(/<\/script>/gi, '<\\/script>');
+            };
 
             const renderPostList = (postsToRender) => {
                 postsListView.innerHTML = '';
@@ -92,16 +96,16 @@
                         const postEl = document.createElement('article');
                         postEl.className = 'post-card';
                         
+                        const sanitizedContent = sanitizeContent(post.content);
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = sanitizedContent;
+                        
                         let summary = '';
                         const moreMarker = '<!--more-->';
-                        const content = post.content;
-                        const markerIndex = content.indexOf(moreMarker);
-                        
-                        const tempDiv = document.createElement('div');
-                        tempDiv.innerHTML = content;
+                        const markerIndex = sanitizedContent.indexOf(moreMarker);
                         
                         if (markerIndex !== -1) {
-                            summary = content.substring(0, markerIndex);
+                            summary = sanitizedContent.substring(0, markerIndex);
                         } else {
                             summary = tempDiv.textContent.substring(0, 120) + (tempDiv.textContent.length > 120 ? '...' : '');
                         }
@@ -153,9 +157,11 @@
                                 data-loading="lazy"
                                 crossorigin="anonymous"
                                 async>
-                            </script>
+                            <\/script>
                         </section>` : '';
                     
+                    const finalContent = sanitizeContent(post.content.replace('<!--more-->', ''));
+
                     postDetailView.innerHTML = `
                         <article class="post-full">
                             <header class="post-full-header">
@@ -165,7 +171,7 @@
                                     ${post.tags && post.tags.length > 0 ? `| 标签: ${post.tags.join(', ')}` : ''}
                                 </p>
                             </header>
-                            <section class="post-full-content">${post.content.replace('<!--more-->', '')}</section>
+                            <section class="post-full-content">${finalContent}</section>
                             ${giscusHtml}
                             <a href="#" class="back-to-home">&larr; 返回首页</a>
                         </article>
@@ -214,6 +220,7 @@
             
             const updateReadingProgress = () => {
                 const progressBar = document.getElementById('reading-progress-bar');
+                if (!progressBar) return;
                 const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
                 const scrolled = (window.scrollY / scrollableHeight) * 100;
                 progressBar.style.width = `${scrolled}%`;
