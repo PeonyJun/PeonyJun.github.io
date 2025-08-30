@@ -5,16 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>博客管理后台</title>
     <style>
-:root{--primary-color:#4a90e2;--primary-hover:#357abd;--danger-color:#d0021b;--success-color:#7ed321;--bg-color:#f0f2f5;--text-color:#4a4a4a;--heading-color:#1a1a1a;--card-bg:#ffffff;--border-color:#e1e4e8;--font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--shadow-sm:0 1px 2px 0 rgba(0,0,0,0.05);--shadow:0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);--shadow-lg:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05)}body{font-family:var(--font-sans);margin:0;background-color:var(--bg-color);color:var(--text-color)}*{box-sizing:border-box}#login-view{display:flex;justify-content:center;align-items:center;height:100vh}.login-box{width:90%;max-width:400px;padding:40px;background:var(--card-bg);box-shadow:var(--shadow-lg);border-radius:12px;text-align:center}.login-box h1{color:var(--heading-color);margin-bottom:1rem}.login-box input{width:100%;padding:12px;margin-bottom:1.5rem;border:1px solid var(--border-color);border-radius:8px}.login-box button{width:100%;padding:12px;background:var(--primary-color);color:#fff;border:0;border-radius:8px;cursor:pointer;font-size:1rem;font-weight:600;transition:background .2s}.login-box button:hover:not(:disabled){background:var(--primary-hover)}.login-box button:disabled{background-color:#a0aec0;cursor:not-allowed}#admin-view{display:none}#app-header{background:var(--card-bg);padding:0 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow-sm);position:sticky;top:0;z-index:100}#logo{font-size:1.5rem;font-weight:600;color:var(--heading-color)}#main-nav{display:flex}#main-nav a{padding:20px 16px;color:var(--text-color);font-weight:500;border-bottom:3px solid transparent;transition:border-color .2s,color .2s}#main-nav a.active,#main-nav a:hover{color:var(--primary-color);border-bottom-color:var(--primary-color)}#user-menu{display:flex;align-items:center;gap:1rem}#user-menu button{background:none;border:none;cursor:pointer;font-weight:600;color:var(--text-color)}#mobile-menu-btn{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer}@media(max-width:860px){#main-nav{display:none;position:absolute;top:100%;left:0;background:var(--card-bg);width:100%;flex-direction:column;border-top:1px solid var(--border-color);box-shadow:var(--shadow)}#main-nav.active{display:flex}#mobile-menu-btn{display:block}}#main-content{padding:24px}.view{display:none}.view.active{display:block}.card{background:var(--card-bg);border-radius:12px;box-shadow:var(--shadow);margin-bottom:24px;padding:24px}.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}.stat-card{text-align:center}.stat-card h4{color:#777;margin:0 0 10px}.stat-card p{font-size:2.5rem;font-weight:bold;margin:0;color:var(--primary-color)}.page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}h2{margin:0;color:var(--heading-color)}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border:none;border-radius:8px;background:var(--primary-color);color:#fff;cursor:pointer;font-weight:600;transition:background .2s}.btn:hover:not(:disabled){background:var(--primary-hover)}.btn:disabled{background-color:#a0aec0;cursor:not-allowed}.btn-danger{background-color:var(--danger-color)}.btn-success{background-color:var(--success-color)}.btn-secondary{background-color:#a0aec0}table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:12px 15px;text-align:left;border-bottom:1px solid var(--border-color)}th{background:#f9fafb}.status-badge{padding:4px 10px;border-radius:16px;font-size:12px;font-weight:600}.status-published{background-color:#e6fffa;color:#38a169}.status-draft{background-color:#feebc8;color:#9c4221}.status-scheduled{background-color:#ebf4ff;color:#3182ce}.form-group{margin-bottom:1.5rem}.form-group label{display:block;margin-bottom:8px;font-weight:600}input[type=text],input[type=password],input[type=color],input[type=datetime-local],textarea,select{width:100%;padding:10px;border:1px solid var(--border-color);border-radius:6px}.editor-grid{display:grid;grid-template-columns:1fr 320px;gap:24px}@media(max-width:1024px){.editor-grid{grid-template-columns:1fr}}.editor-main{display:flex;flex-direction:column}.editor-sidebar .card{position:sticky;top:88px}.media-library{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem}.media-item{position:relative;border-radius:8px;overflow:hidden;box-shadow:var(--shadow-sm)}.media-item img{width:100%;height:120px;object-fit:cover;display:block}.media-overlay{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);color:#fff;padding:8px;font-size:12px;text-align:center;opacity:0;transition:opacity .2s;display:flex;gap:10px;justify-content:center;align-items:center}.media-item:hover .media-overlay{opacity:1}.media-overlay button{background:rgba(0,0,0,0.5);color:white;border:none;padding:5px;cursor:pointer;border-radius:4px}.toast-container{position:fixed;top:20px;right:20px;z-index:9999}.toast{background-color:#fff;padding:15px 20px;border-radius:8px;box-shadow:var(--shadow-lg);margin-bottom:10px;opacity:0;transform:translateX(100%);animation:slideIn .5s forwards}.toast.success{border-left:4px solid var(--success-color)}.toast.error{border-left:4px solid var(--danger-color)}@keyframes slideIn{to{opacity:1;transform:translateX(0)}}
+:root{--primary-color:#4a90e2;--primary-hover:#357abd;--danger-color:#d0021b;--success-color:#7ed321;--bg-color:#f0f2f5;--text-color:#4a4a4a;--heading-color:#1a1a1a;--card-bg:#ffffff;--border-color:#e1e4e8;--font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--shadow-sm:0 1px 2px 0 rgba(0,0,0,0.05);--shadow:0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);--shadow-lg:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05)}body{font-family:var(--font-sans);margin:0;background-color:var(--bg-color);color:var(--text-color)}*{box-sizing:border-box}#login-view{display:flex;justify-content:center;align-items:center;height:100vh}.login-box{width:90%;max-width:400px;padding:40px;background:var(--card-bg);box-shadow:var(--shadow-lg);border-radius:12px;text-align:center}.login-box h1{color:var(--heading-color);margin-bottom:1rem}.login-box input{width:100%;padding:12px;margin-bottom:1.5rem;border:1px solid var(--border-color);border-radius:8px}.login-box button{width:100%;padding:12px;background:var(--primary-color);color:#fff;border:0;border-radius:8px;cursor:pointer;font-size:1rem;font-weight:600;transition:background .2s}.login-box button:hover:not(:disabled){background:var(--primary-hover)}.login-box button:disabled{background-color:#a0aec0;cursor:not-allowed}#runtime-error-view{display:none;padding:20px;text-align:left;color:#d0021b;background-color:#fff2f2;border:1px solid #d0021b;border-radius:8px;}#runtime-error-view code{background-color:#e0e0e0;padding:2px 5px;border-radius:4px;font-family:monospace;}#admin-view{display:none}#app-header{background:var(--card-bg);padding:0 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow-sm);position:sticky;top:0;z-index:100}#logo{font-size:1.5rem;font-weight:600;color:var(--heading-color)}#main-nav{display:flex}#main-nav a{padding:20px 16px;color:var(--text-color);font-weight:500;border-bottom:3px solid transparent;transition:border-color .2s,color .2s}#main-nav a.active,#main-nav a:hover{color:var(--primary-color);border-bottom-color:var(--primary-color)}#user-menu{display:flex;align-items:center;gap:1rem}#user-menu button{background:none;border:none;cursor:pointer;font-weight:600;color:var(--text-color)}#mobile-menu-btn{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer}@media(max-width:860px){#main-nav{display:none;position:absolute;top:100%;left:0;background:var(--card-bg);width:100%;flex-direction:column;border-top:1px solid var(--border-color);box-shadow:var(--shadow)}#main-nav.active{display:flex}#mobile-menu-btn{display:block}}#main-content{padding:24px}.view{display:none}.view.active{display:block}.card{background:var(--card-bg);border-radius:12px;box-shadow:var(--shadow);margin-bottom:24px;padding:24px}.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}.stat-card{text-align:center}.stat-card h4{color:#777;margin:0 0 10px}.stat-card p{font-size:2.5rem;font-weight:bold;margin:0;color:var(--primary-color)}.page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}h2{margin:0;color:var(--heading-color)}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border:none;border-radius:8px;background:var(--primary-color);color:#fff;cursor:pointer;font-weight:600;transition:background .2s}.btn:hover:not(:disabled){background:var(--primary-hover)}.btn:disabled{background-color:#a0aec0;cursor:not-allowed}.btn-danger{background-color:var(--danger-color)}.btn-success{background-color:var(--success-color)}.btn-secondary{background-color:#a0aec0}table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:12px 15px;text-align:left;border-bottom:1px solid var(--border-color)}th{background:#f9fafb}.status-badge{padding:4px 10px;border-radius:16px;font-size:12px;font-weight:600}.status-published{background-color:#e6fffa;color:#38a169}.status-draft{background-color:#feebc8;color:#9c4221}.status-scheduled{background-color:#ebf4ff;color:#3182ce}.form-group{margin-bottom:1.5rem}.form-group label{display:block;margin-bottom:8px;font-weight:600}input[type=text],input[type=password],input[type=color],input[type=datetime-local],textarea,select{width:100%;padding:10px;border:1px solid var(--border-color);border-radius:6px}.editor-grid{display:grid;grid-template-columns:1fr 320px;gap:24px}@media(max-width:1024px){.editor-grid{grid-template-columns:1fr}}.editor-main{display:flex;flex-direction:column}.editor-sidebar .card{position:sticky;top:88px}.media-library{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem}.media-item{position:relative;border-radius:8px;overflow:hidden;box-shadow:var(--shadow-sm)}.media-item img{width:100%;height:120px;object-fit:cover;display:block}.media-overlay{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);color:#fff;padding:8px;font-size:12px;text-align:center;opacity:0;transition:opacity .2s;display:flex;gap:10px;justify-content:center;align-items:center}.media-item:hover .media-overlay{opacity:1}.media-overlay button{background:rgba(0,0,0,0.5);color:white;border:none;padding:5px;cursor:pointer;border-radius:4px}.toast-container{position:fixed;top:20px;right:20px;z-index:9999}.toast{background-color:#fff;padding:15px 20px;border-radius:8px;box-shadow:var(--shadow-lg);margin-bottom:10px;opacity:0;transform:translateX(100%);animation:slideIn .5s forwards}.toast.success{border-left:4px solid var(--success-color)}.toast.error{border-left:4px solid var(--danger-color)}@keyframes slideIn{to{opacity:1;transform:translateX(0)}}
     </style>
 </head>
 <body>
 
 <div id="login-view">
     <div class="login-box">
+        <div id="runtime-error-view">
+            <h3>运行环境错误</h3>
+            <p>本后台页面不能直接以 <code>file:///</code> 方式打开，因为它需要与GitHub服务器通信。</p>
+            <p><strong>请选择以下任一方式解决：</strong></p>
+            <ol>
+                <li><strong>(推荐)</strong> 将 <code>admin.html</code> 文件上传到您的GitHub仓库，然后通过 <code>https://your-name.github.io/admin.html</code> 访问。</li>
+                <li>在您电脑上启动一个本地服务器来运行此文件。</li>
+            </ol>
+        </div>
         <h1>博客管理</h1>
         <p>请输入您的GitHub Personal Access Token。</p>
-        <input type="password" id="token-input" placeholder="具备 repo 权限的Token">
+        <div class="form-group">
+            <input type="password" id="token-input" placeholder="具备 repo 权限的Token">
+        </div>
+        <div class="form-group">
+             <input type="text" id="repo-input" placeholder="仓库名, 如: username.github.io">
+        </div>
         <button id="login-btn">登录</button>
         <p id="login-message" style="color:var(--primary-color); margin-top: 15px;"></p>
     </div>
@@ -31,7 +45,7 @@
             <a href="#" data-view="settings">设置</a>
         </nav>
         <div id="user-menu">
-            <a href="index.html" target="_blank" class="btn">查看站点</a>
+            <a id="view-site-link" href="index.html" target="_blank" class="btn">查看站点</a>
             <button id="logout-btn">注销</button>
         </div>
          <button id="mobile-menu-btn">☰</button>
@@ -111,31 +125,33 @@
 
 <script>
 const GitHubAPI = {
-    BASE_URL: 'https.api.github.com',
+    BASE_URL: 'api.github.com',
     encodeContent: (str) => btoa(unescape(encodeURIComponent(str))),
     decodeContent: (str) => decodeURIComponent(escape(atob(str))),
+    encodePath: (path) => path.split('/').map(segment => encodeURIComponent(segment)).join('/'),
     async request(token, endpoint, options = {}) {
         const url = `https://${this.BASE_URL}${endpoint}`;
         const headers = { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', ...options.headers };
         const response = await fetch(url, { ...options, headers });
         if (!response.ok) {
             if (response.status === 404) return null;
-            const error = await response.json();
+            const error = await response.json().catch(() => ({ message: response.statusText }));
             throw new Error(error.message || 'API request failed');
         }
         if (response.status === 204 || response.headers.get("Content-Length") === "0") return { content: null };
         return response.json();
     },
     async getFile(token, owner, repo, path) {
-        const result = await this.request(token, `/repos/${owner}/${repo}/contents/${path}`);
+        const encodedPath = this.encodePath(path);
+        const result = await this.request(token, `/repos/${owner}/${repo}/contents/${encodedPath}`);
         if (!result) return null;
         return { content: this.decodeContent(result.content), sha: result.sha };
     },
-    updateFile: (token, owner, repo, path, content, sha, message) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`, { method: 'PUT', body: JSON.stringify({ message, content: GitHubAPI.encodeContent(content), sha }) }),
-    createFile: (token, owner, repo, path, content, message) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`, { method: 'PUT', body: JSON.stringify({ message, content: GitHubAPI.encodeContent(content) }) }),
-    createBinaryFile: (token, owner, repo, path, content, message) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`, { method: 'PUT', body: JSON.stringify({ message, content }) }),
-    deleteFile: (token, owner, repo, path, sha, message) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`, { method: 'DELETE', body: JSON.stringify({ message, sha }) }),
-    getDirectory: (token, owner, repo, path) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`)
+    updateFile: (token, owner, repo, path, content, sha, message) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${GitHubAPI.encodePath(path)}`, { method: 'PUT', body: JSON.stringify({ message, content: GitHubAPI.encodeContent(content), sha }) }),
+    createFile: (token, owner, repo, path, content, message) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${GitHubAPI.encodePath(path)}`, { method: 'PUT', body: JSON.stringify({ message, content: GitHubAPI.encodeContent(content) }) }),
+    createBinaryFile: (token, owner, repo, path, content, message) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${GitHubAPI.encodePath(path)}`, { method: 'PUT', body: JSON.stringify({ message, content }) }),
+    deleteFile: (token, owner, repo, path, sha, message) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${GitHubAPI.encodePath(path)}`, { method: 'DELETE', body: JSON.stringify({ message, sha }) }),
+    getDirectory: (token, owner, repo, path) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${GitHubAPI.encodePath(path)}`)
 };
 
 const AdminApp = {
@@ -143,46 +159,65 @@ const AdminApp = {
     config: {}, configSha: '', postsData: { posts: [], pages: [] }, postsSha: '',
 
     init() {
+        if (window.location.protocol === 'file:') {
+            document.getElementById('runtime-error-view').style.display = 'block';
+            document.getElementById('login-btn').disabled = true;
+            return;
+        }
+        
         this.token = localStorage.getItem('github_token');
+        this.repo = localStorage.getItem('github_repo');
+        if (this.repo) document.getElementById('repo-input').value = this.repo;
         if (this.token) this.start();
         
         const loginBtn = document.getElementById('login-btn');
         loginBtn.onclick = () => {
             const tokenInput = document.getElementById('token-input').value;
-            if(tokenInput) {
+            const repoInput = document.getElementById('repo-input').value;
+            if(tokenInput && repoInput) {
                 this.setLoading(loginBtn, true, '登录中...');
                 localStorage.setItem('github_token', tokenInput);
+                localStorage.setItem('github_repo', repoInput);
                 this.token = tokenInput;
-                this.start().finally(() => this.setLoading(loginBtn, false, '登录'));
+                this.repo = repoInput;
+                this.start().catch(err => {
+                    document.getElementById('login-message').textContent = `错误: ${err.message}`;
+                }).finally(() => this.setLoading(loginBtn, false, '登录'));
+            } else {
+                this.showToast('Token和仓库名不能为空', 'error');
             }
         };
         document.getElementById('logout-btn').onclick = () => {
             localStorage.removeItem('github_token');
+            localStorage.removeItem('github_repo');
             window.location.reload();
         };
     },
     
     async start() {
-        try {
-            const user = await GitHubAPI.request(this.token, '/user');
-            if(!user) throw new Error('无效的Token');
-            this.owner = user.login;
-            this.repo = `${this.owner}.github.io`;
-            this.basePath = window.location.pathname.split('/').filter(p => p && !p.endsWith('.html')).join('/');
-            
-            await this.initializeOrLoadData();
-            
-            document.getElementById('login-view').style.display = 'none';
-            document.getElementById('admin-view').style.display = 'block';
+        const loginMessage = document.getElementById('login-message');
+        loginMessage.style.color = 'var(--primary-color)';
+        loginMessage.textContent = '验证身份...';
+        const user = await GitHubAPI.request(this.token, '/user');
+        if(!user) throw new Error('无效的Token或网络错误');
+        
+        this.owner = user.login;
+        if (!this.repo) this.repo = `${this.owner}.github.io`;
 
-            this.setupEventListeners();
-            this.updateDashboard();
-            this.renderPostList();
-            this.renderPageList();
-        } catch (error) {
-            document.getElementById('login-message').textContent = `错误: ${error.message}`;
-            localStorage.removeItem('github_token');
-        }
+        const isDefaultRepo = this.repo === `${this.owner}.github.io`;
+        this.basePath = isDefaultRepo ? '' : this.repo;
+
+        document.getElementById('view-site-link').href = `https://${this.owner}.github.io/${this.basePath}`;
+
+        await this.initializeOrLoadData();
+        
+        document.getElementById('login-view').style.display = 'none';
+        document.getElementById('admin-view').style.display = 'block';
+
+        this.setupEventListeners();
+        this.updateDashboard();
+        this.renderPostList();
+        this.renderPageList();
     },
 
     async initializeOrLoadData() {
@@ -197,7 +232,7 @@ const AdminApp = {
             const defaultConfig = {
                 site: { title: `${this.owner}的博客`, description: "由GitHub驱动的博客" },
                 styling: { accentColor: "#4a90e2" },
-                comments: { repo: "", repoId: "", category: "", categoryId: "" },
+                comments: { repo: `${this.owner}/${this.repo}`, repoId: "", category: "", categoryId: "" },
                 advanced: { customCss: "" }
             };
             const defaultPosts = { posts: [], pages: [] };
@@ -208,10 +243,13 @@ const AdminApp = {
                 GitHubAPI.createFile(this.token, this.owner, this.repo, this.getPath('images/.gitkeep'), '', 'feat: initialize images directory')
             ]);
             
-            this.config = defaultConfig;
-            this.configSha = configRes.content.sha;
-            this.postsData = defaultPosts;
-            this.postsSha = postsRes.content.sha;
+            const newConfig = await GitHubAPI.getFile(this.token, this.owner, this.repo, configPath);
+            const newPosts = await GitHubAPI.getFile(this.token, this.owner, this.repo, this.getPath('posts.json'));
+
+            this.config = JSON.parse(newConfig.content);
+            this.configSha = newConfig.sha;
+            this.postsData = JSON.parse(newPosts.content);
+            this.postsSha = newPosts.sha;
             loginMessage.textContent = '初始化成功!';
         } else {
             loginMessage.textContent = '配置加载成功，正在读取数据...';
@@ -271,29 +309,32 @@ const AdminApp = {
                      if(confirm('确定删除此图片吗？')) this.deleteImage(btn, btn.dataset.path, btn.dataset.sha);
                 }
             };
-            if (handlers[btn.id] || handlers[btn.classList[1]]) {
-                 (handlers[btn.id] || handlers[btn.classList[1]])();
-            }
+            const handler = handlers[btn.id] || handlers[btn.classList[1]];
+            if(handler) handler();
         });
         
         document.getElementById('post-status').onchange = (e) => {
             document.getElementById('publish-date-group').style.display = e.target.value === 'scheduled' ? 'block' : 'none';
         };
-        document.getElementById('image-upload-input').onchange = (e) => this.uploadImage(e.target.files[0], e.target.previousElementSibling);
+        document.getElementById('image-upload-input').onchange = (e) => {
+            const file = e.target.files[0];
+            const btn = e.target.nextElementSibling; // The label acts as the button
+            if (file) this.uploadImage(file, btn);
+            e.target.value = ''; // Reset file input
+        };
         
         const titleInput = document.getElementById('post-title');
         const slugInput = document.getElementById('post-slug');
         let slugManuallyEdited = false;
-        slugInput.addEventListener('input', () => slugManuallyEdited = true);
-        titleInput.addEventListener('input', () => {
-            if (!slugManuallyEdited) {
-                slugInput.value = this.slugify(titleInput.value);
-            }
-        });
-        document.getElementById('new-post-btn').addEventListener('click', () => slugManuallyEdited = false);
-        document.querySelector('.page-header').addEventListener('click', (e) => {
-            if(e.target.matches('#new-page-btn')) slugManuallyEdited = false;
-        })
+        const setupSlugListener = () => {
+            slugManuallyEdited = false;
+            slugInput.oninput = () => slugManuallyEdited = true;
+            titleInput.oninput = () => {
+                if (!slugManuallyEdited) slugInput.value = this.slugify(titleInput.value);
+            };
+        };
+        document.getElementById('new-post-btn').onclick = setupSlugListener;
+        document.getElementById('new-page-btn').onclick = setupSlugListener;
     },
     
     updateDashboard() {
@@ -302,7 +343,11 @@ const AdminApp = {
         document.getElementById('pages-count').textContent = this.postsData.pages.length;
         GitHubAPI.getDirectory(this.token, this.owner, this.repo, this.getPath('images'))
             .then(files => {
-                if(files) document.getElementById('media-count').textContent = files.filter(f => f.type === 'file' && f.name !== '.gitkeep').length;
+                if(files && Array.isArray(files)) {
+                    document.getElementById('media-count').textContent = files.filter(f => f.type === 'file' && f.name !== '.gitkeep').length;
+                } else {
+                    document.getElementById('media-count').textContent = 0;
+                }
             })
             .catch(() => document.getElementById('media-count').textContent = 'N/A');
     },
@@ -310,7 +355,7 @@ const AdminApp = {
     renderList(tbodyId, data, rowTemplate) {
         const list = document.getElementById(tbodyId);
         if (!list) return;
-        const sortedData = data.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+        const sortedData = [...data].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
         list.innerHTML = sortedData.map(rowTemplate).join('');
     },
 
@@ -339,8 +384,8 @@ const AdminApp = {
         const item = id ? collection.find(p => p.id === id) : null;
         
         document.getElementById('editor-title').textContent = id ? `编辑${isPost?'文章':'页面'}` : `创建新${isPost?'文章':'页面'}`;
-        const fields = ['id','type','title','slug','content','tags','cover-image','meta-desc','status'];
-        fields.forEach(f => {
+        
+        ['id','type','title','slug','content','tags','cover-image','meta-desc','status'].forEach(f => {
             const el = document.getElementById(`post-${f}`);
             if(el) el.value = '';
         });
@@ -352,8 +397,7 @@ const AdminApp = {
         document.getElementById('post-slug').value = item?.slug || '';
         document.getElementById('post-content').value = item?.content || '';
 
-        const postOnlyElements = ['tags','cover-image','pinned','meta-desc','status','publish-date-group'];
-        postOnlyElements.forEach(elId => {
+        ['tags','cover-image','pinned','meta-desc','status','publish-date-group'].forEach(elId => {
             const element = document.getElementById(`post-${elId}`) || document.getElementById(elId);
             const container = element.closest('.form-group');
             if (container) container.style.display = isPost ? '' : 'none';
@@ -389,8 +433,7 @@ const AdminApp = {
                 updatedAt: new Date().toISOString()
             };
             if(!itemData.title) {
-                this.showToast('标题不能为空', 'error');
-                return;
+                this.showToast('标题不能为空', 'error'); return;
             }
 
             if(isPost) {
@@ -408,19 +451,20 @@ const AdminApp = {
                 }
             }
 
-            const collection = isPost ? this.postsData.posts : this.postsData.pages;
+            const currentPostsData = JSON.parse(JSON.stringify(this.postsData));
+            const collection = isPost ? currentPostsData.posts : currentPostsData.pages;
             const itemIndex = id ? collection.findIndex(i => i.id === id) : -1;
 
-            if(itemIndex > -1) {
-                Object.assign(collection[itemIndex], itemData);
-            } else {
+            if(itemIndex > -1) Object.assign(collection[itemIndex], itemData);
+            else {
                 itemData.id = `${type}_${Date.now()}`;
                 itemData.createdAt = new Date().toISOString();
                 collection.push(itemData);
             }
 
-            const res = await GitHubAPI.updateFile(this.token, this.owner, this.repo, this.getPath('posts.json'), JSON.stringify(this.postsData, null, 2), this.postsSha, `docs: ${id ? 'update' : 'create'} ${type} ${itemData.title}`);
+            const res = await GitHubAPI.updateFile(this.token, this.owner, this.repo, this.getPath('posts.json'), JSON.stringify(currentPostsData, null, 2), this.postsSha, `docs: ${id ? 'update' : 'create'} ${type} ${itemData.title}`);
             this.postsSha = res.content.sha;
+            this.postsData = currentPostsData;
             
             this.showToast('保存成功');
             if(isPost) this.renderPostList(); else this.renderPageList();
@@ -440,7 +484,7 @@ const AdminApp = {
         libraryEl.innerHTML = '<p>加载中...</p>';
         try {
             const files = await GitHubAPI.getDirectory(this.token, this.owner, this.repo, this.getPath('images'));
-            if(!files) {
+            if(!files || !Array.isArray(files) || files.filter(f=>f.type==='file' && f.name !== '.gitkeep').length === 0) {
                  libraryEl.innerHTML = '<p>媒体库为空。请上传第一张图片。</p>';
                  return;
             }
@@ -505,28 +549,20 @@ const AdminApp = {
     async saveSettings(btn) {
         this.setLoading(btn, true);
         try {
-            const newConfig = {
-                site: {
-                    title: document.getElementById('setting-title').value,
-                    description: document.getElementById('setting-description').value,
-                },
-                styling: {
-                    accentColor: document.getElementById('setting-accent-color').value,
-                },
-                comments: {
-                    repo: document.getElementById('setting-comments-repo').value,
-                    repoId: document.getElementById('setting-comments-repoid').value,
-                    category: document.getElementById('setting-comments-category').value,
-                    categoryId: document.getElementById('setting-comments-categoryid').value,
-                },
-                advanced: {
-                    customCss: document.getElementById('setting-custom-css').value
-                }
-            };
-            
-            const res = await GitHubAPI.updateFile(this.token, this.owner, this.repo, this.getPath('config.json'), JSON.stringify(newConfig, null, 2), this.configSha, 'docs: update config');
+            const currentConfig = JSON.parse(JSON.stringify(this.config));
+            currentConfig.site.title = document.getElementById('setting-title').value;
+            currentConfig.site.description = document.getElementById('setting-description').value;
+            currentConfig.styling.accentColor = document.getElementById('setting-accent-color').value;
+            currentConfig.comments.repo = document.getElementById('setting-comments-repo').value;
+            currentConfig.comments.repoId = document.getElementById('setting-comments-repoid').value;
+            currentConfig.comments.category = document.getElementById('setting-comments-category').value;
+            currentConfig.comments.categoryId = document.getElementById('setting-comments-categoryid').value;
+            if(!currentConfig.advanced) currentConfig.advanced = {};
+            currentConfig.advanced.customCss = document.getElementById('setting-custom-css').value;
+
+            const res = await GitHubAPI.updateFile(this.token, this.owner, this.repo, this.getPath('config.json'), JSON.stringify(currentConfig, null, 2), this.configSha, 'docs: update config');
             this.configSha = res.content.sha;
-            this.config = newConfig;
+            this.config = currentConfig;
             this.showToast('设置已保存');
         } catch(error) {
             this.showToast(`保存失败: ${error.message}`, 'error');
