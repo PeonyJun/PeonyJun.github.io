@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>博客管理后台</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root{--bg-color:#f4f6f8;--sidebar-bg:#2c3e50;--sidebar-text:#ecf0f1;--sidebar-hover-bg:#34495e;--sidebar-active-bg:#1abc9c;--content-bg:#fff;--text-color:#34495e;--accent-color:#3498db;--border-color:#e0e0e0;--danger-color:#e74c3c;--success-color:#2ecc71;--shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;margin:0;background-color:var(--bg-color);color:var(--text-color);font-size:14px}a{text-decoration:none}input,textarea,button{font-family:inherit}#login-wrapper{display:flex;justify-content:center;align-items:center;height:100vh}.login-box{width:90%;max-width:360px;padding:40px;background:var(--content-bg);box-shadow:var(--shadow);border-radius:4px;text-align:center}.login-box h1{margin-bottom:20px}.login-box p{margin-bottom:20px;color:#7f8c8d}.login-box input{width:100%;padding:10px;margin-bottom:20px;border:1px solid var(--border-color);border-radius:4px;box-sizing:border-box}.login-box button{width:100%;padding:10px;background:var(--accent-color);color:#fff;border:0;border-radius:4px;cursor:pointer;transition:background .2s}.login-box button:hover{background:#2980b9}.admin-wrapper{display:flex;min-height:100vh}#admin-sidebar{position:fixed;top:0;left:0;height:100%;width:220px;background:var(--sidebar-bg);color:var(--sidebar-text);display:flex;flex-direction:column;flex-shrink:0;transform:translateX(-100%);transition:transform .3s ease-in-out;z-index:1000}.admin-wrapper.sidebar-visible #admin-sidebar{transform:translateX(0)}.admin-wrapper.sidebar-visible #mobile-overlay{display:block}#admin-sidebar .logo{padding:20px;font-size:1.5rem;font-weight:700;text-align:center;background-color:rgba(0,0,0,.2)}#admin-sidebar .nav{flex-grow:1;list-style:none;margin:0;padding:20px 0}#admin-sidebar .nav a{display:block;padding:15px 20px;color:var(--sidebar-text);transition:background .2s}#admin-sidebar .nav a:hover{background:var(--sidebar-hover-bg)}#admin-sidebar .nav a.active{background:var(--sidebar-active-bg)}#admin-content{width:100%;padding:20px}#mobile-header{display:flex;justify-content:space-between;align-items:center;background:var(--content-bg);padding:10px 20px;box-shadow:var(--shadow);margin-bottom:20px}.mobile-menu-btn{font-size:1.5rem;background:0 0;border:0;cursor:pointer;color:var(--text-color)}.mobile-logo{font-size:1.2rem;font-weight:700}#mobile-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:999;display:none}@media(min-width: 768px){#admin-sidebar{position:static;transform:translateX(0)}#admin-content{width:calc(100% - 220px);padding:30px}#mobile-header{display:none}}#admin-content h2{border-bottom:1px solid var(--border-color);padding-bottom:10px;margin-top:0}.page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.admin-table-wrapper{overflow-x:auto}.admin-table{width:100%;border-collapse:collapse;background:var(--content-bg);box-shadow:var(--shadow)}.admin-table th,.admin-table td{padding:15px;text-align:left;border-bottom:1px solid var(--border-color);white-space:nowrap}.admin-table th{background:#f9fafb}.admin-table .actions a{margin-right:10px;color:var(--accent-color)}.admin-table .actions .delete{color:var(--danger-color)}button,a.btn{display:inline-block;padding:8px 16px;border:none;border-radius:4px;background:var(--accent-color);color:#fff;cursor:pointer;transition:background .2s}button:hover,a.btn:hover{opacity:.9}.btn-success{background:var(--success-color)}.btn-danger{background:var(--danger-color)}.form-group{margin-bottom:20px}.form-group label{display:block;margin-bottom:8px;font-weight:700}.form-group input[type=text],.form-group input[type=password],.form-group textarea{width:100%;padding:10px;border:1px solid var(--border-color);border-radius:4px;box-sizing:border-box}.form-group textarea{resize:vertical;min-height:200px}.editor-container{display:none}
+        :root{--bg-color:#f4f6f8;--sidebar-bg:#1a202c;--sidebar-text:#a0aec0;--sidebar-hover-bg:#2d3748;--sidebar-active-bg:#4a5568;--sidebar-active-text:#fff;--content-bg:#fff;--text-color:#2d3748;--heading-color:#1a202c;--accent-color:#4299e1;--accent-color-hover:#2b6cb0;--border-color:#e2e8f0;--danger-color:#e53e3e;--success-color:#48bb78;--info-color:#4299e1;--warning-color:#ed8936;--shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06);--font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}body{font-family:var(--font-sans);margin:0;background-color:var(--bg-color);color:var(--text-color);font-size:14px;line-height:1.6}a{text-decoration:none;color:var(--accent-color)}input,textarea,button,select{font-family:inherit}#login-wrapper{display:flex;justify-content:center;align-items:center;height:100vh}.login-box{width:90%;max-width:380px;padding:40px;background:var(--content-bg);box-shadow:var(--shadow);border-radius:8px;text-align:center}.login-box h1{margin-top:0;margin-bottom:1rem;color:var(--heading-color);font-size:1.8rem}.login-box p{margin-bottom:2rem;color:#718096}.login-box input{width:100%;padding:12px;margin-bottom:1.5rem;border:1px solid var(--border-color);border-radius:6px;box-sizing:border-box;transition:border-color .2s,box-shadow .2s}.login-box input:focus{border-color:var(--accent-color);box-shadow:0 0 0 3px rgba(66,153,225,.5);outline:0}.login-box button{width:100%;padding:12px;background:var(--accent-color);color:#fff;border:0;border-radius:6px;cursor:pointer;transition:background .2s;font-size:1rem;font-weight:600}.login-box button:hover{background:var(--accent-color-hover)}.admin-wrapper{display:flex;min-height:100vh}#admin-sidebar{position:fixed;top:0;left:0;height:100%;width:240px;background:var(--sidebar-bg);color:var(--sidebar-text);display:flex;flex-direction:column;flex-shrink:0;transform:translateX(-100%);transition:transform .3s ease-in-out;z-index:1000}.admin-wrapper.sidebar-visible #admin-sidebar{transform:translateX(0)}.admin-wrapper.sidebar-visible #mobile-overlay{display:block}#admin-sidebar .logo{padding:2rem 1.5rem;font-size:1.5rem;font-weight:700;text-align:center;color:#fff;background-color:rgba(0,0,0,.2)}#admin-sidebar .nav{flex-grow:1;list-style:none;margin:0;padding:20px 0}#admin-sidebar .nav a{display:flex;align-items:center;gap:12px;padding:15px 25px;color:var(--sidebar-text);transition:background .2s,color .2s;font-weight:500}#admin-sidebar .nav a:hover{background:var(--sidebar-hover-bg);color:var(--sidebar-active-text)}#admin-sidebar .nav li.active a{background:var(--sidebar-active-bg);color:var(--sidebar-active-text);border-left:4px solid var(--accent-color)}#admin-content{width:100%;padding:20px;transition:margin-left .3s ease-in-out}#mobile-header{display:flex;justify-content:space-between;align-items:center;background:var(--content-bg);padding:10px 20px;box-shadow:var(--shadow);margin-bottom:20px;position:sticky;top:0;z-index:998}.mobile-menu-btn{font-size:1.5rem;background:0 0;border:0;cursor:pointer;color:var(--text-color)}.mobile-logo{font-size:1.2rem;font-weight:700}#mobile-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:999;display:none}@media(min-width: 992px){#admin-sidebar{position:sticky;transform:translateX(0)}#admin-content{width:calc(100% - 240px);padding:30px}#mobile-header{display:none}}.card{background:var(--content-bg);border-radius:8px;box-shadow:var(--shadow);margin-bottom:2rem;padding:1.5rem}.page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem}.page-header h2{margin:0;font-size:1.8rem;color:var(--heading-color)}.admin-table-wrapper{overflow-x:auto}.admin-table{width:100%;border-collapse:collapse}.admin-table th,.admin-table td{padding:12px 15px;text-align:left;border-bottom:1px solid var(--border-color);white-space:nowrap}.admin-table th{background:#f7fafc;font-weight:600}.admin-table .actions a{margin-right:15px}.admin-table .actions .delete{color:var(--danger-color)}.status-badge{padding:3px 8px;border-radius:12px;font-size:12px;font-weight:600}.status-badge.published{background-color:#e6fffa;color:#38a169}.status-badge.draft{background-color:#feebc8;color:#9c4221}button,a.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:none;border-radius:6px;background:var(--accent-color);color:#fff;cursor:pointer;transition:background .2s;font-weight:600}button:hover,a.btn:hover{background:var(--accent-color-hover);opacity:1}button:disabled{background-color:#cbd5e0;cursor:not-allowed}.btn-success{background:var(--success-color)}.btn-danger{background:var(--danger-color)}.btn-secondary{background-color:#a0aec0;color:#fff}.form-group{margin-bottom:1.5rem}.form-group label{display:block;margin-bottom:8px;font-weight:600}.form-group input[type=text],.form-group input[type=password],.form-group input[type=color],.form-group textarea,.form-group select{width:100%;padding:10px;border:1px solid var(--border-color);border-radius:6px;box-sizing:border-box;transition:border-color .2s,box-shadow .2s}.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent-color);box-shadow:0 0 0 3px rgba(66,153,225,.5);outline:0}.form-group textarea{resize:vertical;min-height:250px}.form-section-divider{border:0;height:1px;background-color:var(--border-color);margin:2.5rem 0}#toast-container{position:fixed;top:20px;right:20px;z-index:9999}.toast{background-color:#fff;padding:15px 20px;border-radius:8px;box-shadow:0 5px 15px rgba(0,0,0,.1);margin-bottom:10px;display:flex;align-items:center;gap:10px;opacity:0;transform:translateX(100%);animation:slideIn .5s forwards}.toast.success{border-left:4px solid var(--success-color)}.toast.error{border-left:4px solid var(--danger-color)}.toast i{font-size:1.2rem}.toast.success .fa-check-circle{color:var(--success-color)}.toast.error .fa-times-circle{color:var(--danger-color)}@keyframes slideIn{to{opacity:1;transform:translateX(0)}}#dashboard-view .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem}.stat-card{background:var(--content-bg);padding:1.5rem;border-radius:8px;box-shadow:var(--shadow);display:flex;align-items:center;gap:1rem}.stat-card i{font-size:2rem;color:var(--accent-color)}.stat-card .info h4{margin:0;font-size:1rem;color:#718096}.stat-card .info p{margin:0;font-size:2rem;font-weight:700;color:var(--heading-color)}#media-library{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem}.media-item{position:relative;border-radius:8px;overflow:hidden;box-shadow:var(--shadow)}.media-item img{width:100%;height:120px;object-fit:cover;display:block}.media-item .overlay{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);color:#fff;padding:8px;font-size:12px;text-align:center;opacity:0;transition:opacity .2s}.media-item:hover .overlay{opacity:1}.media-item .copy-btn{cursor:pointer;background:0 0;border:0;color:#fff;padding:0;margin-left:5px}#editor-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}.main-view{display:none}
     </style>
 </head>
 <body>
 
     <div id="login-wrapper">
-        <div id="login-box" class="login-box">
+        <div class="login-box">
             <h1>博客管理</h1>
             <p>请输入您的GitHub Personal Access Token开始。</p>
             <input type="password" id="token-input" placeholder="输入具备 repo 权限的Token">
-            <button id="start-btn">开始</button>
+            <button id="start-btn">开始 <i class="fa-solid fa-arrow-right"></i></button>
             <p id="initial-message" style="color:red; margin-top: 15px;"></p>
         </div>
     </div>
@@ -25,46 +26,85 @@
         <aside id="admin-sidebar">
             <div class="logo">My Blog</div>
             <ul class="nav">
-                <li><a href="#" id="nav-posts" class="active">管理文章</a></li>
-                <li><a href="#" id="nav-settings">网站设置</a></li>
-                <li><a href="index.html" target="_blank">查看站点</a></li>
+                <li data-view="dashboard" class="active"><a href="#"><i class="fa-solid fa-gauge"></i>仪表盘</a></li>
+                <li data-view="posts"><a href="#"><i class="fa-solid fa-file-pen"></i>文章管理</a></li>
+                <li data-view="media"><a href="#"><i class="fa-solid fa-photo-film"></i>媒体库</a></li>
+                <li data-view="settings"><a href="#"><i class="fa-solid fa-gear"></i>网站设置</a></li>
+                <li><a href="index.html" target="_blank"><i class="fa-solid fa-globe"></i>查看站点</a></li>
             </ul>
         </aside>
 
         <main id="admin-content">
             <header id="mobile-header">
-                <button id="mobile-menu-btn">&#9776;</button>
+                <button id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
                 <div class="mobile-logo">管理后台</div>
             </header>
+            
+            <div id="toast-container"></div>
 
-            <div id="posts-view">
+            <div id="dashboard-view" class="main-view card">
+                 <div class="page-header"><h2>仪表盘</h2></div>
+                 <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fa-solid fa-file-alt"></i>
+                        <div class="info">
+                            <h4>已发布文章</h4>
+                            <p id="published-posts-count">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fa-solid fa-pencil-ruler"></i>
+                        <div class="info">
+                            <h4>草稿箱</h4>
+                            <p id="draft-posts-count">0</p>
+                        </div>
+                    </div>
+                     <div class="stat-card">
+                        <i class="fa-solid fa-images"></i>
+                        <div class="info">
+                            <h4>媒体文件</h4>
+                            <p id="media-count">0</p>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+
+            <div id="posts-view" class="main-view">
                 <div class="page-header">
                     <h2>文章管理</h2>
-                    <button id="new-post-btn">撰写新文章</button>
+                    <button id="new-post-btn"><i class="fa-solid fa-plus"></i> 撰写新文章</button>
                 </div>
-                <div class="admin-table-wrapper">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>标题</th>
-                                <th>发布日期</th>
-                                <th class="actions">操作</th>
-                            </tr>
-                        </thead>
-                        <tbody id="post-list"></tbody>
-                    </table>
+                <div class="card">
+                    <div class="admin-table-wrapper">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>标题</th>
+                                    <th>状态</th>
+                                    <th>发布日期</th>
+                                    <th class="actions">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="post-list"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+
+            <div id="media-view" class="main-view card">
+                <div class="page-header"><h2>媒体库</h2></div>
+                <div id="media-library"></div>
+            </div>
             
-            <div id="editor-container">
+            <div id="editor-container" class="main-view card">
                 <h2 id="editor-title">撰写新文章</h2>
-                 <input type="hidden" id="post-id">
+                <input type="hidden" id="post-id">
                 <div class="form-group">
                     <label for="post-title">标题</label>
                     <input type="text" id="post-title">
                 </div>
                 <div class="form-group">
-                    <label for="post-content">内容 (请直接编写HTML, 使用 `&lt;!--more--&gt;` 创建摘要)</label>
+                    <label for="post-content">内容 (支持HTML)</label>
                     <textarea id="post-content" rows="15"></textarea>
                 </div>
                 <div class="form-group">
@@ -75,15 +115,18 @@
                     <label for="image-upload">上传图片到文章</label>
                     <input type="file" id="image-upload" accept="image/*">
                 </div>
-                <button id="save-post-btn" class="btn-success">发布文章</button>
-                <button id="cancel-edit-btn">取消</button>
-                <button id="delete-post-btn" class="btn-danger" style="display:none;">删除文章</button>
+                <div id="editor-actions">
+                    <button id="save-draft-btn" class="btn-secondary"><i class="fa-solid fa-save"></i> 保存草稿</button>
+                    <button id="publish-btn" class="btn-success"><i class="fa-solid fa-rocket"></i> 发布文章</button>
+                    <button id="cancel-edit-btn">取消</button>
+                    <button id="delete-post-btn" class="btn-danger" style="display:none; margin-left: auto;"><i class="fa-solid fa-trash"></i> 删除文章</button>
+                </div>
             </div>
 
-            <div id="settings-view" style="display: none;">
-                <div class="page-header">
-                    <h2>网站设置</h2>
-                </div>
+            <div id="settings-view" class="main-view card">
+                <div class="page-header"><h2>网站设置</h2></div>
+                
+                <h3><i class="fa-solid fa-circle-info"></i> 基本信息</h3>
                 <div class="form-group">
                     <label for="setting-title">网站标题</label>
                     <input type="text" id="setting-title">
@@ -92,6 +135,10 @@
                     <label for="setting-description">网站描述</label>
                     <input type="text" id="setting-description">
                 </div>
+
+                <hr class="form-section-divider">
+
+                <h3><i class="fa-solid fa-palette"></i> 外观样式</h3>
                 <div class="form-group">
                     <label for="setting-bg-color">背景颜色</label>
                     <input type="color" id="setting-bg-color">
@@ -108,18 +155,34 @@
                     <label for="setting-bg-image">上传网站背景图</label>
                     <input type="file" id="setting-bg-image" accept="image/*">
                     <input type="text" id="setting-bg-image-url" placeholder="背景图URL将显示在这里" readonly>
-                    <button id="clear-bg-image-btn" style="margin-top: 5px;">清除背景图</button>
+                    <button id="clear-bg-image-btn" style="margin-top: 5px;" class="btn-secondary">清除背景图</button>
                 </div>
-                <button id="save-settings-btn" class="btn-success">保存设置</button>
+
+                <hr class="form-section-divider">
+
+                <h3><i class="fa-solid fa-comments"></i> 评论设置 (Giscus)</h3>
+                <div class="form-group"><label for="setting-comments-repo">仓库 (格式: owner/repo)</label><input type="text" id="setting-comments-repo" placeholder="例: yourname/yourname.github.io"></div>
+                <div class="form-group"><label for="setting-comments-repoid">仓库 ID</label><input type="text" id="setting-comments-repoid" placeholder="从 Giscus 官网获取"></div>
+                <div class="form-group"><label for="setting-comments-category">分类</label><input type="text" id="setting-comments-category" placeholder="从 Giscus 官网获取"></div>
+                <div class="form-group"><label for="setting-comments-categoryid">分类 ID</label><input type="text" id="setting-comments-categoryid" placeholder="从 Giscus 官网获取"></div>
+                
+                <button id="save-settings-btn" class="btn-success"><i class="fa-solid fa-save"></i> 保存设置</button>
+                
+                <hr class="form-section-divider">
+
+                <h3><i class="fa-solid fa-database"></i> 数据备份与恢复</h3>
+                <div class="form-group">
+                    <button id="export-data-btn" class="btn-info"><i class="fa-solid fa-download"></i> 导出数据</button>
+                    <label for="import-file-input" class="btn btn-warning" style="cursor: pointer; margin-left:10px;"><i class="fa-solid fa-upload"></i> 导入数据</label>
+                    <input type="file" id="import-file-input" accept=".json" style="display: none;">
+                </div>
             </div>
         </main>
     </div>
 
     <script>
         const utf8_to_b64 = (str) => btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1)));
-        const b64_to_utf8 = (str) => {
-            try { return decodeURIComponent(atob(str).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')); } catch (e) { return atob(str); }
-        };
+        const b64_to_utf8 = (str) => { try { return decodeURIComponent(atob(str).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')); } catch (e) { return atob(str); } };
 
         const GitHubAPI = {
             BASE_URL: 'https://api.github.com',
@@ -140,11 +203,9 @@
                     const result = await this.request(token, `/repos/${owner}/${repo}/contents/${path}`);
                     if (!result || typeof result.content !== 'string') return null;
                     return { content: b64_to_utf8(result.content), sha: result.sha };
-                } catch (error) {
-                    if (error.message.toLowerCase().includes('not found')) return null;
-                    throw error;
-                }
+                } catch (error) { if (error.message.toLowerCase().includes('not found')) return null; throw error; }
             },
+            getDirectory: (token, owner, repo, path) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`),
             createFile: (token, owner, repo, path, content, message, isBinary = false) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`, { method: 'PUT', body: JSON.stringify({ message, content: isBinary ? content : utf8_to_b64(content) }) }),
             updateFile: (token, owner, repo, path, content, sha, message) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`, { method: 'PUT', body: JSON.stringify({ message, content: utf8_to_b64(content), sha }) }),
         };
@@ -152,11 +213,10 @@
         document.addEventListener('DOMContentLoaded', () => {
             const loginWrapper = document.getElementById('login-wrapper');
             const adminWrapper = document.getElementById('admin-wrapper');
-            const mainViews = { posts: document.getElementById('posts-view'), settings: document.getElementById('settings-view') };
-            const navButtons = { posts: document.getElementById('nav-posts'), settings: document.getElementById('nav-settings') };
-            const editorContainer = document.getElementById('editor-container');
-            const postListBody = document.getElementById('post-list');
+            const mainViews = document.querySelectorAll('.main-view');
+            const navLinks = document.querySelectorAll('#admin-sidebar .nav li[data-view]');
             const messageEl = document.getElementById('initial-message');
+            const postListBody = document.getElementById('post-list');
 
             let token = null, owner = '', repo = '', basePath = '';
             let posts = [], postsSha = '';
@@ -164,16 +224,30 @@
             
             const getPath = (fileName) => basePath ? `${basePath}/${fileName}` : fileName;
 
-            const showMainView = (view) => {
-                Object.values(mainViews).forEach(v => v.style.display = 'none');
-                editorContainer.style.display = 'none';
-                Object.values(navButtons).forEach(b => b.classList.remove('active'));
-                Object.values(navButtons).forEach(b => b.parentElement.classList.remove('active'));
-                mainViews[view].style.display = 'block';
-                navButtons[view].classList.add('active');
-                navButtons[view].parentElement.classList.add('active');
-                document.querySelector('.admin-wrapper').classList.remove('sidebar-visible');
+            const showToast = (message, type = 'success') => {
+                const container = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                const icon = type === 'success' ? 'fa-check-circle' : 'fa-times-circle';
+                toast.innerHTML = `<i class="fa-solid ${icon}"></i> ${message}`;
+                container.appendChild(toast);
+                setTimeout(() => { toast.remove(); }, 4000);
             };
+
+            const showView = (viewId) => {
+                mainViews.forEach(v => v.style.display = 'none');
+                document.getElementById(`${viewId}-view`)?.style.setProperty('display', 'block');
+                if (viewId === 'editor-container') {
+                    document.getElementById('editor-container').style.display = 'block';
+                }
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.dataset.view === viewId);
+                });
+                document.getElementById('admin-wrapper').classList.remove('sidebar-visible');
+                if (viewId === 'dashboard') updateDashboard();
+                if (viewId === 'media') renderMediaLibrary();
+            };
+
             const setButtonsDisabled = (disabled) => document.querySelectorAll('button').forEach(b => b.disabled = disabled);
 
             const start = async () => {
@@ -193,7 +267,7 @@
 
                     if (!configData || !configData.content) {
                         messageEl.textContent = '未检测到配置，正在为您激活系统...';
-                        const initialConfig = { site: { title: `${user.login}的博客`, description: "由单个仓库驱动的博客" }, styling: { backgroundColor: "#f8f9fa", textColor: "#212529", accentColor: "#0d6efd", backgroundImageUrl: "" } };
+                        const initialConfig = { site: { title: `${user.login}的博客`, description: "由单个仓库驱动的博客" }, styling: { backgroundColor: "#f8f9fa", textColor: "#212529", accentColor: "#0d6efd", backgroundImageUrl: "" }, comments: { repo: "", repoId: "", category: "", categoryId: "" } };
                         const [configRes, postsRes] = await Promise.all([
                              GitHubAPI.createFile(token, owner, repo, getPath('config.json'), JSON.stringify(initialConfig, null, 2), 'feat: initialize config'),
                              GitHubAPI.createFile(token, owner, repo, getPath('posts.json'), '[]', 'feat: initialize posts'),
@@ -201,17 +275,19 @@
                         ]);
                         config = initialConfig; configSha = configRes.content.sha;
                         posts = []; postsSha = postsRes.content.sha;
-                        alert('系统激活成功！');
+                        showToast('系统激活成功！');
                     } else {
                         const postsData = await GitHubAPI.getFile(token, owner, repo, getPath('posts.json'));
-                        config = JSON.parse(configData.content); configSha = configData.sha;
+                        config = JSON.parse(configData.content);
+                        if (!config.comments) config.comments = { repo: "", repoId: "", category: "", categoryId: "" };
+                        configSha = configData.sha;
                         posts = postsData && postsData.content ? JSON.parse(postsData.content) : [];
                         postsSha = postsData ? postsData.sha : null;
                     }
                     
                     loginWrapper.style.display = 'none';
                     adminWrapper.style.display = 'flex';
-                    showMainView('posts');
+                    showView('dashboard');
                     renderPostList();
                     populateSettings();
 
@@ -226,9 +302,12 @@
             const renderPostList = () => {
                 postListBody.innerHTML = '';
                 [...posts].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).forEach(post => {
+                    const statusClass = post.status === 'published' ? 'published' : 'draft';
+                    const statusText = post.status === 'published' ? '已发布' : '草稿';
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
                         <td>${post.title}</td>
+                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
                         <td>${new Date(post.createdAt).toLocaleDateString()}</td>
                         <td class="actions">
                             <a href="#" class="edit" data-id="${post.id}">编辑</a>
@@ -239,43 +318,53 @@
                 });
             };
 
+            const updateDashboard = async () => {
+                document.getElementById('published-posts-count').textContent = posts.filter(p => p.status === 'published').length;
+                document.getElementById('draft-posts-count').textContent = posts.filter(p => p.status !== 'published').length;
+                try {
+                    const mediaFiles = await GitHubAPI.getDirectory(token, owner, repo, getPath('images'));
+                    const imageCount = mediaFiles.filter(f => f.type === 'file' && f.name !== '.gitkeep').length;
+                    document.getElementById('media-count').textContent = imageCount;
+                } catch {
+                     document.getElementById('media-count').textContent = 'N/A';
+                }
+            };
+            
             const openEditor = (postId = null) => {
-                showMainView('posts');
-                mainViews.posts.style.display = 'none';
-                editorContainer.style.display = 'block';
                 const post = posts.find(p => p.id === postId);
                 document.getElementById('editor-title').textContent = post ? '编辑文章' : '撰写新文章';
-                document.getElementById('save-post-btn').textContent = post ? '更新文章' : '发布文章';
+                document.getElementById('publish-btn').textContent = post?.status === 'published' ? '更新文章' : '发布文章';
                 document.getElementById('post-id').value = post?.id || '';
                 document.getElementById('post-title').value = post?.title || '';
                 document.getElementById('post-content').value = post?.content || '';
                 document.getElementById('post-tags').value = post?.tags?.join(', ') || '';
-                document.getElementById('delete-post-btn').style.display = post ? 'inline-block' : 'none';
+                document.getElementById('delete-post-btn').style.display = post ? 'inline-flex' : 'none';
+                showView('editor-container');
             };
 
-            const savePost = async () => {
+            const savePost = async (status) => {
                 const id = document.getElementById('post-id').value;
                 const title = document.getElementById('post-title').value.trim();
                 const content = document.getElementById('post-content').value.trim();
-                if (!title || !content) return alert('标题和内容不能为空！');
+                if (!title || !content) { showToast('标题和内容不能为空！', 'error'); return; }
                 
                 setButtonsDisabled(true);
                 const tags = document.getElementById('post-tags').value.split(',').map(t => t.trim()).filter(Boolean);
                 const postIndex = posts.findIndex(p => p.id === id);
 
                 if (postIndex > -1) {
-                    Object.assign(posts[postIndex], { title, content, tags, updatedAt: new Date().toISOString() });
+                    Object.assign(posts[postIndex], { title, content, tags, status, updatedAt: new Date().toISOString() });
                 } else {
-                    posts.push({ id: `post_${Date.now()}`, title, content, tags, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() });
+                    posts.push({ id: `post_${Date.now()}`, title, content, tags, status, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() });
                 }
                 
                 try {
                     const res = await GitHubAPI.updateFile(token, owner, repo, getPath('posts.json'), JSON.stringify(posts, null, 2), postsSha, `docs: ${id ? 'update' : 'create'} post`);
                     postsSha = res.content.sha;
-                    alert('保存成功！');
+                    showToast('保存成功！');
                     renderPostList();
-                    showMainView('posts');
-                } catch (error) { alert(`保存失败: ${error.message}`);
+                    showView('posts');
+                } catch (error) { showToast(`保存失败: ${error.message}`, 'error');
                 } finally { setButtonsDisabled(false); }
             };
 
@@ -286,10 +375,32 @@
                 try {
                     const res = await GitHubAPI.updateFile(token, owner, repo, getPath('posts.json'), JSON.stringify(posts, null, 2), postsSha, 'docs: delete post');
                     postsSha = res.content.sha;
-                    alert('删除成功！');
+                    showToast('删除成功！');
                     renderPostList();
-                } catch (error) { alert(`删除失败: ${error.message}`);
+                    showView('posts');
+                } catch (error) { showToast(`删除失败: ${error.message}`, 'error');
                 } finally { setButtonsDisabled(false); }
+            };
+
+            const renderMediaLibrary = async () => {
+                const libraryEl = document.getElementById('media-library');
+                libraryEl.innerHTML = '<p>正在加载...</p>';
+                try {
+                    const files = await GitHubAPI.getDirectory(token, owner, repo, getPath('images'));
+                    libraryEl.innerHTML = '';
+                    files.filter(f => f.type === 'file' && f.name !== '.gitkeep').forEach(file => {
+                        const item = document.createElement('div');
+                        item.className = 'media-item';
+                        item.innerHTML = `
+                            <img src="${file.download_url}" alt="${file.name}">
+                            <div class="overlay">
+                                ${file.name}
+                                <button class="copy-btn" data-url="${file.download_url}" title="复制URL"><i class="fa-solid fa-copy"></i></button>
+                            </div>
+                        `;
+                        libraryEl.appendChild(item);
+                    });
+                } catch (error) { libraryEl.innerHTML = `<p style="color:red">加载媒体库失败: ${error.message}</p>`; }
             };
             
             const populateSettings = () => {
@@ -299,6 +410,12 @@
                 document.getElementById('setting-text-color').value = config.styling.textColor;
                 document.getElementById('setting-accent-color').value = config.styling.accentColor;
                 document.getElementById('setting-bg-image-url').value = config.styling.backgroundImageUrl;
+                if (config.comments) {
+                    document.getElementById('setting-comments-repo').value = config.comments.repo || '';
+                    document.getElementById('setting-comments-repoid').value = config.comments.repoId || '';
+                    document.getElementById('setting-comments-category').value = config.comments.category || '';
+                    document.getElementById('setting-comments-categoryid').value = config.comments.categoryId || '';
+                }
             };
             
             const saveSettings = async () => {
@@ -311,12 +428,18 @@
                     accentColor: document.getElementById('setting-accent-color').value,
                     backgroundImageUrl: document.getElementById('setting-bg-image-url').value,
                 };
+                newConfig.comments = {
+                    repo: document.getElementById('setting-comments-repo').value.trim(),
+                    repoId: document.getElementById('setting-comments-repoid').value.trim(),
+                    category: document.getElementById('setting-comments-category').value.trim(),
+                    categoryId: document.getElementById('setting-comments-categoryid').value.trim(),
+                };
                 try {
                     const res = await GitHubAPI.updateFile(token, owner, repo, getPath('config.json'), JSON.stringify(newConfig, null, 2), configSha, 'docs: update config');
                     configSha = res.content.sha;
                     config = newConfig;
-                    alert('网站设置已保存！');
-                } catch (error) { alert(`设置保存失败: ${error.message}`);
+                    showToast('网站设置已保存！');
+                } catch (error) { showToast(`设置保存失败: ${error.message}`, 'error');
                 } finally { setButtonsDisabled(false); }
             };
             
@@ -337,21 +460,83 @@
                             const contentTextarea = document.getElementById('post-content');
                             contentTextarea.value += `\n${htmlToInsert}\n`;
                         }
-                    } catch (error) { alert(`图片上传失败: ${error.message}`);
+                        showToast('图片上传成功！');
+                    } catch (error) { showToast(`图片上传失败: ${error.message}`, 'error');
                     } finally { setButtonsDisabled(false); }
                 };
                 reader.readAsDataURL(file);
             };
-            
+
+            const exportData = () => {
+                const data = { config: config, posts: posts };
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `blog_backup_${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast('数据已导出');
+            };
+
+            const importData = (event) => {
+                const file = event.target.files[0];
+                if (!file) return;
+                if (!confirm('这将覆盖您当前的帖子和设置。确定要继续吗？')) return;
+
+                const reader = new FileReader();
+                reader.onload = async (e) => {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        if (!data.config || !data.posts) throw new Error('无效的备份文件格式');
+
+                        setButtonsDisabled(true);
+                        
+                        const configContent = JSON.stringify(data.config, null, 2);
+                        const postsContent = JSON.stringify(data.posts, null, 2);
+                        
+                        const [configRes, postsRes] = await Promise.all([
+                            GitHubAPI.updateFile(token, owner, repo, getPath('config.json'), configContent, configSha, 'docs: import config from backup'),
+                            GitHubAPI.updateFile(token, owner, repo, getPath('posts.json'), postsContent, postsSha, 'docs: import posts from backup')
+                        ]);
+                        
+                        config = data.config;
+                        posts = data.posts;
+                        configSha = configRes.content.sha;
+                        postsSha = postsRes.content.sha;
+                        
+                        populateSettings();
+                        renderPostList();
+                        showToast('数据导入成功！');
+                    } catch (error) {
+                        showToast(`导入失败: ${error.message}`, 'error');
+                    } finally {
+                        setButtonsDisabled(false);
+                        event.target.value = '';
+                    }
+                };
+                reader.readAsText(file);
+            };
+
             document.getElementById('start-btn').onclick = start;
-            navButtons.posts.onclick = () => showMainView('posts');
-            navButtons.settings.onclick = () => showMainView('settings');
+            navLinks.forEach(link => { link.onclick = () => showView(link.dataset.view); });
             document.getElementById('new-post-btn').onclick = () => openEditor();
-            document.getElementById('cancel-edit-btn').onclick = () => showMainView('posts');
-            document.getElementById('save-post-btn').onclick = savePost;
+            document.getElementById('cancel-edit-btn').onclick = () => showView('posts');
+            document.getElementById('save-draft-btn').onclick = () => savePost('draft');
+            document.getElementById('publish-btn').onclick = () => savePost('published');
             postListBody.addEventListener('click', (e) => {
                 if (e.target.classList.contains('edit')) { e.preventDefault(); openEditor(e.target.dataset.id); }
                 if (e.target.classList.contains('delete')) { e.preventDefault(); deletePost(e.target.dataset.id); }
+            });
+             document.getElementById('media-library').addEventListener('click', (e) => {
+                const button = e.target.closest('.copy-btn');
+                if (button) {
+                    navigator.clipboard.writeText(button.dataset.url).then(() => {
+                        showToast('URL 已复制到剪贴板');
+                    });
+                }
             });
             document.getElementById('delete-post-btn').onclick = () => deletePost(document.getElementById('post-id').value);
             document.getElementById('save-settings-btn').onclick = saveSettings;
@@ -360,6 +545,8 @@
             document.getElementById('clear-bg-image-btn').onclick = () => { document.getElementById('setting-bg-image-url').value = ''; };
             document.getElementById('mobile-menu-btn').onclick = () => document.getElementById('admin-wrapper').classList.toggle('sidebar-visible');
             document.getElementById('mobile-overlay').onclick = () => document.getElementById('admin-wrapper').classList.remove('sidebar-visible');
+            document.getElementById('export-data-btn').onclick = exportData;
+            document.getElementById('import-file-input').onchange = importData;
         });
     </script>
 </body>
