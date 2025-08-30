@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "PeonyJun的博客",
-    "description": "由单个仓库驱动的博客"
+    "title": "PeonyJun",
+    "description": "基础版本"
   },
   "customization": {
     "postLayout": "list",
