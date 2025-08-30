@@ -6,225 +6,132 @@
     <meta name="description" content="">
     <title>正在加载...</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style id="custom-fonts-style"></style>
     <style>
-        :root{--bg-color:#fff;--text-color:#333;--heading-color:#111;--accent-color:#007bff;--link-hover-color:#0056b3;--border-color:#e9ecef;--card-bg:#fff;--card-shadow:0 4px 6px rgba(0,0,0,.05);--meta-color:#6c757d;--header-bg:rgba(255,255,255,0.85);--code-bg:#f1f1f1;--code-color:#333;--font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Hiragino Sans GB","Microsoft YaHei",sans-serif}html.dark{--bg-color:#1a202c;--text-color:#a0aec0;--heading-color:#edf2f7;--accent-color:#4299e1;--link-hover-color:#63b3ed;--border-color:#2d3748;--card-bg:#2d3748;--card-shadow:0 4px 6px rgba(0,0,0,.15);--meta-color:#718096;--header-bg:rgba(26,32,44,0.85);--code-bg:#2d3748;--code-color:#a0aec0}body{font-family:var(--font-sans);line-height:1.8;color:var(--text-color);background-color:var(--bg-color);background-size:cover;background-position:center;background-attachment:fixed;margin:0;padding:0;transition:background-color .3s,color .3s}a{color:var(--accent-color);text-decoration:none;transition:color .2s}a:hover{color:var(--link-hover-color)}.container{max-width:880px;margin:0 auto;padding:1.5rem}.site-header{padding:2rem 0;text-align:center;margin-bottom:2rem}.site-title{font-size:2.8rem;margin:0;color:var(--heading-color);font-weight:700}.site-description{font-size:1.1rem;margin:10px 0 0;color:var(--meta-color)}.main-nav{display:flex;justify-content:center;align-items:center;gap:1.5rem;padding:1rem;position:sticky;top:0;background-color:var(--header-bg);backdrop-filter:saturate(180%) blur(5px);z-index:10;border-bottom:1px solid var(--border-color);margin-bottom:2rem;border-radius:8px}.search-box{position:relative}.search-box input{padding:8px 12px 8px 32px;border-radius:20px;border:1px solid var(--border-color);background-color:var(--card-bg);color:var(--text-color);transition:width .3s,border-color .3s;width:180px}.search-box input:focus{width:240px;border-color:var(--accent-color);outline:0}.search-box .fa-search{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--meta-color)}.theme-toggle{cursor:pointer;background:0 0;border:0;font-size:1.2rem;color:var(--text-color)}#posts-list-view{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}.post-card{background-color:var(--card-bg);border-radius:12px;box-shadow:var(--card-shadow);transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column;overflow:hidden}.post-card:hover{transform:translateY(-5px);box-shadow:0 8px 16px rgba(0,0,0,.08)}html.dark .post-card:hover{box-shadow:0 8px 16px rgba(0,0,0,.2)}.post-card-image{width:100%;height:200px;object-fit:cover}.post-card-content{padding:1.5rem;display:flex;flex-direction:column;flex-grow:1}.post-title{margin:0 0 10px}.post-title a{font-size:1.4rem;color:var(--heading-color);text-decoration:none;font-weight:600}.post-meta{font-size:.85rem;color:var(--meta-color);margin-bottom:1rem}.post-summary{color:var(--text-color);margin-bottom:1.5rem;word-wrap:break-word;flex-grow:1}.read-more-btn{display:inline-block;padding:8px 16px;background-color:var(--accent-color);color:#fff;border-radius:5px;font-size:.9rem;transition:background-color .2s;align-self:flex-start}.read-more-btn:hover{background-color:var(--link-hover-color)}.site-footer{text-align:center;padding:2rem 0;margin-top:2rem;border-top:1px solid var(--border-color);color:var(--meta-color);font-size:.9rem}#post-detail-view{display:none;background-color:var(--card-bg);padding:2rem;border-radius:12px;box-shadow:var(--card-shadow);max-width:800px;margin:0 auto}.post-full-header{margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border-color);text-align:center}.post-full-title{font-size:2.5rem;color:var(--heading-color);margin:0 0 1rem;line-height:1.3}.post-full-meta{font-size:.9rem;color:var(--meta-color)}.post-full-content{font-size:1.1rem;word-wrap:break-word}.post-full-content h2,h3{color:var(--heading-color);margin-top:2.5rem}.post-full-content p{margin-bottom:1.5rem}.post-full-content img{max-width:100%;height:auto;border-radius:8px;margin:1.5rem 0}.post-full-content blockquote{margin:1.5rem 0;padding:0 1.5rem;border-left:4px solid var(--accent-color);color:var(--meta-color)}.post-full-content pre{background-color:var(--code-bg);color:var(--code-color);padding:1rem;border-radius:8px;overflow-x:auto;font-family:Menlo,Monaco,Consolas,"Courier New",monospace}.back-to-home{display:inline-block;margin-top:2.5rem;font-size:1rem}#page-views{display:none}@media(min-width: 768px){.container{padding:2rem}#post-detail-view{padding:3rem}.post-full-title{font-size:3rem}}#reading-progress-bar{position:fixed;top:0;left:0;height:4px;background-color:var(--accent-color);width:0%;z-index:9999;transition:width .1s}
+        :root{--bg-color:#f8f9fa;--text-color:#212529;--heading-color:#000;--accent-color:#007bff;--link-hover-color:#0056b3;--border-color:#dee2e6;--card-bg:#fff;--shadow-sm:0 1px 2px 0 rgba(0,0,0,.05);--shadow-md:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);--font-body:'Noto Sans SC',sans-serif;--font-heading:'Montserrat',sans-serif}html.dark{--bg-color:#121212;--text-color:#adb5bd;--heading-color:#fff;--accent-color:#4dabf7;--link-hover-color:#74c0fc;--border-color:#343a40;--card-bg:#1e1e1e}body{font-family:var(--font-body);margin:0;padding:0;background-color:var(--bg-color);color:var(--text-color);line-height:1.7;transition:background-color .3s,color .3s;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.container{max-width:1100px;margin:0 auto;padding:2rem 1.5rem;display:grid;grid-template-columns:1fr;gap:2.5rem}@media(min-width: 992px){.container{grid-template-columns:1fr 300px}}.main-content{min-width:0}.sidebar{min-width:0}.site-header{background-color:var(--card-bg);padding:2rem;text-align:center;border-radius:8px;margin-bottom:2.5rem;box-shadow:var(--shadow-sm)}.site-title{font-family:var(--font-heading);font-size:2.5rem;margin:0 0 .5rem;color:var(--heading-color)}.site-description{font-size:1rem;color:var(--text-color);margin:0;white-space:pre-wrap}.posts-list.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}.posts-list.list .post-card{margin-bottom:1.5rem}.post-card{background-color:var(--card-bg);border-radius:8px;box-shadow:var(--shadow-md);overflow:hidden;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}.post-card:hover{transform:translateY(-5px);box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05)}.post-card-image{width:100%;height:200px;object-fit:cover;border-bottom:1px solid var(--border-color)}.post-card-content{padding:1.5rem;flex-grow:1;display:flex;flex-direction:column}.post-card-title{font-family:var(--font-heading);font-size:1.3rem;margin:0 0 .75rem}.post-card-title a{color:var(--heading-color);text-decoration:none}.post-card-meta{font-size:.8rem;color:var(--text-color);opacity:.7;margin-bottom:1rem}.post-card-summary{font-size:.95rem;flex-grow:1;margin-bottom:1.5rem}.post-card-footer{margin-top:auto}.read-more-btn{font-family:var(--font-heading);font-weight:600;font-size:.85rem;color:var(--accent-color);text-decoration:none}.sidebar-widget{background-color:var(--card-bg);padding:1.5rem;border-radius:8px;box-shadow:var(--shadow-sm);margin-bottom:2rem}.widget-title{font-family:var(--font-heading);font-size:1.1rem;margin:0 0 1rem;padding-bottom:.5rem;border-bottom:2px solid var(--accent-color);color:var(--heading-color)}.widget-content.about p{margin:0;font-size:.9rem;white-space:pre-wrap}.tag-cloud{display:flex;flex-wrap:wrap;gap:.5rem}.tag-cloud a{background-color:var(--bg-color);padding:.25rem .75rem;border-radius:15px;font-size:.8rem;color:var(--text-color);text-decoration:none;transition:background-color .2s,color .2s}.tag-cloud a:hover{background-color:var(--accent-color);color:#fff}.recent-posts ul{list-style:none;padding:0;margin:0}.recent-posts li a{display:block;padding:.5rem 0;border-bottom:1px solid var(--border-color);font-size:.9rem;color:var(--text-color);text-decoration:none;transition:color .2s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.recent-posts li:last-child a{border-bottom:0}.recent-posts li a:hover{color:var(--accent-color)}.post-full{background-color:var(--card-bg);border-radius:8px;box-shadow:var(--shadow-md);padding:2rem}@media(min-width: 768px){.post-full{padding:3rem}}.post-full-header{text-align:center;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border-color)}.post-full-title{font-family:var(--font-heading);font-size:2.8rem;margin:0 0 1rem;line-height:1.2;color:var(--heading-color)}.post-full-meta{font-size:.9rem;color:var(--text-color);opacity:.7}.post-full-content{font-size:1.05rem;word-wrap:break-word}.post-full-content>:first-child{margin-top:0}.post-full-content img{max-width:100%;height:auto;border-radius:8px;margin:1.5rem 0}.post-full-content a{color:var(--accent-color);text-decoration:underline}.post-full-content h2,.post-full-content h3{font-family:var(--font-heading);color:var(--heading-color);margin:2.5rem 0 1rem}.post-full-content blockquote{border-left:4px solid var(--accent-color);margin:1.5rem 0;padding:0 1.5rem;color:var(--text-color);opacity:.8}.post-full-content pre{border-radius:8px;font-size:.9rem}.site-footer{text-align:center;padding:2rem 0;margin-top:1rem;border-top:1px solid var(--border-color);color:var(--text-color);opacity:.7;font-size:.9rem}.back-to-home{display:inline-block;margin-top:3rem;font-family:var(--font-heading)}.theme-toggle{position:fixed;bottom:20px;right:20px;width:40px;height:40px;border-radius:50%;background-color:var(--card-bg);border:1px solid var(--border-color);cursor:pointer;display:flex;justify-content:center;align-items:center;font-size:1rem;box-shadow:var(--shadow-md);z-index:100}#reading-progress-bar{position:fixed;top:0;left:0;height:4px;background-color:var(--accent-color);width:0;z-index:9999;transition:width .1s}#giscus-container{margin-top:3rem}
     </style>
+    <style id="custom-css-style"></style>
 </head>
 <body>
     <div id="reading-progress-bar"></div>
-    <div class="container">
-        <header id="site-header" class="site-header">
-            <h1 id="blog-title"></h1>
-            <p id="blog-description" class="site-description"></p>
-        </header>
-        
-        <nav class="main-nav">
-             <div class="search-box">
-                <i class="fa-solid fa-search"></i>
-                <input type="text" id="search-input" placeholder="搜索文章...">
-            </div>
-            <button id="theme-toggle" class="theme-toggle" title="切换主题">
-                <i class="fa-solid fa-moon"></i>
-            </button>
-        </nav>
-
-        <main id="page-views">
-            <div id="posts-list-view"></div>
-            <div id="post-detail-view"></div>
-        </main>
-        
-        <footer class="site-footer">
-            <p>Powered by GitHub</p>
-        </footer>
+    <div class="container" style="opacity:0; transition: opacity .5s;">
+        <main class="main-content" id="main-content"></main>
+        <aside class="sidebar" id="sidebar"></aside>
     </div>
-
+    <footer class="site-footer">
+        <p id="footer-text"></p>
+    </footer>
+    <button id="theme-toggle" title="切换主题"><i class="fa-solid fa-moon"></i></button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
     <script>
         const b64_to_utf8 = (str) => { try { return decodeURIComponent(atob(str).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')); } catch (e) { return atob(str); } };
 
         document.addEventListener('DOMContentLoaded', async () => {
-            const body = document.body;
-            const blogTitleEl = document.getElementById('blog-title');
-            const blogDescriptionEl = document.getElementById('blog-description');
-            const pageViews = document.getElementById('page-views');
-            const postsListView = document.getElementById('posts-list-view');
-            const postDetailView = document.getElementById('post-detail-view');
-            const searchInput = document.getElementById('search-input');
+            const mainContent = document.getElementById('main-content');
+            const sidebar = document.getElementById('sidebar');
+            const footerText = document.getElementById('footer-text');
             const themeToggle = document.getElementById('theme-toggle');
 
             let allPosts = [];
             let siteConfig = {};
-            let originalTitle = document.title;
-            const currentTheme = localStorage.getItem('theme');
+
+            const applyTheme = (theme, isInitial = false) => {
+                const doc = document.documentElement;
+                if (theme === 'dark') {
+                    doc.classList.add('dark');
+                    themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+                } else {
+                    doc.classList.remove('dark');
+                    themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+                }
+                if (!isInitial) localStorage.setItem('theme', theme);
+                const giscusFrame = document.querySelector('iframe.giscus-frame');
+                if (giscusFrame) { giscusFrame.contentWindow.postMessage({ giscus: { setConfig: { theme: theme === 'dark' ? 'dark' : 'light' } } }, 'https://giscus.app'); }
+            };
+
+            const sanitizeContent = (html) => html.replace(/<\/script>/gi, '<\\/script>');
 
             const getFileFromApi = async (owner, repo, path) => {
                 const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
                 const response = await fetch(url, { cache: "no-store" });
                 if (!response.ok) throw new Error(`无法从API获取文件: ${path}`);
-                const data = await response.json();
-                if (typeof data.content !== 'string') throw new Error(`API返回的文件内容格式不正确: ${path}`);
-                return b64_to_utf8(data.content);
+                return JSON.parse(b64_to_utf8((await response.json()).content));
             };
 
-            const applyTheme = (theme) => {
-                if (theme === 'dark') {
-                    document.documentElement.classList.add('dark');
-                    themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
-                }
-            };
-            
-            if (currentTheme) applyTheme(currentTheme);
-
-            themeToggle.addEventListener('click', () => {
-                const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
-                localStorage.setItem('theme', newTheme);
-                applyTheme(newTheme);
-            });
-            
-            const sanitizeContent = (html) => {
-                return html.replace(/<\/script>/gi, '<\\/script>');
+            const renderHomePage = () => {
+                const layout = siteConfig.customization?.postLayout || 'grid';
+                const headerHtml = `<header class="site-header"><h1 class="site-title">${siteConfig.site.title}</h1><p class="site-description">${siteConfig.site.description}</p></header>`;
+                const postsHtml = allPosts.map(post => {
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = sanitizeContent(post.content);
+                    const summary = (tempDiv.textContent || "").substring(0, 100) + '...';
+                    const firstImage = tempDiv.querySelector('img');
+                    return `<div class="post-card">${firstImage ? `<img src="${firstImage.src}" alt="${post.title}" class="post-card-image">` : ''}<div class="post-card-content"><h2 class="post-card-title"><a href="#/post/${post.id}">${post.title}</a></h2><p class="post-card-meta">发布于 ${new Date(post.createdAt).toLocaleDateString()}</p><p class="post-card-summary">${summary}</p><div class="post-card-footer"><a href="#/post/${post.id}" class="read-more-btn">阅读全文 &rarr;</a></div></div></div>`;
+                }).join('');
+                mainContent.innerHTML = `${headerHtml}<div class="posts-list ${layout}">${postsHtml}</div>`;
             };
 
-            const renderPostList = (postsToRender) => {
-                postsListView.innerHTML = '';
-                showView('list');
-                
-                if (postsToRender.length > 0) {
-                    postsToRender.forEach(post => {
-                        const postEl = document.createElement('article');
-                        postEl.className = 'post-card';
-                        
-                        const sanitizedContent = sanitizeContent(post.content);
-                        const tempDiv = document.createElement('div');
-                        tempDiv.innerHTML = sanitizedContent;
-                        
-                        let summary = '';
-                        const moreMarker = '<!--more-->';
-                        const markerIndex = sanitizedContent.indexOf(moreMarker);
-                        
-                        if (markerIndex !== -1) {
-                            summary = sanitizedContent.substring(0, markerIndex);
-                        } else {
-                            summary = tempDiv.textContent.substring(0, 120) + (tempDiv.textContent.length > 120 ? '...' : '');
-                        }
-                        
-                        const firstImage = tempDiv.querySelector('img');
-                        const imageUrl = firstImage ? firstImage.src : '';
-                        const imageHtml = imageUrl ? `<img src="${imageUrl}" alt="${post.title}" class="post-card-image">` : '';
-
-                        postEl.innerHTML = `
-                            ${imageHtml}
-                            <div class="post-card-content">
-                                <header class="post-header">
-                                    <h2 class="post-title"><a href="#/post/${post.id}">${post.title}</a></h2>
-                                    <p class="post-meta">发布于 ${new Date(post.createdAt).toLocaleDateString()}</p>
-                                </header>
-                                <div class="post-summary">${summary}</div>
-                                <a href="#/post/${post.id}" class="read-more-btn">阅读全文 &rarr;</a>
-                            </div>
-                        `;
-                        postsListView.appendChild(postEl);
-                    });
-                } else {
-                    postsListView.innerHTML = '<p>暂无文章。开始您的第一篇创作吧！</p>';
-                }
-            };
-            
             const renderSinglePost = (postId) => {
                 const post = allPosts.find(p => p.id === postId);
-                showView('detail');
-
-                if (post) {
-                    document.title = `${post.title} - ${siteConfig.site.title}`;
-                    document.querySelector('meta[name="description"]').setAttribute('content', post.content.replace(/<[^>]*>?/gm, '').substring(0, 160));
-                    
-                    const giscusHtml = (siteConfig.comments && siteConfig.comments.repo && siteConfig.comments.repoId) ?
-                        `<section id="comments" style="margin-top: 3rem;">
-                            <script src="https://giscus.app/client.js"
-                                data-repo="${siteConfig.comments.repo}"
-                                data-repo-id="${siteConfig.comments.repoId}"
-                                data-category="${siteConfig.comments.category}"
-                                data-category-id="${siteConfig.comments.categoryId}"
-                                data-mapping="pathname"
-                                data-strict="0"
-                                data-reactions-enabled="1"
-                                data-emit-metadata="0"
-                                data-input-position="top"
-                                data-theme="${localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'}"
-                                data-lang="zh-CN"
-                                data-loading="lazy"
-                                crossorigin="anonymous"
-                                async>
-                            <\/script>
-                        </section>` : '';
-                    
-                    const finalContent = sanitizeContent(post.content.replace('<!--more-->', ''));
-
-                    postDetailView.innerHTML = `
-                        <article class="post-full">
-                            <header class="post-full-header">
-                                <h1 class="post-full-title">${post.title}</h1>
-                                <p class="post-full-meta">
-                                    发布于 ${new Date(post.createdAt).toLocaleDateString()}
-                                    ${post.tags && post.tags.length > 0 ? `| 标签: ${post.tags.join(', ')}` : ''}
-                                </p>
-                            </header>
-                            <section class="post-full-content">${finalContent}</section>
-                            ${giscusHtml}
-                            <a href="#" class="back-to-home">&larr; 返回首页</a>
-                        </article>
-                    `;
-                } else {
-                    document.title = `未找到文章 - ${siteConfig.site.title}`;
-                    postDetailView.innerHTML = `<article class="post-full"><h1 class="post-full-title">404 - 未找到文章</h1><p>抱歉，您要查找的文章不存在。</p><a href="#" class="back-to-home">&larr; 返回首页</a></article>`;
-                }
+                if (!post) { mainContent.innerHTML = '<h1>404 - 文章未找到</h1>'; return; }
+                document.title = `${post.title} - ${siteConfig.site.title}`;
+                const finalContent = sanitizeContent(post.content.replace('<!--more-->', ''));
+                mainContent.innerHTML = `
+                    <article class="post-full">
+                        <header class="post-full-header">
+                            <h1 class="post-full-title">${post.title}</h1>
+                            <p class="post-full-meta">发布于 ${new Date(post.createdAt).toLocaleDateString()} ${post.tags && post.tags.length > 0 ? `| 标签: ${post.tags.join(', ')}` : ''}</p>
+                        </header>
+                        <section class="post-full-content">${finalContent}</section>
+                        <a href="#" class="back-to-home">&larr; 返回首页</a>
+                        <div id="giscus-container"></div>
+                    </article>`;
+                setTimeout(() => Prism.highlightAll(), 0);
+                loadGiscus();
             };
 
-            const showView = (view) => {
-                if(view === 'list') {
-                    postDetailView.style.display = 'none';
-                    postsListView.style.display = 'grid';
-                    document.getElementById('site-header').style.display = 'block';
-                } else {
-                    postsListView.style.display = 'none';
-                    postDetailView.style.display = 'block';
-                    document.getElementById('site-header').style.display = 'none';
-                }
-            }
-            
+            const renderSidebar = () => {
+                const tags = [...new Set(allPosts.flatMap(p => p.tags || []))];
+                const recentPosts = allPosts.slice(0, 5);
+                sidebar.innerHTML = `
+                    <div class="sidebar-widget"><h3 class="widget-title">关于我</h3><div class="widget-content about"><p>${siteConfig.site.description}</p></div></div>
+                    <div class="sidebar-widget"><h3 class="widget-title">标签</h3><div class="widget-content tag-cloud">${tags.map(tag => `<a href="#">${tag}</a>`).join('')}</div></div>
+                    <div class="sidebar-widget"><h3 class="widget-title">最新文章</h3><div class="widget-content recent-posts"><ul>${recentPosts.map(p => `<li><a href="#/post/${p.id}">${p.title}</a></li>`).join('')}</ul></div></div>`;
+            };
+
+            const loadGiscus = () => {
+                const { comments } = siteConfig;
+                if (!comments?.repo || !comments?.repoId) return;
+                const container = document.getElementById('giscus-container');
+                if (!container || container.firstChild) return;
+                const script = document.createElement('script');
+                Object.entries({
+                    src: 'https://giscus.app/client.js', 'data-repo': comments.repo, 'data-repo-id': comments.repoId, 'data-category': comments.category, 'data-category-id': comments.categoryId,
+                    'data-mapping': 'pathname', 'data-strict': '0', 'data-reactions-enabled': '1', 'data-emit-metadata': '0', 'data-input-position': 'top',
+                    'data-theme': localStorage.getItem('theme') === 'dark' ? 'dark' : 'light', 'data-lang': 'zh-CN', crossorigin: 'anonymous', async: true
+                }).forEach(([key, value]) => script.setAttribute(key, value));
+                container.appendChild(script);
+            };
+
             const handleRoute = () => {
                 const hash = window.location.hash;
                 if (hash.startsWith('#/post/')) {
                     const postId = hash.substring(7);
                     renderSinglePost(postId);
                 } else {
-                    document.title = siteConfig.site.title || originalTitle;
-                    document.querySelector('meta[name="description"]').setAttribute('content', siteConfig.site.description || '');
-                    const filteredPosts = filterPosts(searchInput.value, allPosts);
-                    renderPostList(filteredPosts);
+                    document.title = siteConfig.site.title;
+                    renderHomePage();
                 }
                 window.scrollTo(0, 0);
             };
 
-            const filterPosts = (query, posts) => {
-                if (!query) return posts;
-                query = query.toLowerCase();
-                return posts.filter(post => 
-                    post.title.toLowerCase().includes(query) ||
-                    post.content.toLowerCase().includes(query) ||
-                    (post.tags && post.tags.some(tag => tag.toLowerCase().includes(query)))
-                );
-            };
-            
             const updateReadingProgress = () => {
-                const progressBar = document.getElementById('reading-progress-bar');
-                if (!progressBar) return;
-                const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const scrolled = (window.scrollY / scrollableHeight) * 100;
-                progressBar.style.width = `${scrolled}%`;
-            }
+                const bar = document.getElementById('reading-progress-bar');
+                const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+                bar.style.width = `${(window.scrollY / scrollable) * 100}%`;
+            };
 
             const main = async () => {
                 try {
@@ -233,39 +140,38 @@
                     const basePath = window.location.pathname.split('/').filter(p => p && p.toLowerCase() !== 'index.html').join('/');
                     const getPath = (fileName) => basePath ? `${basePath}/${fileName}` : fileName;
 
-                    const configContent = await getFileFromApi(owner, repo, getPath('config.json'));
-                    siteConfig = JSON.parse(configContent);
-                    originalTitle = siteConfig.site.title;
-
-                    document.title = siteConfig.site.title;
-                    blogTitleEl.textContent = siteConfig.site.title;
-                    blogDescriptionEl.textContent = siteConfig.site.description;
-
-                    const { backgroundColor, textColor, accentColor, backgroundImageUrl } = siteConfig.styling;
-                    if (backgroundColor) document.documentElement.style.setProperty('--bg-color', backgroundColor);
-                    if (textColor) document.documentElement.style.setProperty('--text-color', textColor);
-                    if (accentColor) document.documentElement.style.setProperty('--accent-color', accentColor);
-                    if (backgroundImageUrl) body.style.backgroundImage = `url(${backgroundImageUrl})`;
+                    [siteConfig, allPosts] = await Promise.all([
+                        getFileFromApi(owner, repo, getPath('config.json')),
+                        getFileFromApi(owner, repo, getPath('posts.json'))
+                    ]);
                     
-                    const postsContent = await getFileFromApi(owner, repo, getPath('posts.json'));
-                    const allPublishedPosts = JSON.parse(postsContent).filter(p => p.status === 'published');
-                    allPosts = allPublishedPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                    allPosts = allPosts.filter(p => p.status === 'published').sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+                    const { customization } = siteConfig;
+                    const fontBody = customization?.fontBody || 'Noto Sans SC';
+                    const fontHeading = customization?.fontHeading || 'Montserrat';
+                    const fontStyle = `@import url('https://fonts.googleapis.com/css2?family=${fontBody.replace(/ /g, '+')}:wght@400;700&family=${fontHeading.replace(/ /g, '+')}:wght@700&display=swap');`;
+                    document.getElementById('custom-fonts-style').innerHTML = fontStyle;
+                    document.documentElement.style.setProperty('--font-body', `'${fontBody}', sans-serif`);
+                    document.documentElement.style.setProperty('--font-heading', `'${fontHeading}', sans-serif`);
+                    if(customization?.customCSS) document.getElementById('custom-css-style').innerHTML = customization.customCSS;
+
+                    footerText.textContent = customization?.footerText || `© ${new Date().getFullYear()} ${siteConfig.site.title}`;
                     
-                    pageViews.style.display = 'block';
+                    const savedTheme = localStorage.getItem('theme') || 'light';
+                    applyTheme(savedTheme, true);
+
+                    handleRoute();
+                    renderSidebar();
+                    
                     window.addEventListener('hashchange', handleRoute);
-                    handleRoute(); 
-                    
-                    searchInput.addEventListener('input', (e) => {
-                        const filtered = filterPosts(e.target.value, allPosts);
-                        renderPostList(filtered);
-                    });
-                    
                     window.addEventListener('scroll', updateReadingProgress);
-
+                    themeToggle.addEventListener('click', () => applyTheme(document.documentElement.classList.contains('dark') ? 'light' : 'dark'));
+                    if(customization?.customJS) { const customScript = document.createElement('script'); customScript.innerHTML = customization.customJS; document.body.appendChild(customScript); }
+                    document.querySelector('.container').style.opacity = 1;
                 } catch (error) {
-                    blogTitleEl.textContent = '博客加载失败';
-                    pageViews.style.display = 'block';
-                    postsListView.innerHTML = `<p><b>错误:</b> ${error.message}。</p><p>请确认后台已激活,并已发布文章。</p>`;
+                    mainContent.innerHTML = `<h1>博客加载失败</h1><p>${error.message}</p>`;
+                    document.querySelector('.container').style.opacity = 1;
                 }
             };
 
