@@ -1,0 +1,71 @@
+name: Check for Scheduled Posts
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Run Publisher Script
+        run: |
+          node -e '
+          const fs = require("fs");
+          const path = require("path");
+
+          async function run() {
+            const postsPath = path.join(process.env.GITHUB_WORKSPACE, "posts.json");
+            if (!fs.existsSync(postsPath)) {
+              console.log("posts.json not found.");
+              return;
+            }
+
+            const postsData = JSON.parse(fs.readFileSync(postsPath, "utf8"));
+            const now = new Date();
+            let updated = false;
+
+            postsData.posts.forEach(post => {
+              if (post.status === "scheduled" && new Date(post.publishAt) <= now) {
+                post.status = "published";
+                post.createdAt = post.publishAt;
+                updated = true;
+                console.log(`Publishing post: ${post.title}`);
+              }
+            });
+
+            if (updated) {
+              fs.writeFileSync(postsPath, JSON.stringify(postsData, null, 2));
+              console.log("posts.json updated with published posts.");
+
+              await require("child_process").execSync("git config --global user.name github-actions");
+              await require("child_process").execSync("git config --global user.email github-actions@github.com");
+              await require("child_process").execSync("git add posts.json");
+              await require("child_process").execSync("git commit -m \"docs: publish scheduled posts\"");
+              await require("child_process").execSync("git push");
+              
+              console.log("Changes committed and pushed.");
+            } else {
+              console.log("No scheduled posts to publish at this time.");
+            }
+          }
+
+          run().catch(error => {
+            console.error(error);
+            process.exit(1);
+          });
+          '
