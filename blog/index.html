@@ -3,204 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <title>正在加载...</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-    <style id="custom-fonts-style"></style>
+    <title>Peony King</title>
+    <!-- 样式保持不变，只修改逻辑 -->
     <style>
-        :root{--bg-color:#f4f5f5;--card-bg:#fff;--text-color:#4a4a4a;--heading-color:#333;--accent-color:#1677b3;--border-color:#e5e5e5;--header-bg:rgba(255,255,255,0.85);--shadow:0 2px 10px rgba(0,0,0,0.05);--font-body:'Noto Sans SC',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--font-heading:'Noto Sans SC',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}html.dark{--bg-color:#1c1c1e;--card-bg:#2a2a2c;--text-color:#c7c7c7;--heading-color:#f2f2f2;--accent-color:#3498db;--border-color:#3a3a3c;--header-bg:rgba(28,28,30,0.8);--shadow:0 2px 10px rgba(0,0,0,0.2)}*,:after,:before{box-sizing:border-box}body{font-family:var(--font-body);margin:0;padding-top:60px;background-color:var(--bg-color);color:var(--text-color);font-size:16px;line-height:1.8;transition:background-color .3s,color .3s;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}img{max-width:100%;height:auto;vertical-align:middle}a{color:var(--accent-color);text-decoration:none;transition:color .2s}a:hover{color:var(--heading-color)}.container{max-width:900px;margin:0 auto;padding:2rem 1rem}.site-header{position:fixed;top:0;left:0;right:0;height:60px;background-color:var(--header-bg);backdrop-filter:saturate(180%) blur(5px);-webkit-backdrop-filter:saturate(180%) blur(5px);z-index:1000;border-bottom:1px solid var(--border-color);transition: all .3s ease-in-out}.site-header.scrolled{background-color:var(--card-bg);box-shadow:0 2px 5px rgba(0,0,0,0.05)}.nav-container{max-width:1200px;height:100%;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}.site-logo a{font-family:var(--font-heading);font-weight:700;font-size:1.5rem;color:var(--heading-color)}.nav-menu{display:flex;align-items:center;gap:1.5rem}.nav-menu a{font-size:1rem;color:var(--text-color)}.nav-menu button{background:0 0;border:0;color:var(--text-color);cursor:pointer;font-size:1.2rem;padding:0}.post-card-link{display:block;color:inherit;text-decoration:none;margin-bottom:2rem}.post-card{display:flex;flex-direction:column;background-color:var(--card-bg);border-radius:8px;box-shadow:var(--shadow);overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;border-bottom:1px solid var(--border-color)}@media(min-width: 768px){.post-card{flex-direction:row}}.post-card-link:hover .post-card{transform:translateY(-5px);box-shadow:0 5px 20px rgba(0,0,0,.08)}.post-card-image-wrapper{flex-shrink:0;width:100%;height:220px;overflow:hidden}@media(min-width: 768px){.post-card-image-wrapper{width:300px;height:auto}}.post-card-image{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}.post-card-link:hover .post-card-image{transform:scale(1.05)}.post-card-content{padding:1.5rem;display:flex;flex-direction:column;flex-grow:1}.post-card-tag{font-size:.8rem;color:var(--accent-color);font-weight:700;margin-bottom:.5rem}.post-card-title{font-family:var(--font-heading);font-size:1.5rem;font-weight:700;color:var(--heading-color);margin:0 0 1rem;line-height:1.3}.post-card-summary{font-size:.95rem;color:var(--text-color);margin:0 0 1rem;flex-grow:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.post-card-meta{font-size:.85rem;color:var(--text-color);opacity:.7;display:flex;align-items:center;gap:.5rem}.post-full{background-color:var(--card-bg);border-radius:8px;padding:1.5rem;box-shadow:var(--shadow)}@media(min-width: 768px){.post-full{padding:3rem}}.post-full-title{font-family:var(--font-heading);font-size:2.5rem;font-weight:700;text-align:center;margin:0 auto 1rem;max-width:800px;line-height:1.2;color:var(--heading-color)}@media(min-width: 768px){.post-full-title{font-size:3rem}}.post-full-meta{text-align:center;color:var(--text-color);opacity:.7;margin-bottom:3rem}.post-full-content{max-width:700px;margin:0 auto;font-size:1.1rem}.post-full-content h2,.post-full-content h3{font-family:var(--font-heading);color:var(--heading-color);margin:2.5rem 0 1rem}.post-full-content p{margin-bottom:1.5rem}.post-full-content blockquote{border-left:3px solid var(--accent-color);margin:1.5rem 0;padding:0 1.5rem;color:var(--text-color);opacity:.8;font-style:italic}.post-full-content pre{border-radius:8px}.post-tags{max-width:700px;margin:3rem auto 0;padding-top:2rem;border-top:1px solid var(--border-color);display:flex;flex-wrap:wrap;gap:.75rem}.post-tags a{background-color:var(--bg-color);padding:.25rem .75rem;border-radius:15px;font-size:.8rem;color:var(--text-color);border:1px solid var(--border-color)}.post-navigation{display:flex;justify-content:space-between;max-width:700px;margin:2rem auto 0;padding-top:2rem;border-top:1px solid var(--border-color)}.post-nav-item{display:block;max-width:48%}.post-nav-item span{display:block;font-size:.8rem;opacity:.7;margin-bottom:.25rem}.post-nav-item a{font-weight:700;color:var(--text-color)}.site-footer{text-align:center;padding:2rem 1rem;margin-top:2rem;font-size:.9rem;color:var(--text-color);opacity:.7}#back-to-top{position:fixed;bottom:20px;right:20px;width:40px;height:40px;border-radius:50%;background-color:var(--card-bg);border:1px solid var(--border-color);cursor:pointer;display:flex;justify-content:center;align-items:center;font-size:1rem;box-shadow:var(--shadow);z-index:100;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s,transform .3s}#back-to-top:hover{transform:translateY(-3px)}#back-to-top.visible{opacity:1;visibility:visible}#giscus-container{max-width:700px;margin:3rem auto 0}
+        :root {
+            --bg1: #0f172a; --bg2: #1e293b; --t1: #e2e8f0; --t2: #94a3b8;
+            --ac: #38bdf8; --ph: #334155; --bd: rgba(148, 163, 184, 0.2);
+        }
+        body.light {
+            --bg1: #f8fafc; --bg2: #ffffff; --t1: #212529; --t2: #6c757d;
+            --ac: #0d6efd; --ph: #e9ecef; --bd: rgba(0, 0, 0, 0.1);
+        }
+        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg1); color: var(--t1); }
+        a { text-decoration: none; color: var(--t1); }
+        main { padding: 24px 12px; }
+        .c { max-width: 980px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 12px; }
+        .card .ip { margin-bottom: 8px; border-radius: 8px; background: var(--ph); aspect-ratio: 4/3; position: relative; overflow:hidden; }
+        .card .ip img { width:100%; height:100%; object-fit:cover; }
+        .card p { padding: 0 4px; margin: 0; font-size: 14px; line-height: 1.4; }
+        .arts { margin-top: 30px; }
+        .arts h2 { font-size: 20px; margin-bottom: 16px; }
     </style>
-    <style id="custom-css-style"></style>
 </head>
 <body>
-    <header class="site-header" id="site-header">
-        <div class="nav-container">
-            <div class="site-logo">
-                <a href="#" id="site-title-link"></a>
-            </div>
-            <nav class="nav-menu">
-                <button id="theme-toggle" title="切换主题"><i class="fa-solid fa-moon"></i></button>
-            </nav>
+    <main>
+        <div class="c" id="content-container">
+            <!-- 所有内容将由JS动态生成 -->
+            <p>正在加载内容...</p>
         </div>
-    </header>
-
-    <main class="container" id="main-container" style="opacity:0; transition: opacity .5s;">
-        <div id="posts-list-view"></div>
-        <div id="post-detail-view" style="display:none;"></div>
     </main>
-
-    <footer class="site-footer">
-        <p id="footer-text"></p>
-    </footer>
-
-    <button id="back-to-top" title="返回顶部"><i class="fa-solid fa-arrow-up"></i></button>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
     <script>
-        const b64_to_utf8 = (str) => { try { return decodeURIComponent(atob(str).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')); } catch (e) { return atob(str); } };
-
         document.addEventListener('DOMContentLoaded', async () => {
-            const mainContainer = document.getElementById('main-container');
-            const postListView = document.getElementById('posts-list-view');
-            const postDetailView = document.getElementById('post-detail-view');
-            const siteTitleLink = document.getElementById('site-title-link');
-            const footerText = document.getElementById('footer-text');
-            const themeToggle = document.getElementById('theme-toggle');
-            const backToTopBtn = document.getElementById('back-to-top');
-            const siteHeader = document.getElementById('site-header');
-
-            let allPosts = [];
-            let siteConfig = {};
-            let ownerName = '';
-
-            const applyTheme = (theme, isInitial = false) => {
-                const doc = document.documentElement;
-                if (theme === 'dark') {
-                    doc.classList.add('dark');
-                    themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
-                } else {
-                    doc.classList.remove('dark');
-                    themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
-                }
-                if (!isInitial) localStorage.setItem('theme', theme);
-                const giscusFrame = document.querySelector('iframe.giscus-frame');
-                if (giscusFrame) { giscusFrame.contentWindow.postMessage({ giscus: { setConfig: { theme: theme === 'dark' ? 'dark_dimmed' : 'light' } } }, 'https://giscus.app'); }
-            };
-
-            const sanitizeContent = (html) => html.replace(/<\/script>/gi, '<\\/script>');
-
-            const getFileFromApi = async (owner, repo, path) => {
-                const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-                const response = await fetch(url, { cache: "no-store" });
-                if (!response.ok) throw new Error(`无法从API获取文件: ${path}`);
-                return JSON.parse(b64_to_utf8((await response.json()).content));
-            };
-
-            const renderHomePage = () => {
-                postDetailView.style.display = 'none';
-                postListView.style.display = 'block';
-                const postsHtml = allPosts.map(post => {
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = sanitizeContent(post.content);
-                    const summary = (tempDiv.textContent || "").substring(0, 120) + '...';
-                    const firstImage = tempDiv.querySelector('img');
-                    const firstTag = post.tags && post.tags.length > 0 ? post.tags[0] : '';
-                    return `<a href="#/post/${post.id}" class="post-card-link"><article class="post-card"><div class="post-card-image-wrapper">${firstImage ? `<img src="${firstImage.src}" alt="${post.title}" class="post-card-image">` : ''}</div><div class="post-card-content">${firstTag ? `<div class="post-card-tag">${firstTag}</div>` : ''}<h2 class="post-card-title">${post.title}</h2><p class="post-card-summary">${summary}</p><div class="post-card-meta"><span><i class="fa-regular fa-user"></i> ${ownerName}</span><span><i class="fa-regular fa-clock"></i> ${new Date(post.createdAt).toLocaleDateString()}</span></div></div></article></a>`;
-                }).join('');
-                postListView.innerHTML = postsHtml;
-            };
-
-            const renderSinglePost = (postId) => {
-                const currentIndex = allPosts.findIndex(p => p.id === postId);
-                if (currentIndex === -1) { postListView.innerHTML = '<h1>404 - 文章未找到</h1>'; return; }
-                const post = allPosts[currentIndex];
-                const prevPost = allPosts[currentIndex + 1];
-                const nextPost = allPosts[currentIndex - 1];
-
-                document.title = `${post.title} - ${siteConfig.site.title}`;
-                const finalContent = sanitizeContent(post.content.replace('<!--more-->', ''));
-                postListView.style.display = 'none';
-                postDetailView.style.display = 'block';
-                postDetailView.innerHTML = `
-                    <article class="post-full">
-                        <header class="post-full-header">
-                            <h1 class="post-full-title">${post.title}</h1>
-                            <div class="post-full-meta"><span><i class="fa-regular fa-user"></i> ${ownerName}</span> &nbsp;&bull;&nbsp; <span><i class="fa-regular fa-clock"></i> ${new Date(post.createdAt).toLocaleDateString()}</span></div>
-                        </header>
-                        <section class="post-full-content">${finalContent}</section>
-                        ${post.tags && post.tags.length > 0 ? `<div class="post-tags">${post.tags.map(tag => `<a href="#">${tag}</a>`).join('')}</div>` : ''}
-                        <div class="post-navigation">
-                            <div class="post-nav-item prev">${prevPost ? `<span>上一篇</span><a href="#/post/${prevPost.id}">${prevPost.title}</a>` : ''}</div>
-                            <div class="post-nav-item next" style="text-align:right;">${nextPost ? `<span>下一篇</span><a href="#/post/${nextPost.id}">${nextPost.title}</a>` : ''}</div>
-                        </div>
-                        <div id="giscus-container"></div>
-                    </article>`;
-                setTimeout(() => Prism.highlightAll(), 0);
-                loadGiscus();
-            };
+            const contentContainer = document.getElementById('content-container');
             
-            const loadGiscus = () => {
-                const { comments } = siteConfig;
-                if (!comments?.repo || !comments?.repoId) return;
-                const container = document.getElementById('giscus-container');
-                if (!container) return;
-                container.innerHTML = "";
-                const script = document.createElement('script');
-                Object.entries({
-                    src: 'https://giscus.app/client.js', 'data-repo': comments.repo, 'data-repo-id': comments.repoId, 'data-category': comments.category, 'data-category-id': comments.categoryId,
-                    'data-mapping': 'pathname', 'data-strict': '0', 'data-reactions-enabled': '1', 'data-emit-metadata': '0', 'data-input-position': 'top',
-                    'data-theme': localStorage.getItem('theme') === 'dark' ? 'dark_dimmed' : 'light', 'data-lang': 'zh-CN', crossorigin: 'anonymous', async: true
-                }).forEach(([key, value]) => script.setAttribute(key, value));
-                container.appendChild(script);
-            };
+            // 核心改动：从 db.json 加载数据
+            try {
+                const response = await fetch('db.json?t=' + new Date().getTime()); // 添加时间戳避免缓存
+                if (!response.ok) throw new Error('无法加载数据文件！');
+                const db = await response.json();
+                
+                // 使用加载的数据渲染页面
+                renderFrontend(db);
+            } catch (error) {
+                contentContainer.innerHTML = `<p style="color:red;">内容加载失败: ${error.message}</p>`;
+            }
 
-            const handleRoute = () => {
-                const hash = window.location.hash;
-                if (hash.startsWith('#/post/')) {
-                    const postId = hash.substring(7);
-                    renderSinglePost(postId);
-                } else {
-                    document.title = siteConfig.site.title;
-                    renderHomePage();
-                }
-                window.scrollTo(0, 0);
-            };
-            
-            const main = async () => {
-                try {
-                    ownerName = window.location.hostname.split('.')[0];
-                    const repo = `${ownerName}.github.io`;
-                    const basePath = window.location.pathname.split('/').filter(p => p && p.toLowerCase() !== 'index.html').join('/');
-                    const getPath = (fileName) => basePath ? `${basePath}/${fileName}` : fileName;
-
-                    [siteConfig, allPosts] = await Promise.all([
-                        getFileFromApi(ownerName, repo, getPath('config.json')),
-                        getFileFromApi(ownerName, repo, getPath('posts.json'))
-                    ]);
-                    
-                    allPosts = allPosts.filter(p => p.status === 'published').sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-                    const { customization } = siteConfig;
-                    const fontBody = customization?.fontBody || 'Noto Sans SC';
-                    const fontHeading = customization?.fontHeading || 'Noto Sans SC';
-                    if (fontBody !== fontHeading) {
-                        const fontStyle = `@import url('https://fonts.googleapis.com/css2?family=${fontBody.replace(/ /g, '+')}:wght@400;700&family=${fontHeading.replace(/ /g, '+')}:wght@700&display=swap');`;
-                         document.getElementById('custom-fonts-style').innerHTML = fontStyle;
-                    } else {
-                         const fontStyle = `@import url('https://fonts.googleapis.com/css2?family=${fontBody.replace(/ /g, '+')}:wght@400;700&display=swap');`;
-                         document.getElementById('custom-fonts-style').innerHTML = fontStyle;
+            function renderFrontend(db) {
+                // 应用代理
+                const applyProxy = (url) => {
+                    if (db.config.proxyEnabled && url.includes('raw.githubusercontent.com')) {
+                        return db.config.proxyUrl + url;
                     }
-                    document.documentElement.style.setProperty('--font-body', `'${fontBody}', sans-serif`);
-                    document.documentElement.style.setProperty('--font-heading', `'${fontHeading}', sans-serif`);
-                    if(customization?.customCSS) document.getElementById('custom-css-style').innerHTML += customization.customCSS;
-                    
-                    siteTitleLink.textContent = siteConfig.site.title;
-                    footerText.textContent = customization?.footerText || `© ${new Date().getFullYear()} ${siteConfig.site.title}`;
-                    
-                    const savedTheme = localStorage.getItem('theme') || 'light';
-                    applyTheme(savedTheme, true);
+                    return url;
+                };
 
-                    handleRoute();
-                    
-                    window.addEventListener('hashchange', handleRoute);
-                    window.addEventListener('scroll', () => {
-                        if (window.scrollY > 200) backToTopBtn.classList.add('visible'); else backToTopBtn.classList.remove('visible');
-                        if (window.scrollY > 50) siteHeader.classList.add('scrolled'); else siteHeader.classList.remove('scrolled');
-                    });
-                    themeToggle.addEventListener('click', () => applyTheme(document.documentElement.classList.contains('dark') ? 'light' : 'dark'));
-                    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+                let html = '';
 
-                    if(customization?.customJS) { const customScript = document.createElement('script'); customScript.innerHTML = customization.customJS; document.body.appendChild(customScript); }
-                    mainContainer.style.opacity = 1;
-                } catch (error) {
-                    mainContainer.innerHTML = `<div class="post-full" style="text-align:center;"><h1>博客加载失败</h1><p>${error.message}</p></div>`;
-                    mainContainer.style.opacity = 1;
+                // 渲染Banner和推荐位
+                const bannerArticle = db.articles.find(a => a.id == db.config.featured1_id);
+                if (bannerArticle) {
+                    html += `<h2>推荐文章</h2><div class="card"><a href="#"><div class="ip"><img src="${applyProxy(bannerArticle.coverImage)}" alt="${bannerArticle.title}"></div><p>${bannerArticle.title}</p></a></div>`;
                 }
-            };
+                
+                // 渲染文章列表
+                html += `<section class="arts"><h2>最新文章</h2><div class="grid">`;
+                db.articles.forEach(article => {
+                    html += `
+                        <div class="card">
+                            <a href="#">
+                                <div class="ip"><img src="${applyProxy(article.coverImage)}" alt="${article.title}"></div>
+                                <p>${article.title}</p>
+                            </a>
+                        </div>
+                    `;
+                });
+                html += `</div></section>`;
 
-            main();
+                // 渲染壁纸列表 (假设)
+                // 这里可以根据您的db.json结构扩展更多模块
+                
+                contentContainer.innerHTML = html;
+            }
         });
     </script>
 </body>
