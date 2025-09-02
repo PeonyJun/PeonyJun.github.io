@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peony King</title>
-    <!-- 样式保持不变，只修改逻辑 -->
     <style>
         :root {
             --bg1: #0f172a; --bg2: #1e293b; --t1: #e2e8f0; --t2: #94a3b8;
@@ -14,74 +13,89 @@
             --bg1: #f8fafc; --bg2: #ffffff; --t1: #212529; --t2: #6c757d;
             --ac: #0d6efd; --ph: #e9ecef; --bd: rgba(0, 0, 0, 0.1);
         }
-        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg1); color: var(--t1); }
+        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg1); color: var(--t1); line-height: 1.6; }
         a { text-decoration: none; color: var(--t1); }
         main { padding: 24px 12px; }
         .c { max-width: 980px; margin: 0 auto; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 12px; }
-        .card .ip { margin-bottom: 8px; border-radius: 8px; background: var(--ph); aspect-ratio: 4/3; position: relative; overflow:hidden; }
+        .card .ip { margin-bottom: 8px; border-radius: 8px; background: var(--ph); aspect-ratio: 16/10; position: relative; overflow:hidden; }
         .card .ip img { width:100%; height:100%; object-fit:cover; }
         .card p { padding: 0 4px; margin: 0; font-size: 14px; line-height: 1.4; }
         .arts { margin-top: 30px; }
         .arts h2 { font-size: 20px; margin-bottom: 16px; }
+        .welcome-screen { text-align: center; padding: 60px 20px; background-color: var(--bg2); border-radius: 12px; }
+        .welcome-screen h1 { font-size: 2rem; margin-bottom: 16px; }
+        .welcome-screen p { color: var(--t2); }
+        .welcome-screen code { background-color: var(--ph); padding: 2px 6px; border-radius: 4px; }
     </style>
 </head>
 <body>
     <main>
         <div class="c" id="content-container">
-            <!-- 所有内容将由JS动态生成 -->
-            <p>正在加载内容...</p>
+            <p style="text-align:center;">正在加载内容...</p>
         </div>
     </main>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const contentContainer = document.getElementById('content-container');
             
-            // 核心改动：从 db.json 加载数据
             try {
-                const response = await fetch('db.json?t=' + new Date().getTime()); // 添加时间戳避免缓存
-                if (!response.ok) throw new Error('无法加载数据文件！');
+                const response = await fetch('db.json?t=' + new Date().getTime());
+                if (response.status === 404) {
+                    throw new Error('not_found');
+                }
+                if (!response.ok) {
+                    throw new Error(`无法加载数据文件 (HTTP ${response.status})`);
+                }
                 const db = await response.json();
-                
-                // 使用加载的数据渲染页面
                 renderFrontend(db);
             } catch (error) {
-                contentContainer.innerHTML = `<p style="color:red;">内容加载失败: ${error.message}</p>`;
+                if (error.message === 'not_found') {
+                    contentContainer.innerHTML = `
+                        <div class="welcome-screen">
+                            <h1>欢迎使用 Peony King</h1>
+                            <p>网站尚未配置。请先打开 <code>admin.html</code> 文件，</p>
+                            <p>使用您的GitHub Token登录以完成初始化。</p>
+                        </div>
+                    `;
+                } else {
+                    contentContainer.innerHTML = `<p style="color:red; text-align:center;">内容加载失败: ${error.message}</p>`;
+                }
             }
 
             function renderFrontend(db) {
-                // 应用代理
                 const applyProxy = (url) => {
-                    if (db.config.proxyEnabled && url.includes('raw.githubusercontent.com')) {
-                        return db.config.proxyUrl + url;
+                    if (db.config.proxyEnabled && url && url.includes('raw.githubusercontent.com')) {
+                        return (db.config.proxyUrl || '') + url;
                     }
-                    return url;
+                    return url || '';
                 };
 
                 let html = '';
 
-                // 渲染Banner和推荐位
                 const bannerArticle = db.articles.find(a => a.id == db.config.featured1_id);
                 if (bannerArticle) {
-                    html += `<h2>推荐文章</h2><div class="card"><a href="#"><div class="ip"><img src="${applyProxy(bannerArticle.coverImage)}" alt="${bannerArticle.title}"></div><p>${bannerArticle.title}</p></a></div>`;
+                    const coverImage = db.media.find(m => m.id == bannerArticle.coverImageId)?.url || '';
+                    html += `<h2>推荐文章</h2><div class="card"><a href="#"><div class="ip"><img src="${applyProxy(coverImage)}" alt="${bannerArticle.title}"></div><p>${bannerArticle.title}</p></a></div>`;
                 }
                 
-                // 渲染文章列表
                 html += `<section class="arts"><h2>最新文章</h2><div class="grid">`;
-                db.articles.forEach(article => {
-                    html += `
-                        <div class="card">
-                            <a href="#">
-                                <div class="ip"><img src="${applyProxy(article.coverImage)}" alt="${article.title}"></div>
-                                <p>${article.title}</p>
-                            </a>
-                        </div>
-                    `;
-                });
+                if (db.articles.length > 0) {
+                    db.articles.forEach(article => {
+                        const coverImage = db.media.find(m => m.id == article.coverImageId)?.url || '';
+                        html += `
+                            <div class="card">
+                                <a href="#">
+                                    <div class="ip"><img src="${applyProxy(coverImage)}" alt="${article.title}"></div>
+                                    <p>${article.title}</p>
+                                </a>
+                            </div>
+                        `;
+                    });
+                } else {
+                    html += `<p>暂无文章。</p>`;
+                }
                 html += `</div></section>`;
-
-                // 渲染壁纸列表 (假设)
-                // 这里可以根据您的db.json结构扩展更多模块
                 
                 contentContainer.innerHTML = html;
             }
