@@ -1,14 +1,145 @@
 {
-  "articles": [],
-  "wallpapers": [],
-  "authors": [
+  "articles": [
+    {
+      "id": 0,
+      "title": "Sinner主题开售",
+      "categoryId": 1,
+      "authorId": 1,
+      "content": "这是关于“Sinner主题开售”的详细内容...",
+      "date": "2025-09-01",
+      "coverImageId": 1
+    },
     {
       "id": 1,
-      "name": "Admin"
+      "title": "后台界面截图",
+      "categoryId": 1,
+      "authorId": 1,
+      "content": "这是关于“后台界面截图”的详细内容...",
+      "date": "2025-08-31",
+      "coverImageId": 2
+    },
+    {
+      "id": 2,
+      "title": "Plain主题预览",
+      "categoryId": 1,
+      "authorId": 1,
+      "content": "这是关于“Plain主题预览”的详细内容...",
+      "date": "2025-08-30",
+      "coverImageId": 3
+    },
+    {
+      "id": 3,
+      "title": "晨露凝在叶尖，阳光漫过窗棂",
+      "categoryId": 1,
+      "authorId": 1,
+      "content": "这是关于“晨露凝在叶尖，阳光漫过窗棂”的详细内容...",
+      "date": "2025-08-29",
+      "coverImageId": 4
+    },
+    {
+      "id": 4,
+      "title": "晚风拂过竹林，叶声沙沙",
+      "categoryId": 1,
+      "authorId": 1,
+      "content": "这是关于“晚风拂过竹林，叶声沙沙”的详细内容...",
+      "date": "2025-08-28",
+      "coverImageId": 5
+    },
+    {
+      "id": 5,
+      "title": "雨打芭蕉，滴答成韵",
+      "categoryId": 1,
+      "authorId": 1,
+      "content": "这是关于“雨打芭蕉，滴答成韵”的详细内容...",
+      "date": "2025-08-27",
+      "coverImageId": 6
+    },
+    {
+      "id": 6,
+      "title": "雪落无声，覆盖了屋檐",
+      "categoryId": 1,
+      "authorId": 1,
+      "content": "这是关于“雪落无声，覆盖了屋檐”的详细内容...",
+      "date": "2025-08-26",
+      "coverImageId": 7
+    },
+    {
+      "id": 7,
+      "title": "微风拂过湖面，涟漪圈圈",
+      "categoryId": 1,
+      "authorId": 1,
+      "content": "这是关于“微风拂过湖面，涟漪圈圈”的详细内容...",
+      "date": "2025-08-25",
+      "coverImageId": 8
+    },
+    {
+      "id": 8,
+      "title": "古寺钟声悠远，穿过山林",
+      "categoryId": 1,
+      "authorId": 1,
+      "content": "这是关于“古寺钟声悠远，穿过山林”的详细内容...",
+      "date": "2025-08-24",
+      "coverImageId": 9
     }
   ],
-  "categories": [],
-  "navLinks": [],
-  "media": [],
-  "config": {}
+  "wallpapers": [
+    {
+      "id": "chuike",
+      "title": "锤科壁纸",
+      "categoryId": 4,
+      "date": "2024-02-01",
+      "views": 398,
+      "images": [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+    },
+    {
+      "id": "apple",
+      "title": "Apple壁纸",
+      "categoryId": 4,
+      "date": "2023-11-15",
+      "views": 520,
+      "images": [ 2, 9 ]
+    }
+  ],
+  "authors": [
+    { "id": 1, "name": "牡丹君" }
+  ],
+  "categories": [
+    { "id": 1, "name": "前沿资讯", "parentId": null },
+    { "id": 2, "name": "车与出行", "parentId": null },
+    { "id": 3, "name": "网站推荐", "parentId": null },
+    { "id": 4, "name": "精选壁纸", "parentId": null },
+    { "id": 5, "name": "风景壁纸", "parentId": 4 },
+    { "id": 6, "name": "动漫壁纸", "parentId": 4 },
+    { "id": 7, "name": "新番壁纸", "parentId": 6 },
+    { "id": 8, "name": "经典壁纸", "parentId": 6 },
+    { "id": 9, "name": "明星壁纸", "parentId": 4 }
+  ],
+  "navLinks": [
+    { "id": 1, "order": 1, "text": "网站首页", "type": "internal", "value": "home" },
+    { "id": 2, "order": 2, "text": "前沿资讯", "type": "category_archive", "value": 1 },
+    { "id": 3, "order": 3, "text": "车与出行", "type": "category_archive", "value": 2 },
+    { "id": 4, "order": 4, "text": "网站推荐", "type": "category_archive", "value": 3 },
+    { "id": 5, "order": 5, "text": "精选壁纸", "type": "category_archive", "value": 4 }
+  ],
+  "media": [
+    { "id": 1, "url": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/1.jpg" },
+    { "id": 2, "url": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/2.jpg" },
+    { "id": 3, "url": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/3.jpg" },
+    { "id": 4, "url": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/4.jpg" },
+    { "id": 5, "url": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/5.jpg" },
+    { "id": 6, "url": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/6.jpg" },
+    { "id": 7, "url": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/7.jpg" },
+    { "id": 8, "url": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/8.jpg" },
+    { "id": 9, "url": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/9.jpg" }
+  ],
+  "config": {
+    "siteTitle": "Peony King",
+    "logoText": "PEONY KING",
+    "bannerImgId": 1,
+    "featured1_id": 1,
+    "featured2_id": 2,
+    "footerText": "Copyright © 2025 牡丹君",
+    "proxyEnabled": true,
+    "proxyUrl": "https://gh-proxy.com/"
+  }
 }
