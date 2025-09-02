@@ -3,442 +3,715 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>博客管理后台</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Peony King - 管理中心</title>
     <style>
-        :root{--bg-color:#f4f6f8;--sidebar-bg:#1a202c;--sidebar-text:#a0aec0;--sidebar-hover-bg:#2d3748;--sidebar-active-bg:#4a5568;--sidebar-active-text:#fff;--content-bg:#fff;--text-color:#2d3748;--heading-color:#1a202c;--accent-color:#4299e1;--accent-color-hover:#2b6cb0;--border-color:#e2e8f0;--danger-color:#e53e3e;--success-color:#48bb78;--info-color:#4299e1;--warning-color:#ed8936;--shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06);--font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}body{font-family:var(--font-sans);margin:0;background-color:var(--bg-color);color:var(--text-color);font-size:14px;line-height:1.6}a{text-decoration:none;color:var(--accent-color)}input,textarea,button,select{font-family:inherit}#login-wrapper{display:flex;justify-content:center;align-items:center;height:100vh}.login-box{width:90%;max-width:380px;padding:40px;background:var(--content-bg);box-shadow:var(--shadow);border-radius:8px;text-align:center}.login-box h1{margin-top:0;margin-bottom:1rem;color:var(--heading-color);font-size:1.8rem}.login-box p{margin-bottom:2rem;color:#718096}.login-box input{width:100%;padding:12px;margin-bottom:1.5rem;border:1px solid var(--border-color);border-radius:6px;box-sizing:border-box;transition:border-color .2s,box-shadow .2s}.login-box input:focus{border-color:var(--accent-color);box-shadow:0 0 0 3px rgba(66,153,225,.5);outline:0}.login-box button{width:100%;padding:12px;background:var(--accent-color);color:#fff;border:0;border-radius:6px;cursor:pointer;transition:background .2s;font-size:1rem;font-weight:600}.login-box button:hover{background:var(--accent-color-hover)}.admin-wrapper{display:flex;min-height:100vh}#admin-sidebar{position:fixed;top:0;left:0;height:100%;width:240px;background:var(--sidebar-bg);color:var(--sidebar-text);display:flex;flex-direction:column;flex-shrink:0;transform:translateX(-100%);transition:transform .3s ease-in-out;z-index:1000}.admin-wrapper.sidebar-visible #admin-sidebar{transform:translateX(0)}.admin-wrapper.sidebar-visible #mobile-overlay{display:block}#admin-sidebar .logo{padding:2rem 1.5rem;font-size:1.5rem;font-weight:700;text-align:center;color:#fff;background-color:rgba(0,0,0,.2)}#admin-sidebar .nav{flex-grow:1;list-style:none;margin:0;padding:20px 0}#admin-sidebar .nav a{display:flex;align-items:center;gap:12px;padding:15px 25px;color:var(--sidebar-text);transition:background .2s,color .2s;font-weight:500}#admin-sidebar .nav a:hover{background:var(--sidebar-hover-bg);color:var(--sidebar-active-text)}#admin-sidebar .nav li.active a{background:var(--sidebar-active-bg);color:var(--sidebar-active-text);border-left:4px solid var(--accent-color)}#admin-sidebar .nav-footer{padding:20px 0}#admin-content{width:100%;padding:20px;transition:margin-left .3s ease-in-out}#mobile-header{display:flex;justify-content:space-between;align-items:center;background:var(--content-bg);padding:10px 20px;box-shadow:var(--shadow);margin-bottom:20px;position:sticky;top:0;z-index:998}.mobile-menu-btn{font-size:1.5rem;background:0 0;border:0;cursor:pointer;color:var(--text-color)}.mobile-logo{font-size:1.2rem;font-weight:700}#mobile-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:999;display:none}@media(min-width: 992px){#admin-sidebar{position:sticky;transform:translateX(0)}#admin-content{width:calc(100% - 240px);padding:30px}#mobile-header{display:none}}.card{background:var(--content-bg);border-radius:8px;box-shadow:var(--shadow);margin-bottom:2rem;padding:1.5rem}.page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem}.page-header h2{margin:0;font-size:1.8rem;color:var(--heading-color)}.admin-table-wrapper{overflow-x:auto}.admin-table{width:100%;border-collapse:collapse}.admin-table th,.admin-table td{padding:12px 15px;text-align:left;border-bottom:1px solid var(--border-color);white-space:nowrap}.admin-table th{background:#f7fafc;font-weight:600}.admin-table .actions a{margin-right:15px}.admin-table .actions .delete{color:var(--danger-color)}.status-badge{padding:3px 8px;border-radius:12px;font-size:12px;font-weight:600}.status-badge.published{background-color:#e6fffa;color:#38a169}.status-badge.draft{background-color:#feebc8;color:#9c4221}button,a.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:none;border-radius:6px;background:var(--accent-color);color:#fff;cursor:pointer;transition:background .2s;font-weight:600}button:hover,a.btn:hover{background:var(--accent-color-hover);opacity:1}button:disabled{background-color:#cbd5e0;cursor:not-allowed}.btn-success{background:var(--success-color)}.btn-danger{background:var(--danger-color)}.btn-secondary{background-color:#a0aec0;color:#fff}.form-group{margin-bottom:1.5rem}.form-group label{display:block;margin-bottom:8px;font-weight:600}.form-group input[type=text],.form-group input[type=password],.form-group input[type=color],.form-group textarea,.form-group select{width:100%;padding:10px;border:1px solid var(--border-color);border-radius:6px;box-sizing:border-box;transition:border-color .2s,box-shadow .2s}.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent-color);box-shadow:0 0 0 3px rgba(66,153,225,.5);outline:0}.form-group textarea{resize:vertical;min-height:150px;font-family:Menlo,Monaco,Consolas,"Courier New",monospace;font-size:13px}.form-section-divider{border:0;height:1px;background-color:var(--border-color);margin:2.5rem 0}#toast-container{position:fixed;top:20px;right:20px;z-index:9999}.toast{background-color:#fff;padding:15px 20px;border-radius:8px;box-shadow:0 5px 15px rgba(0,0,0,.1);margin-bottom:10px;display:flex;align-items:center;gap:10px;opacity:0;transform:translateX(100%);animation:slideIn .5s forwards}.toast.success{border-left:4px solid var(--success-color)}.toast.error{border-left:4px solid var(--danger-color)}.toast i{font-size:1.2rem}.toast.success .fa-check-circle{color:var(--success-color)}.toast.error .fa-times-circle{color:var(--danger-color)}@keyframes slideIn{to{opacity:1;transform:translateX(0)}}#dashboard-view .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem}.stat-card{background:var(--content-bg);padding:1.5rem;border-radius:8px;box-shadow:var(--shadow);display:flex;align-items:center;gap:1rem}.stat-card i{font-size:2rem;color:var(--accent-color)}.stat-card .info h4{margin:0;font-size:1rem;color:#718096}.stat-card .info p{margin:0;font-size:2rem;font-weight:700;color:var(--heading-color)}#media-library{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem}.media-item{position:relative;border-radius:8px;overflow:hidden;box-shadow:var(--shadow)}.media-item img{width:100%;height:120px;object-fit:cover;display:block}.media-item .overlay{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);color:#fff;padding:8px;font-size:12px;text-align:center;opacity:0;transition:opacity .2s}.media-item:hover .overlay{opacity:1}.media-item .copy-btn{cursor:pointer;background:0 0;border:0;color:#fff;padding:0;margin-left:5px}#editor-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}.main-view{display:none}.form-group small{font-size:12px;color:#718096;margin-top:5px;display:block}
+        :root {
+            --primary: #6366f1; --primary-hover: #4f46e5; --danger: #ef4444; --danger-hover: #dc2626; --success: #22c55e;
+            --bg-main: #f3f4f6; --bg-content: #ffffff; --text-main: #111827; --text-secondary: #6b7280; 
+            --border: #e5e7eb; --sidebar-width: 220px; --header-height: 60px;
+        }
+        body.dark {
+            --primary: #818cf8; --primary-hover: #6366f1; --bg-main: #111827; --bg-content: #1f2937;
+            --text-main: #f9fafb; --text-secondary: #9ca3af; --border: #374151;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background-color: var(--bg-main); color: var(--text-main); transition: background-color .3s, color .3s; font-size: 15px; line-height: 1.6; overflow-x: hidden; }
+        body.no-scroll { overflow: hidden; }
+        a { text-decoration: none; color: var(--primary); }
+        ul { list-style: none; }
+        #login-screen { display: flex; align-items: center; justify-content: center; height: 100vh; }
+        .login-box { width: 100%; max-width: 400px; padding: 32px; background-color: var(--bg-content); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        #admin-container { display: none; }
+        .admin-panel { display: flex; }
+        .sidebar { width: var(--sidebar-width); height: 100vh; background-color: var(--bg-content); position: fixed; top: 0; left: 0; transform: translateX(-100%); transition: transform .3s ease, background-color .3s; z-index: 1000; display: flex; flex-direction: column; border-right: 1px solid var(--border); }
+        .sidebar.open { transform: translateX(0); }
+        .main-content { width: 100%; margin-left: 0; padding-top: var(--header-height); transition: margin-left .3s ease; }
+        @media (min-width: 768px) { .sidebar { transform: translateX(0); } .main-content { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); } }
+        .header { height: var(--header-height); background-color: var(--bg-content); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: fixed; top: 0; width: 100%; z-index: 900; transition: background-color .3s, border-color .3s; }
+        .menu-toggle { display: block; cursor: pointer; } .menu-toggle .icon { stroke: var(--text-secondary); }
+        @media (min-width: 768px) { .menu-toggle { display: none; } .header { width: calc(100% - var(--sidebar-width)); left: var(--sidebar-width); } }
+        .header-actions { display: flex; align-items: center; gap: 12px; background-color: var(--bg-main); padding: 6px 12px; border-radius: 99px; }
+        .sidebar-header { padding: 18px 24px; font-size: 1.25rem; font-weight: bold; white-space: nowrap; }
+        .sidebar-nav { flex-grow: 1; overflow-y: auto; padding: 10px; }
+        .nav-item a { display: flex; align-items: center; padding: 11px 20px; border-radius: 8px; color: var(--text-secondary); font-weight: 500; transition: all 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .nav-item a:hover { background-color: var(--primary); color: white; }
+        .nav-item a.active { background-color: var(--primary); color: white; font-weight: 600; }
+        .nav-item a svg { margin-right: 15px; width: 20px; height: 20px; stroke-width: 2; flex-shrink: 0; }
+        .content-wrapper { padding: 20px; }
+        .page-header { margin-bottom: 20px; } .page-title { font-size: 1.6rem; font-weight: 700; line-height: 1.2; } .page-subtitle { font-size: 0.9rem; color: var(--text-secondary); margin-top: 4px; }
+        .content-view { display: none; } .content-view.active { display: block; animation: fadeIn .3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .card { background-color: var(--bg-content); border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: all .3s; }
+        .card-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .card-body { padding: 20px; } .card-footer { padding: 16px 20px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 12px; background-color: color-mix(in srgb, var(--bg-main) 50%, transparent); }
+        .card-title { font-size: 1.1rem; font-weight: 600; }
+        .btn { padding: 10px 18px; border-radius: 8px; border: none; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+        .btn-primary { background-color: var(--primary); color: white; } .btn-primary:hover { background-color: var(--primary-hover); }
+        .btn-danger { background-color: var(--danger); color: white; } .btn-danger:hover { background-color: var(--danger-hover); }
+        .btn-secondary { background-color: var(--bg-main); color: var(--text-main); border: 1px solid var(--border); }
+        .form-group { margin-bottom: 16px; } .form-label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .form-control { width: 100%; padding: 10px 14px; background-color: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; color: var(--text-main); font-size: 0.95rem; transition: all .2s; }
+        .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 20%, transparent); }
+        .form-hint { font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px; }
+        textarea.form-control { min-height: 160px; resize: vertical; }
+        .switch { position: relative; display: inline-block; width: 44px; height: 24px; } .switch input { display: none; } .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--border); transition: .4s; border-radius: 24px; } .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; } input:checked + .slider { background-color: var(--primary); } input:checked + .slider:before { transform: translateX(20px); }
+        .table-responsive { width: 100%; overflow-x: auto; } .table { width: 100%; border-collapse: collapse; white-space: nowrap; }
+        .table th, .table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+        .table th { font-weight: 600; color: var(--text-secondary); font-size: 13px; text-transform: uppercase; }
+        .table tbody tr { transition: background-color .2s; } .table tbody tr:hover { background-color: color-mix(in srgb, var(--border) 50%, transparent); }
+        .empty-state { text-align: center; padding: 40px; color: var(--text-secondary); } .empty-state svg { width: 48px; height: 48px; margin: 0 auto 16px; }
+        .action-btn { background: none; border: none; padding: 6px; border-radius: 50%; cursor: pointer; transition: background-color .2s; }
+        .action-btn:hover { background-color: var(--border); } .action-btn svg { width: 18px; height: 18px; stroke: var(--text-secondary); }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 1100; display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; visibility: hidden; transition: all .3s; }
+        .modal-overlay.open { opacity: 1; visibility: visible; }
+        .modal-box { background-color: var(--bg-content); border-radius: 12px; padding: 24px; width: 100%; max-width: 450px; transform: scale(0.95); transition: transform .3s; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .modal-box.modal-lg { max-width: 800px; }
+        .modal-overlay.open .modal-box { transform: scale(1); }
+        .modal-header { font-size: 1.2rem; font-weight: 600; margin-bottom: 12px; } .modal-body { color: var(--text-secondary); margin-bottom: 24px; } .modal-footer { display: flex; justify-content: flex-end; gap: 12px; }
+        .grid { display: grid; gap: 16px; } .grid-cols-1 { grid-template-columns: 1fr; } @media (min-width: 768px) { .grid-cols-2 { grid-template-columns: repeat(2, 1fr); } }
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; display: none; } @media (min-width: 768px) { #overlay { display: none !important; } }
+        .editor-toolbar { background-color: var(--bg-main); border: 1px solid var(--border); border-bottom: none; padding: 8px; display: flex; gap: 8px; border-top-left-radius: 8px; border-top-right-radius: 8px; }
+        .toolbar-btn { background: none; border: none; padding: 6px; border-radius: 6px; cursor: pointer; } .toolbar-btn:hover { background-color: var(--border); } .toolbar-btn svg { width: 18px; height: 18px; stroke: var(--text-main); }
+        .category-list ul { list-style-type: none; } .category-list li { border-left: 2px solid var(--border); margin-bottom: 4px; }
+        .category-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-radius: 6px; transition: background-color .2s; }
+        .category-item:hover { background-color: var(--bg-main); }
+        .category-info { display: flex; align-items: center; gap: 8px; } .category-info svg { width: 18px; height: 18px; color: var(--text-secondary); flex-shrink: 0; }
+        .category-list .sub-categories { margin-left: 20px; padding-left: 15px; }
+        .custom-select-wrapper { position: relative; }
+        .custom-select-trigger { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background-color: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; color: var(--text-main); font-size: 0.95rem; cursor: pointer; transition: all .2s; }
+        .custom-select-wrapper.open .custom-select-trigger { border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 20%, transparent); }
+        .custom-select-options { position: absolute; top: 100%; left: 0; right: 0; background-color: var(--bg-content); border: 1px solid var(--border); border-radius: 8px; margin-top: 4px; z-index: 10; max-height: 200px; overflow-y: auto; display: none; }
+        .custom-select-wrapper.open .custom-select-options { display: block; }
+        .custom-select-option { padding: 10px 14px; cursor: pointer; } .custom-select-option:hover { background-color: var(--bg-main); }
+        .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 16px; max-height: 50vh; overflow-y: auto; padding-right: 8px; }
+        .media-item { position: relative; cursor: pointer; border: 2px solid transparent; border-radius: 10px; transition: all .2s; } .media-item img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; }
+        .media-item:hover { transform: scale(1.05); } .media-item.selected { border-color: var(--primary); }
+        .slide-over-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1050; opacity: 0; visibility: hidden; transition: opacity .3s; }
+        .slide-over-backdrop.open { opacity: 1; visibility: visible; }
+        .slide-over-panel { position: fixed; top: 0; right: 0; width: 100%; max-width: 500px; height: 100%; background: var(--bg-content); z-index: 1051; transform: translateX(100%); transition: transform .3s ease; display: flex; flex-direction: column; }
+        .slide-over-panel.open { transform: translateX(0); }
+        .slide-over-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .slide-over-title { font-size: 1.2rem; font-weight: 600; }
+        .slide-over-body { flex-grow: 1; padding: 20px; overflow-y: auto; }
+        .tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+        .tab-btn { padding: 12px 20px; border: none; background: none; cursor: pointer; color: var(--text-secondary); font-weight: 500; position: relative; }
+        .tab-btn.active { color: var(--primary); }
+        .tab-btn.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background: var(--primary); }
+        .tab-content { display: none; } .tab-content.active { display: block; }
+        .draggable-item { padding: 12px; background-color: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; display: flex; align-items: center; cursor: grab; }
+        .draggable-item.dragging { opacity: 0.5; background-color: var(--primary); } .draggable-item .drag-handle { margin-right: 12px; color: var(--text-secondary); }
+        .draggable-item .item-label { flex-grow: 1; }
+        .toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 2000; display: flex; flex-direction: column; gap: 10px; }
+        .toast { background-color: var(--bg-content); color: var(--text-main); padding: 12px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px; transform: translateX(120%); animation: slideIn .3s ease forwards; }
+        .toast.success { border-left: 4px solid var(--success); } .toast.danger { border-left: 4px solid var(--danger); }
+        @keyframes slideIn { to { transform: translateX(0); } }
     </style>
 </head>
-<body>
-    <div id="login-wrapper">
+<body class="dark">
+    <div id="toast-container" class="toast-container"></div>
+    <div id="login-screen">
         <div class="login-box">
-            <h1>博客管理</h1>
-            <p>请输入您的GitHub Personal Access Token开始。</p>
-            <input type="password" id="token-input" placeholder="输入具备 repo 权限的Token">
-            <button id="start-btn">开始 <i class="fa-solid fa-arrow-right"></i></button>
-            <p id="initial-message" style="margin-top: 15px; color: red;"></p>
+            <h1 class="page-title" style="text-align: center; margin-bottom: 24px;">Peony King 管理后台</h1>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="repo-name" class="form-label">GitHub 仓库</label>
+                    <input type="text" id="repo-name" class="form-control" placeholder="例如：username/repo-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="github-token" class="form-label">GitHub Personal Access Token</label>
+                    <input type="password" id="github-token" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">登录</button>
+            </form>
         </div>
     </div>
 
-    <div id="admin-wrapper" class="admin-wrapper" style="display: none;">
-        <div id="mobile-overlay"></div>
-        <aside id="admin-sidebar">
-            <div class="logo">My Blog</div>
-            <ul class="nav">
-                <li data-view="dashboard" class="active"><a href="#"><i class="fa-solid fa-gauge"></i>仪表盘</a></li>
-                <li data-view="posts"><a href="#"><i class="fa-solid fa-file-pen"></i>文章管理</a></li>
-                <li data-view="media"><a href="#"><i class="fa-solid fa-photo-film"></i>媒体库</a></li>
-                <li data-view="settings"><a href="#"><i class="fa-solid fa-gear"></i>网站设置</a></li>
-                <li><a href="index.html" target="_blank"><i class="fa-solid fa-globe"></i>查看站点</a></li>
-            </ul>
-            <div class="nav-footer">
-                <ul class="nav"><li><a href="#" id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i>退出登录</a></li></ul>
-            </div>
-        </aside>
-
-        <main id="admin-content">
-            <header id="mobile-header">
-                <button id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
-                <div class="mobile-logo">管理后台</div>
-            </header>
+    <div id="admin-container">
+        <div class="admin-panel">
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-header">Peony King</div>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li class="nav-item"><a href="#" class="nav-link active" data-view="dashboard"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>仪表盘</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" data-view="articles"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>文章管理</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" data-view="media"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>媒体库</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" data-view="appearance"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>外观管理</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" data-view="settings"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>网站设置</a></li>
+                    </ul>
+                </nav>
+            </aside>
             
-            <div id="toast-container"></div>
-
-            <div id="dashboard-view" class="main-view"></div>
-            <div id="posts-view" class="main-view"></div>
-            <div id="media-view" class="main-view"></div>
-            <div id="editor-container" class="main-view"></div>
-
-            <div id="settings-view" class="main-view card">
-                <div class="page-header"><h2>网站设置</h2></div>
-                
-                <h3><i class="fa-solid fa-circle-info"></i> 基本信息</h3>
-                <div class="form-group"><label for="setting-title">网站标题</label><input type="text" id="setting-title"></div>
-                <div class="form-group"><label for="setting-description">网站描述/博主简介</label><textarea id="setting-description" rows="3"></textarea></div>
-
-                <hr class="form-section-divider">
-
-                <h3><i class="fa-solid fa-palette"></i> 布局与自定义</h3>
-                <div class="form-group"><label for="setting-layout">首页文章布局</label><select id="setting-layout"><option value="grid">网格卡片</option><option value="list">垂直列表</option></select></div>
-                <div class="form-group"><label for="setting-font-body">正文字体</label><select id="setting-font-body"></select></div>
-                <div class="form-group"><label for="setting-font-heading">标题字体</label><select id="setting-font-heading"></select></div>
-                <div class="form-group"><label for="setting-footer-text">页脚文字</label><input type="text" id="setting-footer-text" placeholder="© 2025 你的名字"></div>
-                <div class="form-group"><label for="setting-custom-css">自定义 CSS</label><textarea id="setting-custom-css" rows="5" placeholder="例如: .site-title { color: red; }"></textarea><small>此代码将被注入到网站的 &lt;head&gt; 中。</small></div>
-                <div class="form-group"><label for="setting-custom-js">自定义 JavaScript</label><textarea id="setting-custom-js" rows="5" placeholder="例如: console.log('Hello from custom JS');"></textarea><small>此代码将在页面加载完成后执行。</small></div>
-
-                <hr class="form-section-divider">
-
-                <h3><i class="fa-solid fa-comments"></i> 评论设置 (Giscus)</h3>
-                <div class="form-group"><label for="setting-comments-repo">仓库 (格式: owner/repo)</label><input type="text" id="setting-comments-repo"></div>
-                <div class="form-group"><label for="setting-comments-repoid">仓库 ID</label><input type="text" id="setting-comments-repoid"></div>
-                <div class="form-group"><label for="setting-comments-category">分类</label><input type="text" id="setting-comments-category"></div>
-                <div class="form-group"><label for="setting-comments-categoryid">分类 ID</label><input type="text" id="setting-comments-categoryid"></div>
-                
-                <button id="save-settings-btn" class="btn-success"><i class="fa-solid fa-save"></i> 保存设置</button>
-                
-                <hr class="form-section-divider">
-
-                <h3><i class="fa-solid fa-database"></i> 数据备份与恢复</h3>
-                <div class="form-group">
-                    <button id="export-data-btn" class="btn-info"><i class="fa-solid fa-download"></i> 导出数据</button>
-                    <label for="import-file-input" class="btn btn-warning" style="cursor: pointer; margin-left:10px;"><i class="fa-solid fa-upload"></i> 导入数据</label>
-                    <input type="file" id="import-file-input" accept=".json" style="display: none;">
-                </div>
+            <div class="main-content" id="main-content">
+                <header class="header">
+                    <div class="menu-toggle" id="menu-toggle"><svg class="icon" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></div>
+                    <div class="header-actions">
+                        <label class="switch" title="切换主题"><input type="checkbox" id="theme-toggle" checked><span class="slider"></span></label>
+                        <div id="repo-display"></div>
+                    </div>
+                </header>
+    
+                <main class="content-wrapper">
+                    <div id="view-dashboard" class="content-view active">
+                        <div class="page-header"><h1 class="page-title">仪表盘</h1><p class="page-subtitle">欢迎回来，牡丹君！</p></div>
+                        <div class="grid grid-cols-1 grid-cols-2">
+                            <div class="card"><div class="card-header"><h2 class="card-title">快速操作</h2></div><div class="card-body grid grid-cols-2"><button class="btn btn-primary" data-action="new-article">新建文章</button><button class="btn btn-secondary" data-action="new-wallpaper" disabled>新建壁纸</button></div></div>
+                            <div class="card"><div class="card-header"><h2 class="card-title">网站概览</h2></div><div class="card-body" id="dashboard-stats"></div></div>
+                        </div>
+                    </div>
+    
+                    <div id="view-articles" class="content-view">
+                        <div class="page-header"><h1 class="page-title">文章管理</h1><p class="page-subtitle">管理和创建您的网站文章</p></div>
+                        <div class="card"><div class="card-header"><h2 class="card-title">文章列表</h2><button class="btn btn-primary" data-action="new-article">新建文章</button></div><div class="table-responsive"><table class="table"><thead id="articles-table-head"></thead><tbody id="articles-table-body"></tbody></table></div></div>
+                    </div>
+                    
+                    <div id="view-media" class="content-view">
+                        <div class="page-header"><h1 class="page-title">媒体库</h1><p class="page-subtitle">管理您的所有图片资源</p></div>
+                        <div class="card"><div class="card-header"><h2 class="card-title">所有图片</h2><button class="btn btn-primary" id="upload-media-btn">上传新图片</button></div><div class="card-body"><div class="media-grid" id="media-grid-container"></div></div></div>
+                    </div>
+    
+                    <div id="view-appearance" class="content-view">
+                        <div class="page-header"><h1 class="page-title">外观管理</h1><p class="page-subtitle">管理网站的导航菜单和内容分类</p></div>
+                         <div class="card">
+                            <div class="tabs" id="appearance-tabs">
+                                <button class="tab-btn active" data-tab="nav-menu">导航菜单</button>
+                                <button class="tab-btn" data-tab="content-categories">内容分类</button>
+                            </div>
+                            <div class="card-body">
+                                <div id="tab-nav-menu" class="tab-content active">
+                                    <div class="grid grid-cols-1 grid-cols-2" style="align-items: flex-start;">
+                                        <div><h3 class="card-title" style="margin-bottom: 16px;">菜单项 (可拖拽排序)</h3><div id="nav-links-container"></div></div>
+                                        <form id="nav-link-form"><h3 class="card-title" style="margin-bottom: 16px;" id="nav-link-form-title">添加菜单项</h3><input type="hidden" id="nav-link-id"><div class="form-group"><label class="form-label">链接文字</label><input type="text" id="nav-link-text" class="form-control" required></div><div class="form-group"><label class="form-label">链接类型</label><div id="nav-link-type-select" class="custom-select-wrapper"></div></div><div class="form-group" id="nav-link-category-group" style="display:none;"><label class="form-label">目标分类</label><div id="nav-link-category-select" class="custom-select-wrapper"></div></div><div class="form-group" id="nav-link-url-group" style="display:none;"><label class="form-label">目标URL</label><input type="url" id="nav-link-url" class="form-control" placeholder="https://..."></div><div style="text-align: right;"><button type="submit" class="btn btn-primary">保存菜单项</button></div></form>
+                                    </div>
+                                </div>
+                                <div id="tab-content-categories" class="tab-content">
+                                    <div class="grid grid-cols-1 grid-cols-2" style="align-items: flex-start;">
+                                        <div><h3 class="card-title" style="margin-bottom: 16px;">分类结构</h3><div class="category-list" id="category-list-container"></div></div>
+                                        <form id="category-form"><h3 class="card-title" style="margin-bottom: 16px;" id="category-form-title">添加/编辑分类</h3><input type="hidden" id="category-id"><input type="hidden" id="category-parentId"><div class="form-group"><label for="category-name" class="form-label">分类名称</label><input type="text" id="category-name" class="form-control" placeholder="输入名称..." required></div><div style="text-align: right;"><button type="submit" class="btn btn-primary">保存分类</button></div></form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div id="view-settings" class="content-view">
+                         <div class="page-header"><h1 class="page-title">网站设置</h1><p class="page-subtitle">管理网站的全局配置</p></div>
+                        <div class="card">
+                            <div class="tabs" id="settings-tabs">
+                                <button class="tab-btn active" data-tab="config">前端配置</button>
+                                <button class="tab-btn" data-tab="authors">作者管理</button>
+                                <button class="tab-btn" data-tab="proxy">代理设置</button>
+                            </div>
+                            <div class="card-body">
+                                <div id="tab-config" class="tab-content active">
+                                    <form id="config-form"><div class="grid grid-cols-1 grid-cols-2"><div class="form-group"><label for="config-site-title" class="form-label">网站标题</label><input type="text" id="config-site-title" class="form-control"></div><div class="form-group"><label for="config-logo-text" class="form-label">Logo文字</label><input type="text" id="config-logo-text" class="form-control"></div></div><div class="form-group"><label for="config-banner-img" class="form-label">首页Banner大图URL</label><input type="url" id="config-banner-img" class="form-control"></div><div class="grid grid-cols-1 grid-cols-2"><div class="form-group"><label for="config-featured1-id" class="form-label">首页推荐位1 (文章ID)</label><input type="text" id="config-featured1-id" class="form-control"></div><div class="form-group"><label for="config-featured2-id" class="form-label">首页推荐位2 (文章ID)</label><input type="text" id="config-featured2-id" class="form-control"></div></div><div class="form-group"><label for="config-footer-text" class="form-label">页脚版权信息</label><input type="text" id="config-footer-text" class="form-control"></div><div style="display:flex; justify-content:flex-end;"><button type="submit" class="btn btn-primary">保存前端配置</button></div></form>
+                                </div>
+                                <div id="tab-authors" class="tab-content">
+                                    <div class="grid grid-cols-1 grid-cols-2" style="align-items: flex-start;">
+                                        <div><h3 class="card-title" style="margin-bottom: 16px;">作者列表</h3><div class="table-responsive"><table class="table"><thead id="authors-table-head"></thead><tbody id="authors-table-body"></tbody></table></div></div>
+                                        <form id="author-form"> <h3 class="card-title" style="margin-bottom: 16px;">新增作者</h3><div class="form-group"><label for="author-name" class="form-label">作者名称</label><input type="text" id="author-name" class="form-control" required></div><div style="text-align: right;"><button type="submit" class="btn btn-primary">添加作者</button></div></form>
+                                    </div>
+                                </div>
+                                <div id="tab-proxy" class="tab-content">
+                                    <form id="proxy-form"><div class="form-group"><label class="form-label">启用图片代理</label><label class="switch"><input type="checkbox" id="proxy-enabled"><span class="slider"></span></label></div><div class="form-group"><label for="proxy-url" class="form-label">代理URL前缀</label><input type="url" id="proxy-url" class="form-control" placeholder="例如：https://gh-proxy.com/"><p class="form-hint">此URL前缀将会被添加到所有 `raw.githubusercontent.com` 链接之前。</p></div><div style="display:flex; justify-content:flex-end;"><button type="submit" class="btn btn-primary">保存代理设置</button></div></form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
             </div>
-        </main>
-    </div>
-
-    <script>
-        const utf8_to_b64 = (str) => btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1)));
-        const b64_to_utf8 = (str) => { try { return decodeURIComponent(atob(str).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')); } catch (e) { return atob(str); } };
-
-        const GitHubAPI = {
-            BASE_URL: 'https://api.github.com',
-            async request(token, endpoint, options = {}) {
-                const url = `${this.BASE_URL}${endpoint}`;
-                const headers = { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', ...options.headers };
-                const response = await fetch(url, { ...options, headers });
-                if (!response.ok) {
-                    if (response.status === 401) { localStorage.removeItem('github_token_blog'); location.reload(); }
-                    const errorData = await response.json().catch(() => ({ message: `HTTP Error: ${response.statusText}` }));
-                    throw new Error(errorData.message || 'GitHub API request failed');
-                }
-                if (response.status === 204 || response.headers.get("Content-Length") === "0") return null;
-                return response.json();
-            },
-            getUser: (token) => GitHubAPI.request(token, '/user'),
-            async getFile(token, owner, repo, path) { try { const result = await this.request(token, `/repos/${owner}/${repo}/contents/${path}`); if (!result || typeof result.content !== 'string') return null; return { content: b64_to_utf8(result.content), sha: result.sha }; } catch (error) { if (error.message.toLowerCase().includes('not found')) return null; throw error; } },
-            getDirectory: (token, owner, repo, path) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`),
-            createFile: (token, owner, repo, path, content, message, isBinary = false) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`, { method: 'PUT', body: JSON.stringify({ message, content: isBinary ? content : utf8_to_b64(content) }) }),
-            updateFile: (token, owner, repo, path, content, sha, message) => GitHubAPI.request(token, `/repos/${owner}/${repo}/contents/${path}`, { method: 'PUT', body: JSON.stringify({ message, content: utf8_to_b64(content), sha }) }),
-        };
-
+        </div>
+        
+        <div class="slide-over-backdrop" id="slide-over-backdrop"></div>
+        <div class="slide-over-panel" id="slide-over-panel">
+            <div class="slide-over-header">
+                <h2 class="slide-over-title" id="slide-over-title"></h2>
+                <button class="action-btn" id="slide-over-close"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+            </div>
+            <form class="slide-over-body" id="slide-over-form"></form>
+            <div class="card-footer" id="slide-over-footer">
+                <button type="button" class="btn btn-secondary" id="slide-over-cancel">取消</button>
+                <button type="submit" class="btn btn-primary" form="slide-over-form">保存</button>
+            </div>
+        </div>
+    
+        <div class="modal-overlay" id="delete-modal"><div class="modal-box"><div class="modal-header">确认操作</div><div class="modal-body">您确定要删除这个项目吗？此操作不可恢复。</div><div class="modal-footer"><button class="btn btn-secondary" data-modal-close>取消</button><button class="btn btn-danger" id="confirm-delete">确认删除</button></div></div></div>
+        <div class="modal-overlay" id="media-modal"><div class="modal-box modal-lg"><div class="modal-header">媒体库</div><div class="card-body"><div class="media-grid" id="media-grid-container"></div></div><div class="modal-footer"><button class="btn btn-secondary" data-modal-close>关闭</button></div></div></div>
+        <div id="overlay"></div>
+    
+        <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const loginWrapper = document.getElementById('login-wrapper');
-            const adminWrapper = document.getElementById('admin-wrapper');
-            const tokenInput = document.getElementById('token-input');
-            const messageEl = document.getElementById('initial-message');
+            const $ = (selector) => document.querySelector(selector);
+            const $$ = (selector) => document.querySelectorAll(selector);
             
-            let token = null, owner = '', repo = '', basePath = '';
-            let posts = [], postsSha = '';
-            let config = {}, configSha = '';
-            const googleFonts = ["Noto Sans SC", "Noto Serif SC", "Roboto", "Lato", "Open Sans", "Montserrat", "Source Code Pro", "Merriweather", "Playfair Display"];
-            
-            const showView = (viewId) => {
-                document.querySelectorAll('.main-view').forEach(v => v.style.display = 'none');
-                const viewEl = document.getElementById(`${viewId}-view`) || document.getElementById(viewId);
-                if (viewEl) viewEl.style.display = 'block';
-                document.querySelectorAll('#admin-sidebar .nav li[data-view]').forEach(l => l.classList.toggle('active', l.dataset.view === viewId));
-                adminWrapper.classList.remove('sidebar-visible');
+            const state = {
+                db: null,
+                dbSha: null,
+                github: null,
+                activeView: 'dashboard',
+                editingType: null,
+                editingId: null,
+                customSelects: {}
             };
 
-            const setButtonsDisabled = (disabled) => document.querySelectorAll('button').forEach(b => b.disabled = disabled);
-            const showToast = (message, type = 'success') => {
-                const container = document.getElementById('toast-container');
-                const toast = document.createElement('div');
-                toast.className = `toast ${type}`;
-                const icon = type === 'success' ? 'fa-check-circle' : 'fa-times-circle';
-                toast.innerHTML = `<i class="fa-solid ${icon}"></i> ${message}`;
-                container.appendChild(toast);
-                setTimeout(() => { toast.remove(); }, 4000);
+            const ui = {
+                loginScreen: $('#login-screen'),
+                adminContainer: $('#admin-container'),
+                sidebar: $('#sidebar'),
+                menuToggle: $('#menu-toggle'),
+                themeToggle: $('#theme-toggle'),
+                overlay: $('#overlay'),
+                repoDisplay: $('#repo-display'),
+                deleteModal: $('#delete-modal'),
+                mediaModal: $('#media-modal'),
+                slideOver: {
+                    panel: $('#slide-over-panel'),
+                    backdrop: $('#slide-over-backdrop'),
+                    title: $('#slide-over-title'),
+                    form: $('#slide-over-form'),
+                    cancel: $('#slide-over-cancel'),
+                    close: $('#slide-over-close')
+                }
             };
 
-            const start = async (savedToken = null) => {
-                const userToken = savedToken || tokenInput.value;
-                if (!userToken) { messageEl.textContent = 'Token 不能为空。'; return; }
-                token = userToken;
-                setButtonsDisabled(true);
-                if (!savedToken) messageEl.textContent = '正在验证并加载...';
+            class GitHubService {
+                constructor(token, repo, branch = 'main') {
+                    this.token = token;
+                    this.repo = repo;
+                    this.branch = branch;
+                    this.apiUrl = `https://api.github.com/repos/${repo}`;
+                    this.headers = {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    };
+                }
+
+                async _fetch(url, options = {}) {
+                    const response = await fetch(url, { ...options, headers: this.headers });
+                    if (!response.ok) {
+                        const err = new Error(`GitHub API Error: ${response.status} ${response.statusText}`);
+                        err.response = response;
+                        throw err;
+                    }
+                    return response;
+                }
+                
+                async getFile(path) {
+                    try {
+                        const res = await this._fetch(`${this.apiUrl}/contents/${path}?ref=${this.branch}`);
+                        const data = await res.json();
+                        return { content: JSON.parse(atob(data.content)), sha: data.sha };
+                    } catch (err) {
+                        if (err.response && err.response.status === 404) return null;
+                        throw err;
+                    }
+                }
+
+                async updateFile(path, content, sha) {
+                    return this._fetch(`${this.apiUrl}/contents/${path}`, {
+                        method: 'PUT',
+                        body: JSON.stringify({
+                            message: `[CMS] Update ${path} at ${new Date().toISOString()}`,
+                            content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))),
+                            sha: sha,
+                            branch: this.branch
+                        })
+                    });
+                }
+
+                async createFile(path, content) {
+                     return this._fetch(`${this.apiUrl}/contents/${path}`, {
+                        method: 'PUT',
+                        body: JSON.stringify({
+                            message: `[CMS] Create ${path}`,
+                            content: btoa(unescape(encodeURIComponent(content))),
+                            branch: this.branch
+                        })
+                    });
+                }
+
+                async checkAndCreateDirs() {
+                    const dirs = ['img', 'music', 'resource'];
+                    for (const dir of dirs) {
+                        try {
+                            await this.getFile(`${dir}/.gitkeep`);
+                        } catch (err) {
+                            if (err.response && err.response.status === 404) {
+                                await this.createFile(`${dir}/.gitkeep`, '');
+                            }
+                        }
+                    }
+                }
+            }
+            
+            async function init() {
+                const token = localStorage.getItem('gh_token');
+                const repo = localStorage.getItem('gh_repo');
+
+                if (!token || !repo) {
+                    ui.loginScreen.style.display = 'flex';
+                    ui.adminContainer.style.display = 'none';
+                    return;
+                }
 
                 try {
-                    const user = await GitHubAPI.getUser(token);
-                    owner = user.login;
-                    repo = `${owner}.github.io`;
-                    basePath = window.location.pathname.split('/').filter(p => p && p.toLowerCase() !== 'admin.html').join('/');
-                    const getPath = (fileName) => basePath ? `${basePath}/${fileName}` : fileName;
-                    
-                    let configData = await GitHubAPI.getFile(token, owner, repo, getPath('config.json'));
-                    if (!configData) {
-                        messageEl.textContent = '未检测到配置，正在为您激活系统...';
-                        const initialConfig = { site: { title: `${user.login}的博客`, description: "关于我的一些想法和记录。" }, comments: { repo: "", repoId: "", category: "", categoryId: "" }, customization: { postLayout: "grid", fontBody: "Noto Sans SC", fontHeading: "Montserrat", footerText: `© ${new Date().getFullYear()} ${user.login}`, customCSS: "", customJS: "" } };
-                        const [configRes, postsRes] = await Promise.all([
-                            GitHubAPI.createFile(token, owner, repo, getPath('config.json'), JSON.stringify(initialConfig, null, 2), 'feat: initialize config'),
-                            GitHubAPI.createFile(token, owner, repo, getPath('posts.json'), '[]', 'feat: initialize posts'),
-                            GitHubAPI.createFile(token, owner, repo, getPath('images/.gitkeep'), '', 'feat: initialize images directory')
-                        ]);
-                        config = initialConfig; configSha = configRes.content.sha;
-                        posts = []; postsSha = postsRes.content.sha;
-                        showToast('系统激活成功！');
+                    state.github = new GitHubService(token, repo);
+                    ui.repoDisplay.textContent = repo;
+                    const dbFile = await state.github.getFile('db.json');
+
+                    if (dbFile) {
+                        state.db = dbFile.content;
+                        state.dbSha = dbFile.sha;
                     } else {
-                        const postsData = await GitHubAPI.getFile(token, owner, repo, getPath('posts.json'));
-                        config = JSON.parse(configData.content);
-                        configSha = configData.sha;
-                        posts = postsData ? JSON.parse(postsData.content) : [];
-                        postsSha = postsData ? postsData.sha : null;
+                        state.db = { articles: [], wallpapers: [], authors: [], categories: [], navLinks: [], media: [], config: {} };
+                        await state.github.createFile('db.json', JSON.stringify(state.db, null, 2));
+                        const newDbFile = await state.github.getFile('db.json');
+                        state.dbSha = newDbFile.sha;
                     }
                     
-                    localStorage.setItem('github_token_blog', token);
-                    loginWrapper.style.display = 'none';
-                    adminWrapper.style.display = 'flex';
-                    setupAdminUI();
+                    await state.github.checkAndCreateDirs();
+
+                    ui.loginScreen.style.display = 'none';
+                    ui.adminContainer.style.display = 'block';
+                    showView('dashboard');
+
                 } catch (error) {
-                    messageEl.textContent = `操作失败: ${error.message}`;
-                    localStorage.removeItem('github_token_blog');
-                    token = null;
-                    loginWrapper.style.display = 'flex';
-                } finally {
-                    setButtonsDisabled(false);
+                    console.error("Initialization failed:", error);
+                    showToast('登录失败，请检查Token和仓库名称。', 'danger');
+                    localStorage.clear();
+                    ui.loginScreen.style.display = 'flex';
+                    ui.adminContainer.style.display = 'none';
                 }
+            }
+
+            async function saveDatabase() {
+                if (!state.github || !state.db) return;
+                try {
+                    const res = await state.github.updateFile('db.json', state.db, state.dbSha);
+                    const data = await res.json();
+                    state.dbSha = data.content.sha;
+                    showToast('数据已成功同步到GitHub！');
+                } catch (error) {
+                    console.error("Save failed:", error);
+                    showToast('保存失败，请检查网络或Token权限。', 'danger');
+                }
+            }
+
+            const showView = (viewId) => {
+                $$('.content-view').forEach(v => v.classList.remove('active'));
+                const targetView = $(`#view-${viewId}`);
+                if(targetView) targetView.classList.add('active');
+                $$('.nav-link').forEach(l => l.classList.toggle('active', l.dataset.view === viewId));
+                state.activeView = viewId;
+                if (window.innerWidth < 768) { ui.sidebar.classList.remove('open'); ui.overlay.style.display = 'none'; }
+                const renderMap = { dashboard: renderDashboard, articles: () => renderTable('articles'), media: renderMediaLibrary, appearance: () => { renderNavLinks(); renderCategories(); resetNavLinkForm(); }, settings: () => { renderTable('authors'); loadSettings(); } };
+                if (renderMap[viewId]) renderMap[viewId]();
+            };
+
+            const createActionButtons = (type, id) => `<td style="text-align:right;"><div style="display:flex; justify-content:flex-end; gap: 8px;"><button class="action-btn edit-link" data-type="${type}" data-id="${id}" title="编辑"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button><button class="action-btn delete-link" data-type="${type}" data-id="${id}" title="删除"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button></div></td>`;
+            
+            const renderTable = (type) => {
+                const isArticles = type === 'articles';
+                const headers = isArticles ? ['ID', '标题', '分类', '作者', '日期', ''] : type === 'authors' ? ['ID', '作者名称', ''] : [];
+                const tableId = isArticles ? 'articles' : type === 'authors' ? 'authors' : 'wallpapers';
+                const tableHead = $(`#${tableId}-table-head`), tableBody = $(`#${tableId}-table-body`);
+                if(!tableHead || !tableBody) return;
+                tableHead.innerHTML = `<tr>${headers.map(h => `<th ${h===''?'style="text-align:right"':''}>${h}</th>`).join('')}</tr>`;
+                const data = state.db[type];
+                if (!data || data.length === 0) { tableBody.innerHTML = `<tr class="empty-row"><td colspan="${headers.length}"><div class="empty-state"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg><p>暂无数据，请先添加。</p></div></td></tr>`; return; }
+                tableBody.innerHTML = data.map(item => {
+                    let rowData;
+                    if (isArticles) { rowData = [item.id, item.title, state.db.categories.find(c => c.id == item.categoryId)?.name || '未分类', state.db.authors.find(a=>a.id == item.authorId)?.name || '未知', item.date]; }
+                    else if (type === 'authors') { rowData = [item.id, item.name]; }
+                    else { rowData = []; }
+                    return `<tr>${rowData.map(td => `<td>${td}</td>`).join('')}${createActionButtons(type, item.id)}</tr>`;
+                }).join('');
             };
             
-            const setupAdminUI = () => {
-                document.getElementById('dashboard-view').innerHTML = `<div class="card"><div class="page-header"><h2>仪表盘</h2></div><div class="stats-grid"><div class="stat-card"><i class="fa-solid fa-file-alt"></i><div class="info"><h4>已发布文章</h4><p id="published-posts-count">0</p></div></div><div class="stat-card"><i class="fa-solid fa-pencil-ruler"></i><div class="info"><h4>草稿箱</h4><p id="draft-posts-count">0</p></div></div><div class="stat-card"><i class="fa-solid fa-images"></i><div class="info"><h4>媒体文件</h4><p id="media-count">0</p></div></div></div></div>`;
-                document.getElementById('posts-view').innerHTML = `<div class="page-header"><h2>文章管理</h2><button id="new-post-btn"><i class="fa-solid fa-plus"></i> 撰写新文章</button></div><div class="card"><div class="admin-table-wrapper"><table class="admin-table"><thead><tr><th>标题</th><th>状态</th><th>发布日期</th><th class="actions">操作</th></tr></thead><tbody id="post-list"></tbody></table></div></div>`;
-                document.getElementById('media-view').innerHTML = `<div class="card"><div class="page-header"><h2>媒体库</h2></div><div id="media-library"></div></div>`;
-                document.getElementById('editor-container').innerHTML = `<div class="card"><h2 id="editor-title">撰写新文章</h2><input type="hidden" id="post-id"><div class="form-group"><label for="post-title">标题</label><input type="text" id="post-title"></div><div class="form-group"><label for="post-content">内容 (支持HTML)</label><textarea id="post-content" rows="15"></textarea></div><div class="form-group"><label for="post-tags">标签 (用英文逗号分隔)</label><input type="text" id="post-tags"></div><div class="form-group"><label for="image-upload">上传图片到文章</label><input type="file" id="image-upload" accept="image/*"></div><div id="editor-actions"><button id="save-draft-btn" class="btn-secondary"><i class="fa-solid fa-save"></i> 保存草稿</button><button id="publish-btn" class="btn-success"><i class="fa-solid fa-rocket"></i> 发布文章</button><button id="cancel-edit-btn">取消</button><button id="delete-post-btn" class="btn-danger" style="display:none; margin-left: auto;"><i class="fa-solid fa-trash"></i> 删除文章</button></div></div>`;
+            const renderCategories = () => {
+                 const container = $('#category-list-container');
+                 const folderIcon = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>`;
+                 const buildHierarchy = (parentId = null) => {
+                     const children = state.db.categories.filter(c => c.parentId === parentId); if (children.length === 0) return '';
+                     let html = '<ul>';
+                     children.forEach(cat => { 
+                         const actionButtons = `<div style="display:flex; justify-content:flex-end; gap: 8px;"><button class="action-btn add-subcategory-link" data-parent-id="${cat.id}" title="添加子分类"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path></svg></button>${createActionButtons('categories', cat.id).replace(/<td[^>]*>|<\/td>/g, '')}</div>`;
+                         html += `<li><div class="category-item"><div class="category-info">${folderIcon}<span class="category-name">${cat.name}</span></div>${actionButtons}</div><div class="sub-categories">${buildHierarchy(cat.id)}</div></li>`; 
+                     });
+                     return html + '</ul>';
+                 };
+                 container.innerHTML = buildHierarchy();
+            };
+
+            const renderNavLinks = () => {
+                const container = $('#nav-links-container');
+                if (state.db.navLinks.length === 0) {
+                    container.innerHTML = `<div class="empty-state"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg><p>暂无菜单项。</p></div>`;
+                    return;
+                }
+                container.innerHTML = state.db.navLinks.sort((a, b) => a.order - b.order).map(link => {
+                    let destination = '';
+                    if (link.type === 'category_archive') { const cat = state.db.categories.find(c => c.id == link.value); destination = `分类: ${cat ? cat.name : '未知'}`; }
+                    else { destination = `URL: ${link.value}`; }
+                    return `<div class="draggable-item" draggable="true" data-id="${link.id}"><span class="drag-handle">⠿</span><span class="item-label">${link.text} <small style="color:var(--text-secondary)">(${destination})</small></span>${createActionButtons('navLinks', link.id).replace(/<td[^>]*>|<\/td>/g, '')}</div>`;
+                }).join('');
+            };
+            
+            const createCustomSelect = (containerId, options) => {
+                const container = $(`#${containerId}`); if (!container) return;
+                container.innerHTML = `<div class="custom-select-trigger"><span>请选择...</span><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div><div class="custom-select-options"></div><input type="hidden" name="${containerId}-value" id="${containerId}-value" required>`;
+                const trigger = container.querySelector('.custom-select-trigger'), optionsContainer = container.querySelector('.custom-select-options'), hiddenInput = container.querySelector('input[type="hidden"]');
+                const renderOptions = () => optionsContainer.innerHTML = options.map(opt => `<div class="custom-select-option" data-value="${opt.value}">${opt.label}</div>`).join('');
+                const setValue = (value) => {
+                    hiddenInput.value = value;
+                    const selectedOption = options.find(opt => opt.value == value);
+                    trigger.querySelector('span').textContent = selectedOption ? selectedOption.label.trim() : '请选择...';
+                };
+                trigger.addEventListener('click', (e) => { e.stopPropagation(); $$('.custom-select-wrapper.open').forEach(s => {if (s !== container) s.classList.remove('open');}); container.classList.toggle('open'); });
+                optionsContainer.addEventListener('click', (e) => { if (e.target.matches('.custom-select-option')) { setValue(e.target.dataset.value); container.classList.remove('open'); if (container.onchange) container.onchange(e.target.dataset.value); } });
+                state.customSelects[containerId] = { renderOptions, setValue };
+                renderOptions();
+            };
+
+            const loadSettings = () => {
+                Object.keys(state.db.config).forEach(key => { const input = $(`#config-${key.replace(/_/g, '-')}`); if (input) input.value = state.db.config[key]; });
+                const proxyEnabled = $(`#proxy-enabled`); if (proxyEnabled) proxyEnabled.checked = state.db.config.proxyEnabled;
+                const proxyUrl = $(`#proxy-url`); if (proxyUrl) proxyUrl.value = state.db.config.proxyUrl;
+            };
+
+            const openSlideOver = (type, id = null) => {
+                state.editingType = type; state.editingId = id;
+                let formHtml = '', title = '';
+                if (type === 'article') {
+                    title = id ? '编辑文章' : '新建文章';
+                    formHtml = `<input type="hidden" id="article-id"><div class="grid grid-cols-1 grid-cols-2"><div class="form-group"><label for="article-title" class="form-label">标题</label><input type="text" id="article-title" class="form-control" required></div><div class="grid grid-cols-1 grid-cols-2"><div class="form-group"><label for="article-category-select" class="form-label">分类</label><div id="article-category-select" class="custom-select-wrapper"></div></div><div class="form-group"><label for="article-author-select" class="form-label">作者</label><div id="article-author-select" class="custom-select-wrapper"></div></div></div></div><div class="form-group" style="display:flex; flex-direction:column; flex-grow:1;"><label for="post-content" class="form-label">内容</label><div class="editor-toolbar"><button type="button" class="toolbar-btn" title="插入图片" id="open-media-library-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></button><button type="button" class="toolbar-btn" title="插入代码" id="insert-code-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg></button></div><textarea id="post-content" class="form-control" style="flex-grow:1;"></textarea></div>`;
+                }
+                slideOver.title.textContent = title;
+                slideOver.form.innerHTML = formHtml;
+                slideOver.form.style.display = 'flex'; slideOver.form.style.flexDirection = 'column'; slideOver.form.style.height = '100%';
+
+                const categoryOptions = [{ value: '', label: '请选择分类' }];
+                const buildHierarchyOptions = (pId = null, level = 0) => { state.db.categories.filter(c => c.parentId === pId).forEach(cat => { categoryOptions.push({ value: cat.id, label: `${'— '.repeat(level)}${cat.name}` }); buildHierarchyOptions(cat.id, level + 1); }); };
+                buildHierarchyOptions();
+                createCustomSelect('article-category-select', categoryOptions);
+                const authorOptions = [{ value: '', label: '请选择作者' }, ...state.db.authors.map(a => ({ value: a.id, label: a.name }))];
+                createCustomSelect('article-author-select', authorOptions);
                 
-                populateFontSelectors();
-                populateSettings();
-                renderPostList();
-                updateDashboard();
-                showView('dashboard');
-                setupEventListeners();
-            };
-
-            const populateFontSelectors = () => {
-                const bodySelect = document.getElementById('setting-font-body');
-                const headingSelect = document.getElementById('setting-font-heading');
-                bodySelect.innerHTML = '';
-                headingSelect.innerHTML = '';
-                googleFonts.sort().forEach(font => {
-                    bodySelect.innerHTML += `<option value="${font}">${font}</option>`;
-                    headingSelect.innerHTML += `<option value="${font}">${font}</option>`;
-                });
-            };
-
-            const populateSettings = () => {
-                config.site = config.site || {};
-                config.comments = config.comments || {};
-                config.customization = config.customization || {};
-                document.getElementById('setting-title').value = config.site.title || '';
-                document.getElementById('setting-description').value = config.site.description || '';
-                document.getElementById('setting-layout').value = config.customization.postLayout || 'grid';
-                document.getElementById('setting-font-body').value = config.customization.fontBody || 'Noto Sans SC';
-                document.getElementById('setting-font-heading').value = config.customization.fontHeading || 'Montserrat';
-                document.getElementById('setting-footer-text').value = config.customization.footerText || '';
-                document.getElementById('setting-custom-css').value = config.customization.customCSS || '';
-                document.getElementById('setting-custom-js').value = config.customization.customJS || '';
-                document.getElementById('setting-comments-repo').value = config.comments.repo || '';
-                document.getElementById('setting-comments-repoid').value = config.comments.repoId || '';
-                document.getElementById('setting-comments-category').value = config.comments.category || '';
-                document.getElementById('setting-comments-categoryid').value = config.comments.categoryId || '';
-            };
-            
-            const saveSettings = async () => {
-                setButtonsDisabled(true);
-                const newConfig = {
-                    site: { title: document.getElementById('setting-title').value.trim(), description: document.getElementById('setting-description').value.trim() },
-                    customization: { postLayout: document.getElementById('setting-layout').value, fontBody: document.getElementById('setting-font-body').value, fontHeading: document.getElementById('setting-font-heading').value, footerText: document.getElementById('setting-footer-text').value.trim(), customCSS: document.getElementById('setting-custom-css').value, customJS: document.getElementById('setting-custom-js').value, },
-                    comments: { repo: document.getElementById('setting-comments-repo').value.trim(), repoId: document.getElementById('setting-comments-repoid').value.trim(), category: document.getElementById('setting-comments-category').value.trim(), categoryId: document.getElementById('setting-comments-categoryid').value.trim(), }
-                };
-                try {
-                    const getPath = (fileName) => basePath ? `${basePath}/${fileName}` : fileName;
-                    const res = await GitHubAPI.updateFile(token, owner, repo, getPath('config.json'), JSON.stringify(newConfig, null, 2), configSha, 'docs: update config');
-                    configSha = res.content.sha;
-                    config = newConfig;
-                    showToast('网站设置已保存！');
-                } catch (error) { showToast(`设置保存失败: ${error.message}`, 'error');
-                } finally { setButtonsDisabled(false); }
-            };
-
-            const renderPostList = () => {
-                const postListBody = document.getElementById('post-list');
-                if (!postListBody) return;
-                postListBody.innerHTML = '';
-                [...posts].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).forEach(post => {
-                    const statusClass = post.status === 'published' ? 'published' : 'draft';
-                    const statusText = post.status === 'published' ? '已发布' : '草稿';
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `<td>${post.title}</td><td><span class="status-badge ${statusClass}">${statusText}</span></td><td>${new Date(post.createdAt).toLocaleDateString()}</td><td class="actions"><a href="#" class="edit" data-id="${post.id}">编辑</a> <a href="#" class="delete" data-id="${post.id}">删除</a></td>`;
-                    postListBody.appendChild(tr);
-                });
-            };
-
-            const updateDashboard = async () => {
-                document.getElementById('published-posts-count').textContent = posts.filter(p => p.status === 'published').length;
-                document.getElementById('draft-posts-count').textContent = posts.filter(p => p.status !== 'published').length;
-                try {
-                    const getPath = (fileName) => basePath ? `${basePath}/${fileName}` : fileName;
-                    const mediaFiles = await GitHubAPI.getDirectory(token, owner, repo, getPath('images'));
-                    document.getElementById('media-count').textContent = mediaFiles.filter(f => f.type === 'file' && f.name !== '.gitkeep').length;
-                } catch { document.getElementById('media-count').textContent = 'N/A'; }
-            };
-
-            const openEditor = (postId = null) => {
-                showView('editor-container');
-                const post = posts.find(p => p.id === postId);
-                document.getElementById('editor-title').textContent = post ? '编辑文章' : '撰写新文章';
-                document.getElementById('publish-btn').innerHTML = post?.status === 'published' ? '<i class="fa-solid fa-rocket"></i> 更新文章' : '<i class="fa-solid fa-rocket"></i> 发布文章';
-                document.getElementById('post-id').value = post?.id || '';
-                document.getElementById('post-title').value = post?.title || '';
-                document.getElementById('post-content').value = post?.content || '';
-                document.getElementById('post-tags').value = post?.tags?.join(', ') || '';
-                document.getElementById('delete-post-btn').style.display = post ? 'inline-flex' : 'none';
-            };
-
-            const savePost = async (status) => {
-                const id = document.getElementById('post-id').value;
-                const title = document.getElementById('post-title').value.trim();
-                const content = document.getElementById('post-content').value.trim();
-                if (!title || !content) { showToast('标题和内容不能为空！', 'error'); return; }
-                setButtonsDisabled(true);
-                const tags = document.getElementById('post-tags').value.split(',').map(t => t.trim()).filter(Boolean);
-                const postIndex = posts.findIndex(p => p.id === id);
-                if (postIndex > -1) {
-                    Object.assign(posts[postIndex], { title, content, tags, status, updatedAt: new Date().toISOString() });
-                } else {
-                    posts.push({ id: `post_${Date.now()}`, title, content, tags, status, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() });
+                if (id) {
+                    const item = state.db[type + 's'].find(i => i.id == id);
+                    if (item) {
+                        $('#article-id').value = item.id; $('#article-title').value = item.title;
+                        $('#post-content').value = item.content;
+                        state.customSelects['article-category-select'].setValue(item.categoryId);
+                        state.customSelects['article-author-select'].setValue(item.authorId);
+                    }
                 }
-                try {
-                    const getPath = (fileName) => basePath ? `${basePath}/${fileName}` : fileName;
-                    const res = await GitHubAPI.updateFile(token, owner, repo, getPath('posts.json'), JSON.stringify(posts, null, 2), postsSha, `docs: ${id ? 'update' : 'create'} post`);
-                    postsSha = res.content.sha;
-                    showToast('保存成功！');
-                    renderPostList();
-                    showView('posts');
-                } catch (error) { showToast(`保存失败: ${error.message}`, 'error');
-                } finally { setButtonsDisabled(false); }
+
+                document.body.classList.add('no-scroll');
+                slideOver.backdrop.classList.add('open');
+                slideOver.panel.classList.add('open');
             };
 
-            const deletePost = async (postId) => {
-                if (!postId || !confirm('确定要删除这篇文章吗？')) return;
-                setButtonsDisabled(true);
-                posts = posts.filter(p => p.id !== postId);
-                try {
-                    const getPath = (fileName) => basePath ? `${basePath}/${fileName}` : fileName;
-                    const res = await GitHubAPI.updateFile(token, owner, repo, getPath('posts.json'), JSON.stringify(posts, null, 2), postsSha, 'docs: delete post');
-                    postsSha = res.content.sha;
-                    showToast('删除成功！');
-                    renderPostList();
-                    showView('posts');
-                } catch (error) { showToast(`删除失败: ${error.message}`, 'error');
-                } finally { setButtonsDisabled(false); }
+            const closeSlideOver = () => {
+                document.body.classList.remove('no-scroll');
+                slideOver.backdrop.classList.remove('open');
+                slideOver.panel.classList.remove('open');
             };
 
-            const renderMediaLibrary = async () => {
-                const libraryEl = document.getElementById('media-library');
-                libraryEl.innerHTML = '<p>正在加载...</p>';
-                try {
-                    const getPath = (fileName) => basePath ? `${basePath}/${fileName}` : fileName;
-                    const files = await GitHubAPI.getDirectory(token, owner, repo, getPath('images'));
-                    libraryEl.innerHTML = '';
-                    files.filter(f => f.type === 'file' && f.name !== '.gitkeep').forEach(file => {
-                        const item = document.createElement('div');
-                        item.className = 'media-item';
-                        item.innerHTML = `<img src="${file.download_url}" alt="${file.name}"><div class="overlay">${file.name}<button class="copy-btn" data-url="${file.download_url}" title="复制URL"><i class="fa-solid fa-copy"></i></button></div>`;
-                        libraryEl.appendChild(item);
-                    });
-                } catch (error) { libraryEl.innerHTML = `<p style="color:red">加载媒体库失败: ${error.message}</p>`; }
+            const renderMediaLibrary = () => {
+                const container = $('#media-grid-container');
+                if(state.db.media.length === 0) {
+                    container.innerHTML = `<div class="empty-state" style="width:100%"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg><p>媒体库为空。</p></div>`;
+                    return;
+                }
+                container.innerHTML = state.db.media.map(item => `<div class="media-item" data-url="${item.url}"><img src="${item.url}" alt=""></div>`).join('');
             };
 
-            const uploadFile = async (file) => {
-                if (!file) return;
-                setButtonsDisabled(true);
-                const reader = new FileReader();
-                reader.onload = async (e) => {
-                    const content = e.target.result.split(',')[1];
-                    const getPath = (fileName) => basePath ? `${basePath}/${fileName}` : fileName;
-                    const path = getPath(`images/${new Date().toISOString().replace(/[-:.]/g, '')}_${file.name}`);
-                    try {
-                        const result = await GitHubAPI.createFile(token, owner, repo, path, content, 'feat: upload image', true);
-                        const url = result.content.download_url;
-                        const htmlToInsert = `<img src="${url}" alt="${file.name}">`;
-                        const contentTextarea = document.getElementById('post-content');
-                        contentTextarea.value += `\n${htmlToInsert}\n`;
-                        showToast('图片上传成功！');
-                    } catch (error) { showToast(`图片上传失败: ${error.message}`, 'error');
-                    } finally { setButtonsDisabled(false); }
-                };
-                reader.readAsDataURL(file);
+            const resetCategoryForm = (mode = 'add', id = null, parentId = null) => {
+                const form = $('#category-form'), title = $('#category-form-title');
+                form.reset(); $('#category-id').value = id || ''; $('#category-parentId').value = parentId || '';
+                if (mode === 'edit') {
+                    const cat = state.db.categories.find(c => c.id == id);
+                    title.textContent = '编辑分类'; $('#category-name').value = cat.name;
+                } else { title.textContent = parentId ? '添加子分类' : '添加顶级分类'; }
+                $('#category-name').focus();
             };
 
-            const exportData = () => {
-                const data = { config: config, posts: posts };
-                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a'); a.href = url; a.download = `blog_backup_${new Date().toISOString().split('T')[0]}.json`;
-                document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
-                showToast('数据已导出');
+            const resetNavLinkForm = (link = null) => {
+                const form = $('#nav-link-form'), title = $('#nav-link-form-title');
+                form.reset(); title.textContent = link ? '编辑菜单项' : '添加菜单项';
+                $('#nav-link-id').value = link ? link.id : '';
+                $('#nav-link-text').value = link ? link.text : '';
+                state.customSelects['nav-link-type-select'].setValue(link ? link.type : 'category_archive');
+                handleNavLinkTypeChange(link ? link.type : 'category_archive');
+                if(link) {
+                    if (link.type === 'category_archive') state.customSelects['nav-link-category-select'].setValue(link.value);
+                    else if (link.type === 'external') $('#nav-link-url').value = link.value;
+                } else {
+                     state.customSelects['nav-link-category-select'].setValue('');
+                }
             };
 
-            const importData = (event) => {
-                const file = event.target.files[0];
-                if (!file) return;
-                if (!confirm('这将覆盖您当前的帖子和设置。确定要继续吗？')) return;
-                const reader = new FileReader();
-                reader.onload = async (e) => {
-                    try {
-                        const data = JSON.parse(e.target.result);
-                        if (!data.config || !data.posts) throw new Error('无效的备份文件格式');
-                        setButtonsDisabled(true);
-                        const configContent = JSON.stringify(data.config, null, 2);
-                        const postsContent = JSON.stringify(data.posts, null, 2);
-                        const getPath = (fileName) => basePath ? `${basePath}/${fileName}` : fileName;
-                        const [configRes, postsRes] = await Promise.all([
-                            GitHubAPI.updateFile(token, owner, repo, getPath('config.json'), configContent, configSha, 'docs: import config from backup'),
-                            GitHubAPI.updateFile(token, owner, repo, getPath('posts.json'), postsContent, postsSha, 'docs: import posts from backup')
-                        ]);
-                        config = data.config; posts = data.posts; configSha = configRes.content.sha; postsSha = postsRes.content.sha;
-                        populateSettings(); renderPostList();
-                        showToast('数据导入成功！');
-                    } catch (error) { showToast(`导入失败: ${error.message}`, 'error');
-                    } finally { setButtonsDisabled(false); event.target.value = ''; }
-                };
-                reader.readAsText(file);
+            const renderDashboard = () => {
+                $('#dashboard-stats').innerHTML = `<p>文章总数: ${state.db.articles.length}</p><p>分类总数: ${state.db.categories.length}</p><p>媒体文件数: ${state.db.media.length}</p>`;
             };
 
-            function setupEventListeners() {
-                document.querySelectorAll('#admin-sidebar .nav li[data-view]').forEach(link => { link.onclick = (e) => { e.preventDefault(); showView(link.dataset.view); if (link.dataset.view === 'media') renderMediaLibrary(); }; });
-                document.getElementById('logout-btn').onclick = (e) => { e.preventDefault(); localStorage.removeItem('github_token_blog'); location.reload(); };
-                document.addEventListener('click', e => {
-                    const newPostBtn = e.target.closest('#new-post-btn');
-                    const cancelBtn = e.target.closest('#cancel-edit-btn');
-                    const saveDraftBtn = e.target.closest('#save-draft-btn');
-                    const publishBtn = e.target.closest('#publish-btn');
-                    const deleteBtn = e.target.closest('#delete-post-btn');
-                    const saveSettingsBtn = e.target.closest('#save-settings-btn');
-                    const exportBtn = e.target.closest('#export-data-btn');
-                    if (newPostBtn) openEditor();
-                    if (cancelBtn) showView('posts');
-                    if (saveDraftBtn) savePost('draft');
-                    if (publishBtn) savePost('published');
-                    if (deleteBtn) deletePost(document.getElementById('post-id').value);
-                    if (saveSettingsBtn) saveSettings();
-                    if (exportBtn) exportData();
-                    const editLink = e.target.closest('.edit');
-                    const deleteLink = e.target.closest('.delete');
-                    if (editLink) { e.preventDefault(); openEditor(editLink.dataset.id); }
-                    if (deleteLink) { e.preventDefault(); deletePost(deleteLink.dataset.id); }
-                    const copyBtn = e.target.closest('.copy-btn');
-                    if (copyBtn) { navigator.clipboard.writeText(copyBtn.dataset.url).then(() => showToast('URL 已复制')); }
-                });
-                document.addEventListener('change', e => {
-                    if (e.target.id === 'image-upload') uploadFile(e.target.files[0]);
-                    if (e.target.id === 'import-file-input') importData(e);
-                });
-                document.getElementById('mobile-menu-btn').onclick = () => adminWrapper.classList.toggle('sidebar-visible');
-                document.getElementById('mobile-overlay').onclick = () => adminWrapper.classList.remove('sidebar-visible');
-            }
+            const handleNavLinkTypeChange = (type) => {
+                $('#nav-link-category-group').style.display = type === 'category_archive' ? 'block' : 'none';
+                $('#nav-link-url-group').style.display = type === 'external' ? 'block' : 'none';
+            };
+
+            const showToast = (message, type = 'success') => {
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.textContent = message;
+                $('#toast-container').appendChild(toast);
+                setTimeout(() => { toast.remove(); }, 3000);
+            };
             
-            const savedToken = localStorage.getItem('github_token_blog');
-            if (savedToken) {
-                loginWrapper.style.display = 'none';
-                adminWrapper.style.display = 'flex';
-                start(savedToken);
-            } else {
-                loginWrapper.style.display = 'flex';
-            }
-            document.getElementById('start-btn').onclick = () => start();
+            const initEventListeners = () => {
+                document.addEventListener('click', (e) => { if (!e.target.closest('.custom-select-wrapper')) { $$('.custom-select-wrapper.open').forEach(s => s.classList.remove('open')); }});
+                
+                $('#login-form').addEventListener('submit', e => {
+                    e.preventDefault();
+                    const repo = $('#repo-name').value;
+                    const token = $('#github-token').value;
+                    if (repo && token) {
+                        localStorage.setItem('gh_repo', repo);
+                        localStorage.setItem('gh_token', token);
+                        init();
+                    }
+                });
+
+                sidebar.addEventListener('click', e => {
+                    const navLink = e.target.closest('.nav-link');
+                    if (navLink) { e.preventDefault(); showView(navLink.dataset.view); }
+                });
+
+                menuToggle.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.style.display = 'block'; });
+                overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.style.display = 'none'; });
+                themeToggle.addEventListener('change', () => document.body.classList.toggle('dark', !themeToggle.checked));
+                
+                $('#main-content').addEventListener('click', e => {
+                    const target = e.target.closest('[data-action="new-article"], .edit-link, .delete-link, .add-subcategory-link, #upload-media-btn');
+                    if (!target) return;
+                    e.preventDefault();
+                    if (target.matches('[data-action="new-article"]')) { openSlideOver('article'); }
+                    else if (target.matches('.edit-link')) {
+                        const { type, id } = target.dataset;
+                        if (type === 'categories') { resetCategoryForm('edit', id); }
+                        else if (type === 'authors') { const author = state.db.authors.find(a => a.id == id); const newName = prompt('输入新名称', author.name); if(newName && newName.trim()) { author.name=newName.trim(); renderTable('authors'); saveDatabase();} }
+                        else if (type === 'navLinks') { const link = state.db.navLinks.find(l => l.id == id); resetNavLinkForm(link); }
+                        else { openSlideOver(type.slice(0, -1), id); }
+                    }
+                    else if (target.matches('.delete-link')) { deleteModal.classList.add('open'); deleteModal.dataset.type = target.dataset.type; deleteModal.dataset.id = target.dataset.id; }
+                    else if (target.matches('.add-subcategory-link')) { resetCategoryForm('add', null, target.dataset.parentId); }
+                    else if (target.matches('#upload-media-btn')) { const url = prompt('请输入图片URL:'); if(url) { state.db.media.push({id: Date.now(), url}); renderMediaLibrary(); saveDatabase();} }
+                });
+                
+                slideOver.form.addEventListener('click', e => {
+                    const target = e.target.closest('#open-media-library-btn, #insert-code-btn');
+                    if(!target) return; e.preventDefault();
+                    if (target.id === 'open-media-library-btn') { renderMediaLibrary(); mediaModal.classList.add('open'); }
+                    else if (target.id === 'insert-code-btn') { $('#post-content').value += "\n```\n在此处输入代码\n```\n"; }
+                });
+
+                slideOver.form.addEventListener('submit', e => {
+                    e.preventDefault();
+                    const { editingType, editingId } = state;
+                    if (editingType === 'article') {
+                        const article = { id: editingId ? parseInt(editingId) : Date.now(), title: $('#article-title').value, categoryId: parseInt($('#article-category-select-value').value), authorId: parseInt($('#article-author-select-value').value), content: $('#post-content').value, date: new Date().toISOString().split('T')[0] };
+                        if (editingId) { state.db.articles[state.db.articles.findIndex(a => a.id == editingId)] = article; } else { state.db.articles.push(article); }
+                        renderTable('articles');
+                    }
+                    saveDatabase();
+                    closeSlideOver();
+                });
+
+                [slideOver.cancel, slideOver.close, slideOver.backdrop].forEach(el => el.addEventListener('click', closeSlideOver));
+
+                mediaModal.addEventListener('click', e => {
+                    const target = e.target.closest('[data-modal-close], .media-item');
+                    if (!target) return;
+                    e.preventDefault();
+                    if (target.matches('[data-modal-close]')) { mediaModal.classList.remove('open'); }
+                    else if (target.matches('.media-item')) {
+                        $('#post-content').value += `\n![Image](${target.dataset.url})\n`;
+                        mediaModal.classList.remove('open');
+                    }
+                });
+
+                deleteModal.addEventListener('click', e => {
+                    const target = e.target.closest('[data-modal-close], #confirm-delete');
+                    if (!target) return;
+                    if(target.id === 'confirm-delete') {
+                        const { type, id } = deleteModal.dataset; state.db[type] = state.db[type].filter(item => item.id != id);
+                        if(type === 'categories' || type==='authors' || type === 'navLinks') { showView('appearance'); }
+                        else { showView(type); }
+                        saveDatabase();
+                    }
+                    deleteModal.classList.remove('open');
+                });
+                
+                $('#category-form').addEventListener('submit', e => {
+                    e.preventDefault(); const id = $('#category-id').value; const parentId = $('#category-parentId').value;
+                    const name = $('#category-name').value;
+                    if (id) { state.db.categories.find(c => c.id == id).name = name; } 
+                    else { state.db.categories.push({ id: Date.now(), name, parentId: parentId ? parseInt(parentId) : null }); }
+                    renderCategories(); resetCategoryForm(); saveDatabase();
+                });
+
+                $('#author-form').addEventListener('submit', e => { e.preventDefault(); const name = $('#author-name').value; if(name.trim()){ state.db.authors.push({id: Date.now(), name}); renderTable('authors'); e.target.reset(); saveDatabase();} });
+                
+                $('#nav-link-form').addEventListener('submit', e => {
+                    e.preventDefault();
+                    const id = $('#nav-link-id').value; const type = $('#nav-link-type-select-value').value;
+                    const link = {
+                        id: id ? parseInt(id) : Date.now(), text: $('#nav-link-text').value, type,
+                        value: type === 'category_archive' ? parseInt($('#nav-link-category-select-value').value) : $('#nav-link-url').value,
+                        order: id ? state.db.navLinks.find(l=>l.id==id).order : (state.db.navLinks.length + 1)
+                    };
+                    if(id) { state.db.navLinks[state.db.navLinks.findIndex(l=>l.id==id)] = link; } else { state.db.navLinks.push(link); }
+                    renderNavLinks(); resetNavLinkForm(); saveDatabase();
+                });
+
+                $$('#appearance-tabs .tab-btn, #settings-tabs .tab-btn').forEach(btn => {
+                    btn.addEventListener('click', e => {
+                        const parent = e.target.closest('.tabs');
+                        parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                        e.target.classList.add('active');
+                        parent.nextElementSibling.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                        $(`#tab-${e.target.dataset.tab}`).classList.add('active');
+                    });
+                });
+                
+                $('#nav-links-container').addEventListener('dragstart', e => { if (e.target.matches('.draggable-item')) { e.target.classList.add('dragging'); } });
+                $('#nav-links-container').addEventListener('dragend', e => { if (e.target.matches('.draggable-item')) { e.target.classList.remove('dragging'); } });
+                $('#nav-links-container').addEventListener('dragover', e => {
+                    e.preventDefault();
+                    const container = $('#nav-links-container');
+                    const afterElement = [...container.querySelectorAll('.draggable-item:not(.dragging)')].reduce((closest, child) => { const box = child.getBoundingClientRect(); const offset = e.clientY - box.top - box.height / 2; return offset < 0 && offset > closest.offset ? { offset: offset, element: child } : closest; }, { offset: Number.NEGATIVE_INFINITY }).element;
+                    const draggable = $('.dragging');
+                    if (draggable) { if (afterElement == null) { container.appendChild(draggable); } else { container.insertBefore(draggable, afterElement); } }
+                });
+                $('#nav-links-container').addEventListener('drop', () => {
+                    const newOrder = [...$$('#nav-links-container .draggable-item')].map(item => parseInt(item.dataset.id));
+                    state.db.navLinks.forEach(link => { link.order = newOrder.indexOf(link.id) + 1; });
+                    saveDatabase();
+                });
+                
+                $$('#config-form, #proxy-form').forEach(form => form.addEventListener('submit', e => { e.preventDefault(); loadSettings(); saveDatabase(); }));
+            };
+            
+            initEventListeners();
+            init();
+
+            createCustomSelect('nav-link-type-select', [{value: 'category_archive', label: '分类归档'}, {value: 'external', label: '外部链接'}]);
+            const categoryOptions = [];
+            const buildHierarchyOptions = (pId = null, level = 0) => { db.categories.filter(c => c.parentId === pId).forEach(cat => { categoryOptions.push({ value: cat.id, label: `${'— '.repeat(level)}${cat.name}` }); buildHierarchyOptions(cat.id, level + 1); }); };
+            buildHierarchyOptions();
+            createCustomSelect('nav-link-category-select', categoryOptions);
+            $('#nav-link-type-select').onchange = handleNavLinkTypeChange;
         });
     </script>
 </body>
