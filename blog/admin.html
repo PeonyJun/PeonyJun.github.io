@@ -253,7 +253,7 @@
                     </div>`
             };
     
-            class GitHubService {
+                        class GitHubService {
                 constructor(token, repo, branch = 'main') {
                     this.token = token; this.repo = repo; this.branch = branch;
                     this.apiUrl = `https://api.github.com/repos/${repo}`;
@@ -261,14 +261,22 @@
                 }
                 async _fetch(url, options = {}) {
                     const response = await fetch(url, { ...options, headers: this.headers });
-                    if (!response.ok) { const err = new Error(`${response.status} ${response.statusText}`); err.response = response; throw err; }
+                    if (!response.ok) { 
+                        const errData = await response.json();
+                        const err = new Error(`${response.status} ${response.statusText} - ${errData.message}`); 
+                        err.response = response; 
+                        throw err; 
+                    }
                     return response;
                 }
                 async getFile(path) {
                     try {
                         const res = await this._fetch(`${this.apiUrl}/contents/${path}?ref=${this.branch}&t=${new Date().getTime()}`);
                         const data = await res.json();
-                        return { content: JSON.parse(atob(data.content)), sha: data.sha };
+                        if (data.content) {
+                            return { content: JSON.parse(atob(data.content)), sha: data.sha };
+                        }
+                        return null;
                     } catch (err) { if (err.response && err.response.status === 404) return null; throw err; }
                 }
                 async updateFile(path, content, sha) {
@@ -287,7 +295,14 @@
                     const dirs = ['img', 'music', 'resource'];
                     for (const dir of dirs) {
                         const fullPath = `${basePath}/${dir}/.gitkeep`.replace(/^\//, '');
-                        try { await this.getFile(fullPath); } catch (err) { if (err.response && err.response.status === 404) { await this.createFile(fullPath, ''); } }
+                        try { 
+                            const existing = await this.getFile(fullPath);
+                            if(!existing) {
+                                await this.createFile(fullPath, '');
+                            }
+                        } catch (err) {
+                             console.error(`Error creating directory ${dir}`, err);
+                        }
                     }
                 }
             }
@@ -305,31 +320,36 @@
                 return { repo: repoName, basePath };
             }
 
-            async function init() {
+                        async function init() {
                 const token = localStorage.getItem('gh_token');
                 const { repo, basePath } = getRepoInfoFromURL();
                 
                 if (!token || !repo) {
-                    ui.loginScreen.style.display = 'flex';
-                    ui.adminContainer.style.display = 'none';
+                    ui.loginScreen.style.display = 'flex'; ui.adminContainer.style.display = 'none';
                     return;
                 }
 
                 state.basePath = basePath;
-
+                
                 try {
                     state.github = new GitHubService(token, repo);
                     ui.repoDisplay.textContent = repo;
                     const dbPath = `${basePath}/db.json`.replace(/^\//, '');
-                    const dbFile = await state.github.getFile(dbPath);
+                    let dbFile = await state.github.getFile(dbPath);
 
                     if (dbFile) {
                         state.db = dbFile.content; state.dbSha = dbFile.sha;
                     } else {
-                        state.db = { articles: [], wallpapers: [], authors: [{id: 1, name: 'Admin'}], categories: [], navLinks: [], media: [], config: {} };
-                        await state.github.createFile(dbPath, JSON.stringify(state.db, null, 2));
-                        const newDbFile = await state.github.getFile(dbPath);
-                        state.dbSha = newDbFile.sha;
+                        showToast('未找到 db.json，正在为您创建...');
+                        const initialDbContent = { articles: [], wallpapers: [], authors: [{id: 1, name: 'Admin'}], categories: [], navLinks: [], media: [], config: {} };
+                        await state.github.createFile(dbPath, JSON.stringify(initialDbContent, null, 2));
+                        
+                        // 关键修复：创建后立刻重新获取文件以获得正确的 SHA
+                        dbFile = await state.github.getFile(dbPath);
+                        if (!dbFile) throw new Error('创建db.json后无法重新读取，请检查权限。');
+                        state.db = dbFile.content;
+                        state.dbSha = dbFile.sha;
+                        showToast('db.json 创建成功！');
                     }
                     
                     await state.github.checkAndCreateDirs(basePath);
