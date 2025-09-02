@@ -226,9 +226,8 @@
                 const fileData = await handleApiRequest(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/index.html`);
                 indexFileContent = atob(fileData.content);
                 indexFileSha = fileData.sha;
-
-                const articlesMatch = indexFileContent.match(/const articlesData = (\[[\s\S]*?\])/);
-                const wallpapersMatch = indexFileContent.match(/const wallpaperData = (\[[\s\S]*?\])/);
+const articlesMatch = indexFileContent.match(/const articlesData = ([\s\S]*?);/);
+const wallpapersMatch = indexFileContent.match(/const wallpaperData = ([\s\S]*?);/);
 
                 if (!articlesMatch || !wallpapersMatch) throw new Error('无法解析 index.html 中的数据结构。');
                 
