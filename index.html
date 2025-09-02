@@ -227,23 +227,98 @@
             const lightSwitch = gi('tt'), moonIcon = gi('m'), sunIcon = gi('n');
 
             const articlesData = [
-                {id: 0, title: "Sinner主题开售", img: "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/1.jpg"},
-                {id: 1, title: "后台界面截图", img: "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/2.jpg"},
-                {id: 2, title: "Plain主题预览", img: "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/3.jpg"},
-                {id: 3, title: "晨露凝在叶尖，阳光漫过窗棂", img: "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/4.jpg"},
-                {id: 4, title: "晚风拂过竹林，叶声沙沙", img: "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/5.jpg"},
-                {id: 5, title: "雨打芭蕉，滴答成韵", img: "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/6.jpg"},
-                {id: 6, title: "雪落无声，覆盖了屋檐", img: "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/7.jpg"},
-                {id: 7, title: "微风拂过湖面，涟漪圈圈", img: "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/8.jpg"},
-                {id: 8, title: "古寺钟声悠远，穿过山林", img: "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/9.jpg"},
-                {id: 9, title: "新增文章一，用于分页测试", img: "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/10.jpg"},
-                {id: 10, title: "新增文章二，用于分页测试", img: "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/1.jpg"},
-            ].map(a => ({ ...a, type: 'latest' }));
+    {
+        "id": 0,
+        "title": "Sinn999er主题开售",
+        "type": "latest",
+        "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/1.jpg"
+    },
+    {
+        "id": 1,
+        "title": "后台界面截图",
+        "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/2.jpg",
+        "type": "latest"
+    },
+    {
+        "id": 2,
+        "title": "Plain主题预览",
+        "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/3.jpg",
+        "type": "latest"
+    },
+    {
+        "id": 3,
+        "title": "晨露凝在叶尖，阳光漫过窗棂",
+        "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/4.jpg",
+        "type": "latest"
+    },
+    {
+        "id": 4,
+        "title": "晚风拂过竹林，叶声沙沙",
+        "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/5.jpg",
+        "type": "latest"
+    },
+    {
+        "id": 5,
+        "title": "雨打芭蕉，滴答成韵",
+        "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/6.jpg",
+        "type": "latest"
+    },
+    {
+        "id": 6,
+        "title": "雪落无声，覆盖了屋檐",
+        "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/7.jpg",
+        "type": "latest"
+    },
+    {
+        "id": 7,
+        "title": "微风拂过湖面，涟漪圈圈",
+        "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/8.jpg",
+        "type": "latest"
+    },
+    {
+        "id": 8,
+        "title": "古寺钟声悠远，穿过山林",
+        "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/9.jpg",
+        "type": "latest"
+    },
+    {
+        "id": 9,
+        "title": "新增文章一，用于分页测试",
+        "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/10.jpg",
+        "type": "latest"
+    },
+    {
+        "id": 10,
+        "title": "新增文章二，用于分页测试",
+        "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/1.jpg",
+        "type": "latest"
+    }
+];
 
             const wallpaperData = [
-                {id: 'chuike', title: '锤科壁纸', thumb: "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/1.jpg", date: '2024年02月01日', views: 398, images: ["https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/4.jpg"]},
-                {id: 'apple', title: 'Apple壁纸', thumb: "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/2.jpg", date: '2023年11月15日', views: 520, images: ["https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/9.jpg"]}
-            ].map(w => ({ ...w, type: 'wallpaper' }));
+    {
+        "id": "chuike",
+        "title": "锤科壁纸",
+        "thumb": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/1.jpg",
+        "date": "2024年02月01日",
+        "views": 398,
+        "images": [
+            "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/4.jpg"
+        ],
+        "type": "wallpaper"
+    },
+    {
+        "id": "apple",
+        "title": "Apple壁纸",
+        "thumb": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/2.jpg",
+        "date": "2023年11月15日",
+        "views": 520,
+        "images": [
+            "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/9.jpg"
+        ],
+        "type": "wallpaper"
+    }
+];
             
             let homeCurrentPage = 1, moreCurrentPage = 1;
             const homeArticlesPerPage = 6, moreArticlesPerPage = 10, homeWallpaperLimit = 2;
