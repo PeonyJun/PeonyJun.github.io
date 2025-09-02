@@ -31,12 +31,6 @@
         .menu-toggle { display: block; cursor: pointer; } .menu-toggle .icon { stroke: var(--text-secondary); }
         @media (min-width: 768px) { .menu-toggle { display: none; } .header { width: calc(100% - var(--sidebar-width)); left: var(--sidebar-width); } }
         .header-actions { display: flex; align-items: center; gap: 12px; background-color: var(--bg-main); padding: 6px 12px; border-radius: 99px; }
-        .user-menu { position: relative; }
-        .user-menu-trigger { cursor: pointer; }
-        .user-dropdown { position: absolute; top: calc(100% + 8px); right: 0; background-color: var(--bg-content); border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 160px; z-index: 10; display: none; }
-        .user-menu.open .user-dropdown { display: block; }
-        .dropdown-item { display: block; padding: 10px 16px; color: var(--text-main); }
-        .dropdown-item:hover { background-color: var(--bg-main); }
         .sidebar-header { padding: 18px 24px; font-size: 1.25rem; font-weight: bold; white-space: nowrap; }
         .sidebar-nav { flex-grow: 1; overflow-y: auto; padding: 10px; }
         .nav-item a { display: flex; align-items: center; padding: 11px 20px; border-radius: 8px; color: var(--text-secondary); font-weight: 500; transition: all 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -120,14 +114,10 @@
         <div class="login-box">
             <h1 class="page-title" style="text-align: center; margin-bottom: 24px;">管理后台登录</h1>
             <form id="login-form">
-                 <div class="form-group">
-                    <label for="repo-name" class="form-label">GitHub 仓库 (本地测试时填写)</label>
-                    <input type="text" id="repo-name" class="form-control" placeholder="例如: peonyjun/peonyjun.github.io">
-                    <p class="form-hint">在线访问时会自动检测，无需填写。</p>
-                </div>
                 <div class="form-group">
                     <label for="github-token" class="form-label">GitHub Personal Access Token</label>
                     <input type="password" id="github-token" class="form-control" required>
+                    <p class="form-hint">后台会自动检测当前所在仓库。</p>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">登录</button>
             </form>
@@ -163,27 +153,22 @@
                     </div>
                 </header>
     
-                <main class="content-wrapper">
-                    <div id="view-dashboard" class="content-view active">
-                    </div>
-    
-                    <div id="view-articles" class="content-view">
-                    </div>
-                    
-                    <div id="view-media" class="content-view">
-                    </div>
-    
-                    <div id="view-appearance" class="content-view">
-                    </div>
-    
-                    <div id="view-settings" class="content-view">
-                    </div>
+                <main class="content-wrapper" id="main-content-body">
                 </main>
             </div>
         </div>
         
         <div class="slide-over-backdrop" id="slide-over-backdrop"></div>
         <div class="slide-over-panel" id="slide-over-panel">
+            <div class="slide-over-header">
+                <h2 class="slide-over-title" id="slide-over-title"></h2>
+                <button class="action-btn" id="slide-over-close"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+            </div>
+            <form class="slide-over-body" id="slide-over-form"></form>
+            <div class="card-footer" id="slide-over-footer">
+                <button type="button" class="btn btn-secondary" id="slide-over-cancel">取消</button>
+                <button type="submit" class="btn btn-primary" form="slide-over-form">保存</button>
+            </div>
         </div>
     
         <div class="modal-overlay" id="delete-modal"><div class="modal-box"><div class="modal-header">确认操作</div><div class="modal-body">您确定要删除这个项目吗？此操作不可恢复。</div><div class="modal-footer"><button class="btn btn-secondary" data-modal-close>取消</button><button class="btn btn-danger" id="confirm-delete">确认删除</button></div></div></div>
@@ -191,279 +176,466 @@
         <div id="overlay"></div>
     
         <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const $ = (selector) => document.querySelector(selector);
-                const $$ = (selector) => document.querySelectorAll(selector);
-                
-                const state = {
-                    db: null, dbSha: null, github: null, activeView: 'dashboard',
-                    editingType: null, editingId: null, customSelects: {}, basePath: ''
-                };
+        document.addEventListener('DOMContentLoaded', () => {
+            const $ = (selector) => document.querySelector(selector);
+            const $$ = (selector) => document.querySelectorAll(selector);
+            
+            const state = {
+                db: null, dbSha: null, github: null, activeView: 'dashboard',
+                editingType: null, editingId: null, customSelects: {}, basePath: ''
+            };
+
+            const ui = {
+                loginScreen: $('#login-screen'), adminContainer: $('#admin-container'),
+                sidebar: $('#sidebar'), menuToggle: $('#menu-toggle'), themeToggle: $('#theme-toggle'),
+                overlay: $('#overlay'), repoDisplay: $('#repo-display'), deleteModal: $('#delete-modal'),
+                mediaModal: $('#media-modal'), slideOver: { panel: $('#slide-over-panel'), backdrop: $('#slide-over-backdrop'), title: $('#slide-over-title'), form: $('#slide-over-form'), cancel: $('#slide-over-cancel'), close: $('#slide-over-close') },
+                userMenu: $('#user-menu'), mainContentBody: $('#main-content-body')
+            };
+
+            const viewTemplates = {
+                dashboard: `
+                    <div class="page-header"><h1 class="page-title">仪表盘</h1><p class="page-subtitle">欢迎回来，牡丹君！</p></div>
+                    <div class="grid grid-cols-1 grid-cols-2">
+                        <div class="card"><div class="card-header"><h2 class="card-title">快速操作</h2></div><div class="card-body grid grid-cols-2"><button class="btn btn-primary" data-action="new-article">新建文章</button><button class="btn btn-secondary" data-action="new-wallpaper" disabled>新建壁纸</button></div></div>
+                        <div class="card"><div class="card-header"><h2 class="card-title">网站概览</h2></div><div class="card-body" id="dashboard-stats"></div></div>
+                    </div>`,
+                articles: `
+                    <div class="page-header"><h1 class="page-title">文章管理</h1><p class="page-subtitle">管理和创建您的网站文章</p></div>
+                    <div class="card"><div class="card-header"><h2 class="card-title">文章列表</h2><button class="btn btn-primary" data-action="new-article">新建文章</button></div><div class="table-responsive"><table class="table"><thead id="articles-table-head"></thead><tbody id="articles-table-body"></tbody></table></div></div>`,
+                media: `
+                    <div class="page-header"><h1 class="page-title">媒体库</h1><p class="page-subtitle">管理您的所有图片资源</p></div>
+                    <div class="card"><div class="card-header"><h2 class="card-title">所有图片</h2><button class="btn btn-primary" id="upload-media-btn">上传新图片</button></div><div class="card-body"><div class="media-grid" id="media-grid-container"></div></div></div>`,
+                appearance: `
+                    <div class="page-header"><h1 class="page-title">外观管理</h1><p class="page-subtitle">管理网站的导航菜单和内容分类</p></div>
+                     <div class="card">
+                        <div class="tabs" id="appearance-tabs">
+                            <button class="tab-btn active" data-tab="nav-menu">导航菜单</button>
+                            <button class="tab-btn" data-tab="content-categories">内容分类</button>
+                        </div>
+                        <div class="card-body">
+                            <div id="tab-nav-menu" class="tab-content active">
+                                <div class="grid grid-cols-1 grid-cols-2" style="align-items: flex-start;">
+                                    <div><h3 class="card-title" style="margin-bottom: 16px;">菜单项 (可拖拽排序)</h3><div id="nav-links-container"></div></div>
+                                    <form id="nav-link-form"><h3 class="card-title" style="margin-bottom: 16px;" id="nav-link-form-title">添加菜单项</h3><input type="hidden" id="nav-link-id"><div class="form-group"><label class="form-label">链接文字</label><input type="text" id="nav-link-text" class="form-control" required></div><div class="form-group"><label class="form-label">链接类型</label><div id="nav-link-type-select" class="custom-select-wrapper"></div></div><div class="form-group" id="nav-link-category-group" style="display:none;"><label class="form-label">目标分类</label><div id="nav-link-category-select" class="custom-select-wrapper"></div></div><div class="form-group" id="nav-link-url-group" style="display:none;"><label class="form-label">目标URL</label><input type="url" id="nav-link-url" class="form-control" placeholder="https://..."></div><div style="text-align: right;"><button type="submit" class="btn btn-primary">保存菜单项</button></div></form>
+                                </div>
+                            </div>
+                            <div id="tab-content-categories" class="tab-content">
+                                <div class="grid grid-cols-1 grid-cols-2" style="align-items: flex-start;">
+                                    <div><h3 class="card-title" style="margin-bottom: 16px;">分类结构</h3><div class="category-list" id="category-list-container"></div></div>
+                                    <form id="category-form"><h3 class="card-title" style="margin-bottom: 16px;" id="category-form-title">添加/编辑分类</h3><input type="hidden" id="category-id"><input type="hidden" id="category-parentId"><div class="form-group"><label for="category-name" class="form-label">分类名称</label><input type="text" id="category-name" class="form-control" placeholder="输入名称..." required></div><div style="text-align: right;"><button type="submit" class="btn btn-primary">保存分类</button></div></form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                settings: `
+                     <div class="page-header"><h1 class="page-title">网站设置</h1><p class="page-subtitle">管理网站的全局配置</p></div>
+                    <div class="card">
+                        <div class="tabs" id="settings-tabs">
+                            <button class="tab-btn active" data-tab="config">前端配置</button>
+                            <button class="tab-btn" data-tab="authors">作者管理</button>
+                            <button class="tab-btn" data-tab="proxy">代理设置</button>
+                        </div>
+                        <div class="card-body">
+                            <div id="tab-config" class="tab-content active">
+                                <form id="config-form"><div class="grid grid-cols-1 grid-cols-2"><div class="form-group"><label for="config-site-title" class="form-label">网站标题</label><input type="text" id="config-site-title" class="form-control"></div><div class="form-group"><label for="config-logo-text" class="form-label">Logo文字</label><input type="text" id="config-logo-text" class="form-control"></div></div><div class="form-group"><label for="config-banner-img" class="form-label">首页Banner图片ID</label><input type="text" id="config-banner-img" class="form-control" placeholder="输入媒体库中的图片ID"></div><div class="grid grid-cols-1 grid-cols-2"><div class="form-group"><label for="config-featured1-id" class="form-label">首页推荐位1 (文章ID)</label><input type="text" id="config-featured1-id" class="form-control"></div><div class="form-group"><label for="config-featured2-id" class="form-label">首页推荐位2 (文章ID)</label><input type="text" id="config-featured2-id" class="form-control"></div></div><div class="form-group"><label for="config-footer-text" class="form-label">页脚版权信息</label><input type="text" id="config-footer-text" class="form-control"></div><div style="display:flex; justify-content:flex-end;"><button type="submit" class="btn btn-primary">保存前端配置</button></div></form>
+                            </div>
+                            <div id="tab-authors" class="tab-content">
+                                <div class="grid grid-cols-1 grid-cols-2" style="align-items: flex-start;">
+                                    <div><h3 class="card-title" style="margin-bottom: 16px;">作者列表</h3><div class="table-responsive"><table class="table"><thead id="authors-table-head"></thead><tbody id="authors-table-body"></tbody></table></div></div>
+                                    <form id="author-form"> <h3 class="card-title" style="margin-bottom: 16px;">新增作者</h3><div class="form-group"><label for="author-name" class="form-label">作者名称</label><input type="text" id="author-name" class="form-control" required></div><div style="text-align: right;"><button type="submit" class="btn btn-primary">添加作者</button></div></form>
+                                </div>
+                            </div>
+                            <div id="tab-proxy" class="tab-content">
+                                <form id="proxy-form"><div class="form-group"><label class="form-label">启用图片代理</label><label class="switch"><input type="checkbox" id="proxy-enabled"><span class="slider"></span></label></div><div class="form-group"><label for="proxy-url" class="form-label">代理URL前缀</label><input type="url" id="proxy-url" class="form-control" placeholder="例如：https://gh-proxy.com/"><p class="form-hint">此URL前缀将会被添加到所有 `raw.githubusercontent.com` 链接之前。</p></div><div style="display:flex; justify-content:flex-end;"><button type="submit" class="btn btn-primary">保存代理设置</button></div></form>
+                            </div>
+                        </div>
+                    </div>`
+            };
     
-                const ui = {
-                    loginScreen: $('#login-screen'), adminContainer: $('#admin-container'),
-                    sidebar: $('#sidebar'), menuToggle: $('#menu-toggle'), themeToggle: $('#theme-toggle'),
-                    overlay: $('#overlay'), repoDisplay: $('#repo-display'), deleteModal: $('#delete-modal'),
-                    mediaModal: $('#media-modal'), slideOver: { panel: $('#slide-over-panel'), backdrop: $('#slide-over-backdrop') },
-                    userMenu: $('#user-menu')
-                };
-    
-                class GitHubService {
-                    constructor(token, repo, branch = 'main') {
-                        this.token = token; this.repo = repo; this.branch = branch;
-                        this.apiUrl = `https://api.github.com/repos/${repo}`;
-                        this.headers = { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' };
-                    }
-                    async _fetch(url, options = {}) {
-                        const response = await fetch(url, { ...options, headers: this.headers });
-                        if (!response.ok) { const err = new Error(`${response.status} ${response.statusText}`); err.response = response; throw err; }
-                        return response;
-                    }
-                    async getFile(path) {
-                        try {
-                            const res = await this._fetch(`${this.apiUrl}/contents/${path}?ref=${this.branch}&t=${new Date().getTime()}`);
-                            const data = await res.json();
-                            return { content: JSON.parse(atob(data.content)), sha: data.sha };
-                        } catch (err) { if (err.response && err.response.status === 404) return null; throw err; }
-                    }
-                    async updateFile(path, content, sha) {
-                        return this._fetch(`${this.apiUrl}/contents/${path}`, {
-                            method: 'PUT',
-                            body: JSON.stringify({ message: `[CMS] Update ${path}`, content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))), sha: sha, branch: this.branch })
-                        });
-                    }
-                    async createFile(path, content) {
-                         return this._fetch(`${this.apiUrl}/contents/${path}`, {
-                            method: 'PUT',
-                            body: JSON.stringify({ message: `[CMS] Create ${path}`, content: btoa(unescape(encodeURIComponent(content))), branch: this.branch })
-                        });
-                    }
-                    async checkAndCreateDirs(basePath) {
-                        const dirs = ['img', 'music', 'resource'];
-                        for (const dir of dirs) {
-                            const fullPath = `${basePath}/${dir}/.gitkeep`.replace(/^\//, '');
-                            try { await this.getFile(fullPath); } catch (err) { if (err.response && err.response.status === 404) { await this.createFile(fullPath, ''); } }
-                        }
-                    }
+            class GitHubService {
+                constructor(token, repo, branch = 'main') {
+                    this.token = token; this.repo = repo; this.branch = branch;
+                    this.apiUrl = `https://api.github.com/repos/${repo}`;
+                    this.headers = { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' };
                 }
-                
-                function getRepoInfoFromURL() {
-                    const { hostname, pathname, protocol } = window.location;
-                    if (protocol === 'file:') return { repo: null, basePath: '' };
-                    if (!hostname.endsWith('github.io')) return { repo: null, basePath: '' };
-                    
-                    const user = hostname.split('.')[0];
-                    const repoName = `${user}/${user}.github.io`;
-                    const pathParts = pathname.split('/').filter(p => p && p !== 'admin.html');
-                    const basePath = pathParts.join('/');
-                    
-                    return { repo: repoName, basePath };
+                async _fetch(url, options = {}) {
+                    const response = await fetch(url, { ...options, headers: this.headers });
+                    if (!response.ok) { const err = new Error(`${response.status} ${response.statusText}`); err.response = response; throw err; }
+                    return response;
                 }
-    
-                async function init() {
-                    const token = localStorage.getItem('gh_token');
-                    let { repo, basePath } = getRepoFromURL();
-                    
-                    if (!repo) {
-                        repo = localStorage.getItem('gh_repo');
-                    }
-                    
-                    if (!token || !repo) {
-                        ui.loginScreen.style.display = 'flex'; ui.adminContainer.style.display = 'none';
-                        return;
-                    }
-    
-                    state.basePath = basePath;
-    
+                async getFile(path) {
                     try {
-                        state.github = new GitHubService(token, repo);
-                        ui.repoDisplay.textContent = repo;
-                        const dbPath = `${basePath}/db.json`.replace(/^\//, '');
-                        const dbFile = await state.github.getFile(dbPath);
-    
-                        if (dbFile) {
-                            state.db = dbFile.content; state.dbSha = dbFile.sha;
-                        } else {
-                            state.db = { articles: [], wallpapers: [], authors: [{id: 1, name: 'Admin'}], categories: [], navLinks: [], media: [], config: {} };
-                            await state.github.createFile(dbPath, JSON.stringify(state.db, null, 2));
-                            const newDbFile = await state.github.getFile(dbPath);
-                            state.dbSha = newDbFile.sha;
-                        }
-                        
-                        await state.github.checkAndCreateDirs(basePath);
-    
-                        ui.loginScreen.style.display = 'none'; ui.adminContainer.style.display = 'block';
-                        showView('dashboard');
-    
-                    } catch (error) {
-                        console.error("Initialization failed:", error);
-                        showToast(`登录失败: ${error.message}`, 'danger');
-                        localStorage.removeItem('gh_token');
-                        localStorage.removeItem('gh_repo');
-                        ui.loginScreen.style.display = 'flex'; ui.adminContainer.style.display = 'none';
-                    }
-                }
-    
-                async function saveDatabase() {
-                    if (!state.github || !state.db) return;
-                    try {
-                        const dbPath = `${state.basePath}/db.json`.replace(/^\//, '');
-                        const res = await state.github.updateFile(dbPath, state.db, state.dbSha);
+                        const res = await this._fetch(`${this.apiUrl}/contents/${path}?ref=${this.branch}&t=${new Date().getTime()}`);
                         const data = await res.json();
-                        state.dbSha = data.content.sha;
-                        showToast('数据已成功同步到GitHub！');
-                    } catch (error) {
-                        console.error("Save failed:", error);
-                        showToast('保存失败，请检查网络或Token权限。', 'danger');
+                        return { content: JSON.parse(atob(data.content)), sha: data.sha };
+                    } catch (err) { if (err.response && err.response.status === 404) return null; throw err; }
+                }
+                async updateFile(path, content, sha) {
+                    return this._fetch(`${this.apiUrl}/contents/${path}`, {
+                        method: 'PUT',
+                        body: JSON.stringify({ message: `[CMS] Update ${path}`, content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))), sha: sha, branch: this.branch })
+                    });
+                }
+                async createFile(path, content) {
+                     return this._fetch(`${this.apiUrl}/contents/${path}`, {
+                        method: 'PUT',
+                        body: JSON.stringify({ message: `[CMS] Create ${path}`, content: btoa(unescape(encodeURIComponent(content))), branch: this.branch })
+                    });
+                }
+                async checkAndCreateDirs(basePath) {
+                    const dirs = ['img', 'music', 'resource'];
+                    for (const dir of dirs) {
+                        const fullPath = `${basePath}/${dir}/.gitkeep`.replace(/^\//, '');
+                        try { await this.getFile(fullPath); } catch (err) { if (err.response && err.response.status === 404) { await this.createFile(fullPath, ''); } }
                     }
                 }
+            }
+            
+            function getRepoInfoFromURL() {
+                const { hostname, pathname, protocol } = window.location;
+                if (protocol === 'file:') return { repo: null, basePath: '' };
+                if (!hostname.endsWith('github.io')) return { repo: null, basePath: '' };
                 
-                const showView = (viewId) => {
-                    $$('.content-view').forEach(v => v.innerHTML = ''); 
-                    $$('.content-view').forEach(v => v.classList.remove('active'));
-                    const targetView = $(`#view-${viewId}`);
-                    if (targetView) {
-                        renderView(viewId, targetView);
-                        targetView.classList.add('active');
+                const user = hostname.split('.')[0];
+                const repoName = `${user}/${user}.github.io`;
+                const pathParts = pathname.split('/').filter(p => p && p !== 'admin.html');
+                const basePath = pathParts.join('/');
+                
+                return { repo: repoName, basePath };
+            }
+
+            async function init() {
+                const token = localStorage.getItem('gh_token');
+                const { repo, basePath } = getRepoInfoFromURL();
+                
+                if (!token || !repo) {
+                    ui.loginScreen.style.display = 'flex';
+                    ui.adminContainer.style.display = 'none';
+                    return;
+                }
+
+                state.basePath = basePath;
+
+                try {
+                    state.github = new GitHubService(token, repo);
+                    ui.repoDisplay.textContent = repo;
+                    const dbPath = `${basePath}/db.json`.replace(/^\//, '');
+                    const dbFile = await state.github.getFile(dbPath);
+
+                    if (dbFile) {
+                        state.db = dbFile.content; state.dbSha = dbFile.sha;
+                    } else {
+                        state.db = { articles: [], wallpapers: [], authors: [{id: 1, name: 'Admin'}], categories: [], navLinks: [], media: [], config: {} };
+                        await state.github.createFile(dbPath, JSON.stringify(state.db, null, 2));
+                        const newDbFile = await state.github.getFile(dbPath);
+                        state.dbSha = newDbFile.sha;
                     }
-                    $$('.nav-link').forEach(l => l.classList.toggle('active', l.dataset.view === viewId));
-                    state.activeView = viewId;
-                    if (window.innerWidth < 768) { ui.sidebar.classList.remove('open'); ui.overlay.style.display = 'none'; }
+                    
+                    await state.github.checkAndCreateDirs(basePath);
+
+                    ui.loginScreen.style.display = 'none';
+                    ui.adminContainer.style.display = 'block';
+                    showView('dashboard');
+
+                } catch (error) {
+                    console.error("Initialization failed:", error);
+                    showToast(`登录失败: ${error.message}`, 'danger');
+                    localStorage.removeItem('gh_token');
+                    ui.loginScreen.style.display = 'flex';
+                    ui.adminContainer.style.display = 'none';
+                }
+            }
+
+            async function saveDatabase() {
+                if (!state.github || !state.db) return;
+                try {
+                    const dbPath = `${state.basePath}/db.json`.replace(/^\//, '');
+                    const res = await state.github.updateFile(dbPath, state.db, state.dbSha);
+                    const data = await res.json();
+                    state.dbSha = data.content.sha;
+                    showToast('数据已成功同步到GitHub！');
+                } catch (error) {
+                    console.error("Save failed:", error);
+                    showToast('保存失败，请检查网络或Token权限。', 'danger');
+                }
+            }
+
+            function showView(viewId) {
+                $$('.nav-link').forEach(l => l.classList.toggle('active', l.dataset.view === viewId));
+                state.activeView = viewId;
+                ui.mainContentBody.innerHTML = viewTemplates[viewId] || '';
+                if (window.innerWidth < 768) { ui.sidebar.classList.remove('open'); ui.overlay.style.display = 'none'; }
+                const renderMap = { dashboard: renderDashboard, articles: () => renderTable('articles'), media: renderMediaLibrary, appearance: () => { renderNavLinks(); renderCategories(); resetNavLinkForm(); initAppearanceTabs(); }, settings: () => { renderTable('authors'); loadSettings(); initSettingsTabs(); } };
+                if (renderMap[viewId]) renderMap[viewId]();
+            }
+
+            const createActionButtons = (type, id) => `<td style="text-align:right;"><div style="display:flex; justify-content:flex-end; gap: 8px;"><button class="action-btn edit-link" data-type="${type}" data-id="${id}" title="编辑"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button><button class="action-btn delete-link" data-type="${type}" data-id="${id}" title="删除"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button></div></td>`;
+            
+            const renderTable = (type) => {
+                const isArticles = type === 'articles';
+                const headers = isArticles ? ['ID', '标题', '分类', '作者', '日期', ''] : type === 'authors' ? ['ID', '作者名称', ''] : [];
+                const tableId = isArticles ? 'articles' : type === 'authors' ? 'authors' : 'wallpapers';
+                const tableHead = $(`#${tableId}-table-head`), tableBody = $(`#${tableId}-table-body`);
+                if(!tableHead || !tableBody) return;
+                tableHead.innerHTML = `<tr>${headers.map(h => `<th ${h===''?'style="text-align:right"':''}>${h}</th>`).join('')}</tr>`;
+                const data = state.db[type];
+                if (!data || data.length === 0) { tableBody.innerHTML = `<tr class="empty-row"><td colspan="${headers.length}"><div class="empty-state"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg><p>暂无数据，请先添加。</p></div></td></tr>`; return; }
+                tableBody.innerHTML = data.map(item => {
+                    let rowData;
+                    if (isArticles) { rowData = [item.id, item.title, state.db.categories.find(c => c.id == item.categoryId)?.name || '未分类', state.db.authors.find(a=>a.id == item.authorId)?.name || '未知', item.date]; }
+                    else if (type === 'authors') { rowData = [item.id, item.name]; }
+                    else { rowData = []; }
+                    return `<tr>${rowData.map(td => `<td>${td}</td>`).join('')}${createActionButtons(type, item.id)}</tr>`;
+                }).join('');
+            };
+            
+            const renderCategories = () => {
+                 const container = $('#category-list-container');
+                 const folderIcon = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>`;
+                 const buildHierarchy = (parentId = null) => {
+                     const children = state.db.categories.filter(c => c.parentId === parentId); if (children.length === 0) return '';
+                     let html = '<ul>';
+                     children.forEach(cat => { 
+                         const actionButtons = `<div style="display:flex; justify-content:flex-end; gap: 8px;"><button class="action-btn add-subcategory-link" data-parent-id="${cat.id}" title="添加子分类"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path></svg></button>${createActionButtons('categories', cat.id).replace(/<td[^>]*>|<\/td>/g, '')}</div>`;
+                         html += `<li><div class="category-item"><div class="category-info">${folderIcon}<span class="category-name">${cat.name}</span></div>${actionButtons}</div><div class="sub-categories">${buildHierarchy(cat.id)}</div></li>`; 
+                     });
+                     return html + '</ul>';
+                 };
+                 container.innerHTML = buildHierarchy() || `<div class="empty-state"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg><p>暂无分类。</p></div>`;
+            };
+
+            const renderNavLinks = () => {
+                const container = $('#nav-links-container');
+                if (state.db.navLinks.length === 0) {
+                    container.innerHTML = `<div class="empty-state"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg><p>暂无菜单项。</p></div>`;
+                    return;
+                }
+                container.innerHTML = state.db.navLinks.sort((a, b) => a.order - b.order).map(link => {
+                    let destination = '';
+                    if (link.type === 'category_archive') { const cat = state.db.categories.find(c => c.id == link.value); destination = `分类: ${cat ? cat.name : '未知'}`; }
+                    else { destination = `URL: ${link.value}`; }
+                    return `<div class="draggable-item" draggable="true" data-id="${link.id}"><span class="drag-handle">⠿</span><span class="item-label">${link.text} <small style="color:var(--text-secondary)">(${destination})</small></span>${createActionButtons('navLinks', link.id).replace(/<td[^>]*>|<\/td>/g, '')}</div>`;
+                }).join('');
+            };
+            
+            const createCustomSelect = (containerId, options) => {
+                const container = $(`#${containerId}`); if (!container) return;
+                container.innerHTML = `<div class="custom-select-trigger"><span>请选择...</span><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div><div class="custom-select-options"></div><input type="hidden" name="${containerId}-value" id="${containerId}-value" required>`;
+                const trigger = container.querySelector('.custom-select-trigger'), optionsContainer = container.querySelector('.custom-select-options'), hiddenInput = container.querySelector('input[type="hidden"]');
+                const renderOptions = () => optionsContainer.innerHTML = options.map(opt => `<div class="custom-select-option" data-value="${opt.value}">${opt.label}</div>`).join('');
+                const setValue = (value) => {
+                    hiddenInput.value = value;
+                    const selectedOption = options.find(opt => opt.value == value);
+                    trigger.querySelector('span').textContent = selectedOption ? selectedOption.label.trim() : '请选择...';
                 };
-    
-                const createActionButtons = (type, id) => `<td style="text-align:right;"><div style="display:flex; justify-content:flex-end; gap: 8px;"><button class="action-btn edit-link" data-type="${type}" data-id="${id}" title="编辑"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button><button class="action-btn delete-link" data-type="${type}" data-id="${id}" title="删除"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button></div></td>`;
+                trigger.addEventListener('click', (e) => { e.stopPropagation(); $$('.custom-select-wrapper.open').forEach(s => {if (s !== container) s.classList.remove('open');}); container.classList.toggle('open'); });
+                optionsContainer.addEventListener('click', (e) => { if (e.target.matches('.custom-select-option')) { setValue(e.target.dataset.value); container.classList.remove('open'); if (container.onchange) container.onchange(e.target.dataset.value); } });
+                state.customSelects[containerId] = { renderOptions, setValue };
+                renderOptions();
+            };
+
+            const loadSettings = () => {
+                Object.keys(state.db.config).forEach(key => { const input = $(`#config-${key.replace(/_/g, '-')}`); if (input) { input.value = state.db.config[key]; } });
+                const proxyEnabled = $(`#proxy-enabled`); if (proxyEnabled) proxyEnabled.checked = state.db.config.proxyEnabled;
+                const proxyUrl = $(`#proxy-url`); if (proxyUrl) proxyUrl.value = state.db.config.proxyUrl;
+            };
+
+            const openSlideOver = (type, id = null) => {
+                state.editingType = type; state.editingId = id;
+                let formHtml = '', title = '';
+                if (type === 'article') {
+                    title = id ? '编辑文章' : '新建文章';
+                    formHtml = `<input type="hidden" id="article-id"><div class="grid grid-cols-1 grid-cols-2"><div class="form-group"><label for="article-title" class="form-label">标题</label><input type="text" id="article-title" class="form-control" required></div><div class="grid grid-cols-1 grid-cols-2"><div class="form-group"><label for="article-category-select" class="form-label">分类</label><div id="article-category-select" class="custom-select-wrapper"></div></div><div class="form-group"><label for="article-author-select" class="form-label">作者</label><div id="article-author-select" class="custom-select-wrapper"></div></div></div></div><div class="form-group" style="display:flex; flex-direction:column; flex-grow:1;"><label for="post-content" class="form-label">内容</label><div class="editor-toolbar"><button type="button" class="toolbar-btn" title="插入图片" id="open-media-library-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></button><button type="button" class="toolbar-btn" title="插入代码" id="insert-code-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg></button></div><textarea id="post-content" class="form-control" style="flex-grow:1;"></textarea></div>`;
+                }
+                slideOver.title.textContent = title;
+                slideOver.form.innerHTML = formHtml;
+                slideOver.form.style.display = 'flex'; slideOver.form.style.flexDirection = 'column'; slideOver.form.style.height = '100%';
+
+                const categoryOptions = [{ value: '', label: '请选择分类' }];
+                const buildHierarchyOptions = (pId = null, level = 0) => { state.db.categories.filter(c => c.parentId === pId).forEach(cat => { categoryOptions.push({ value: cat.id, label: `${'— '.repeat(level)}${cat.name}` }); buildHierarchyOptions(cat.id, level + 1); }); };
+                buildHierarchyOptions();
+                createCustomSelect('article-category-select', categoryOptions);
+                const authorOptions = [{ value: '', label: '请选择作者' }, ...state.db.authors.map(a => ({ value: a.id, label: a.name }))];
+                createCustomSelect('article-author-select', authorOptions);
                 
-                const createCustomSelect = (containerId, options, initialValue = '') => {
-                    const container = $(`#${containerId}`); if (!container) return;
-                    container.innerHTML = `<div class="custom-select-trigger"><span>请选择...</span><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div><div class="custom-select-options"></div><input type="hidden" name="${containerId}-value" id="${containerId}-value" required>`;
-                    const trigger = container.querySelector('.custom-select-trigger'), optionsContainer = container.querySelector('.custom-select-options'), hiddenInput = container.querySelector('input[type="hidden"]');
-                    const renderOptions = () => optionsContainer.innerHTML = options.map(opt => `<div class="custom-select-option" data-value="${opt.value}">${opt.label}</div>`).join('');
-                    const setValue = (value) => {
-                        hiddenInput.value = value;
-                        const selectedOption = options.find(opt => opt.value == value);
-                        trigger.querySelector('span').textContent = selectedOption ? selectedOption.label.trim() : '请选择...';
-                    };
-                    trigger.addEventListener('click', (e) => { e.stopPropagation(); $$('.custom-select-wrapper.open').forEach(s => {if (s !== container) s.classList.remove('open');}); container.classList.toggle('open'); });
-                    optionsContainer.addEventListener('click', (e) => { if (e.target.matches('.custom-select-option')) { setValue(e.target.dataset.value); container.classList.remove('open'); if (container.onchange) container.onchange(e.target.dataset.value); } });
-                    state.customSelects[containerId] = { renderOptions, setValue };
-                    renderOptions();
-                    if(initialValue) setValue(initialValue);
-                };
-    
-                const showToast = (message, type = 'success') => {
-                    const toast = document.createElement('div');
-                    toast.className = `toast ${type}`;
-                    toast.textContent = message;
-                    $('#toast-container').appendChild(toast);
-                    setTimeout(() => { toast.remove(); }, 3000);
-                };
+                if (id) {
+                    const item = state.db[type + 's'].find(i => i.id == id);
+                    if (item) {
+                        $('#article-id').value = item.id; $('#article-title').value = item.title;
+                        $('#post-content').value = item.content;
+                        state.customSelects['article-category-select'].setValue(item.categoryId);
+                        state.customSelects['article-author-select'].setValue(item.authorId);
+                    }
+                }
 
-                const renderView = (viewId, container) => {
-                    container.innerHTML = document.getElementById(`template-${viewId}`).innerHTML;
-                    const renderMap = { dashboard: renderDashboard, articles: () => renderTable('articles'), media: renderMediaLibrary, appearance: () => { renderNavLinks(); renderCategories(); resetNavLinkForm(); }, settings: () => { renderTable('authors'); loadSettings(); } };
-                    if (renderMap[viewId]) renderMap[viewId]();
-                };
+                document.body.classList.add('no-scroll');
+                slideOver.backdrop.classList.add('open');
+                slideOver.panel.classList.add('open');
+            };
 
-                const initEventListeners = () => {
-                    document.addEventListener('click', (e) => { if (!e.target.closest('.custom-select-wrapper')) { $$('.custom-select-wrapper.open').forEach(s => s.classList.remove('open')); } });
-                    
-                    $('#login-form').addEventListener('submit', e => {
-                        e.preventDefault();
-                        const token = $('#github-token').value;
-                        const manualRepo = $('#repo-name').value;
-                        if (manualRepo) localStorage.setItem('gh_repo', manualRepo);
-                        if (token) { localStorage.setItem('gh_token', token); init(); }
-                    });
-    
-                    sidebar.addEventListener('click', e => {
-                        const navLink = e.target.closest('.nav-link');
-                        if (navLink) { e.preventDefault(); showView(navLink.dataset.view); }
-                    });
-    
-                    menuToggle.addEventListener('click', () => { ui.sidebar.classList.toggle('open'); ui.overlay.style.display = 'block'; });
-                    overlay.addEventListener('click', () => { ui.sidebar.classList.remove('open'); ui.overlay.style.display = 'none'; });
-                    themeToggle.addEventListener('change', () => document.body.classList.toggle('dark', !themeToggle.checked));
-                    ui.userMenu.addEventListener('click', (e) => {
-                        if (e.target.closest('.user-menu-trigger')) { ui.userMenu.classList.toggle('open'); }
-                        else if (e.target.closest('#logout-btn')) { localStorage.clear(); window.location.reload(); }
-                    });
-                    
-                    $('#main-content').addEventListener('click', e => {
-                        const target = e.target.closest('[data-action="new-article"], .edit-link, .delete-link, .add-subcategory-link, #upload-media-btn');
-                        if (!target) return;
-                        e.preventDefault();
-                        if (target.matches('[data-action="new-article"]')) { openSlideOver('article'); }
-                        else if (target.matches('.edit-link')) {
-                            const { type, id } = target.dataset;
-                            if (type === 'categories') { resetCategoryForm('edit', id); }
-                            else if (type === 'authors') { const author = state.db.authors.find(a => a.id == id); const newName = prompt('输入新名称', author.name); if(newName && newName.trim()) { author.name=newName.trim(); renderTable('authors'); saveDatabase();} }
-                            else if (type === 'navLinks') { const link = state.db.navLinks.find(l => l.id == id); resetNavLinkForm(link); }
-                            else { openSlideOver(type.slice(0, -1), id); }
-                        }
-                        else if (target.matches('.delete-link')) { ui.deleteModal.classList.add('open'); ui.deleteModal.dataset.type = target.dataset.type; ui.deleteModal.dataset.id = target.dataset.id; }
-                        else if (target.matches('.add-subcategory-link')) { resetCategoryForm('add', null, target.dataset.parentId); }
-                        else if (target.matches('#upload-media-btn')) { const url = prompt('请输入图片URL:'); if(url) { state.db.media.push({id: Date.now(), url}); renderMediaLibrary(); saveDatabase();} }
-                    });
-                    
-                    slideOver.form.addEventListener('click', e => {
-                        const target = e.target.closest('#open-media-library-btn, #insert-code-btn');
-                        if(!target) return; e.preventDefault();
-                        if (target.id === 'open-media-library-btn') { renderMediaLibrary(); ui.mediaModal.classList.add('open'); }
-                        else if (target.id === 'insert-code-btn') { $('#post-content').value += "\n```\n在此处输入代码\n```\n"; }
-                    });
-    
-                    slideOver.form.addEventListener('submit', e => {
-                        e.preventDefault();
-                        const { editingType, editingId } = state;
-                        if (editingType === 'article') {
-                            const article = { id: editingId ? parseInt(editingId) : Date.now(), title: $('#article-title').value, categoryId: parseInt($('#article-category-select-value').value), authorId: parseInt($('#article-author-select-value').value), content: $('#post-content').value, date: new Date().toISOString().split('T')[0] };
-                            if (editingId) { state.db.articles[state.db.articles.findIndex(a => a.id == editingId)] = article; } else { state.db.articles.push(article); }
-                            renderTable('articles');
-                        }
+            const closeSlideOver = () => {
+                document.body.classList.remove('no-scroll');
+                slideOver.backdrop.classList.remove('open');
+                slideOver.panel.classList.remove('open');
+            };
+
+            const renderMediaLibrary = () => {
+                const container = $('#media-grid-container');
+                if(!state.db.media || state.db.media.length === 0) {
+                    container.innerHTML = `<div class="empty-state" style="width:100%"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg><p>媒体库为空。</p></div>`;
+                    return;
+                }
+                container.innerHTML = state.db.media.map(item => `<div class="media-item" data-url="${item.url}"><img src="${item.url}" alt=""></div>`).join('');
+            };
+
+            const resetCategoryForm = (mode = 'add', id = null, parentId = null) => {
+                const form = $('#category-form'), title = $('#category-form-title');
+                form.reset(); $('#category-id').value = id || ''; $('#category-parentId').value = parentId || '';
+                if (mode === 'edit') {
+                    const cat = state.db.categories.find(c => c.id == id);
+                    title.textContent = '编辑分类'; $('#category-name').value = cat.name;
+                } else { title.textContent = parentId ? '添加子分类' : '添加顶级分类'; }
+                $('#category-name').focus();
+            };
+
+            const resetNavLinkForm = (link = null) => {
+                const form = $('#nav-link-form'), title = $('#nav-link-form-title');
+                if(!form || !title) return;
+                form.reset(); title.textContent = link ? '编辑菜单项' : '添加菜单项';
+                $('#nav-link-id').value = link ? link.id : '';
+                $('#nav-link-text').value = link ? link.text : '';
+                state.customSelects['nav-link-type-select'].setValue(link ? link.type : 'category_archive');
+                handleNavLinkTypeChange(link ? link.type : 'category_archive');
+                if(link) {
+                    if (link.type === 'category_archive') state.customSelects['nav-link-category-select'].setValue(link.value);
+                    else if (link.type === 'external') $('#nav-link-url').value = link.value;
+                } else {
+                     if(state.customSelects['nav-link-category-select']) state.customSelects['nav-link-category-select'].setValue('');
+                }
+            };
+
+            const renderDashboard = () => {
+                $('#dashboard-stats').innerHTML = `<p>文章总数: ${state.db.articles.length}</p><p>分类总数: ${state.db.categories.length}</p><p>媒体文件数: ${state.db.media.length}</p>`;
+            };
+
+            const handleNavLinkTypeChange = (type) => {
+                const catGroup = $('#nav-link-category-group');
+                const urlGroup = $('#nav-link-url-group');
+                if(!catGroup || !urlGroup) return;
+                catGroup.style.display = type === 'category_archive' ? 'block' : 'none';
+                urlGroup.style.display = type === 'external' ? 'block' : 'none';
+            };
+
+            const showToast = (message, type = 'success') => {
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.textContent = message;
+                $('#toast-container').appendChild(toast);
+                setTimeout(() => { toast.remove(); }, 3000);
+            };
+            
+            const initEventListeners = () => {
+                document.addEventListener('click', (e) => { if (!e.target.closest('.custom-select-wrapper')) { $$('.custom-select-wrapper.open').forEach(s => s.classList.remove('open')); } });
+                
+                $('#login-form').addEventListener('submit', e => {
+                    e.preventDefault();
+                    const token = $('#github-token').value;
+                    if (token) {
+                        localStorage.setItem('gh_token', token);
+                        init();
+                    }
+                });
+
+                sidebar.addEventListener('click', e => {
+                    const navLink = e.target.closest('.nav-link');
+                    if (navLink) { e.preventDefault(); showView(navLink.dataset.view); }
+                });
+
+                menuToggle.addEventListener('click', () => { ui.sidebar.classList.toggle('open'); ui.overlay.style.display = 'block'; });
+                overlay.addEventListener('click', () => { ui.sidebar.classList.remove('open'); ui.overlay.style.display = 'none'; });
+                themeToggle.addEventListener('change', () => document.body.classList.toggle('dark', !themeToggle.checked));
+                ui.userMenu.addEventListener('click', (e) => {
+                    if (e.target.closest('.user-menu-trigger')) { ui.userMenu.classList.toggle('open'); }
+                    else if (e.target.closest('#logout-btn')) { localStorage.clear(); window.location.reload(); }
+                });
+                
+                ui.mainContentBody.addEventListener('click', e => {
+                    const target = e.target.closest('[data-action="new-article"], .edit-link, .delete-link, .add-subcategory-link, #upload-media-btn');
+                    if (!target) return;
+                    e.preventDefault();
+                    if (target.matches('[data-action="new-article"]')) { openSlideOver('article'); }
+                    else if (target.matches('.edit-link')) {
+                        const { type, id } = target.dataset;
+                        if (type === 'categories') { resetCategoryForm('edit', id); }
+                        else if (type === 'authors') { const author = state.db.authors.find(a => a.id == id); const newName = prompt('输入新名称', author.name); if(newName && newName.trim()) { author.name=newName.trim(); renderTable('authors'); saveDatabase();} }
+                        else if (type === 'navLinks') { const link = state.db.navLinks.find(l => l.id == id); resetNavLinkForm(link); }
+                        else { openSlideOver(type.slice(0, -1), id); }
+                    }
+                    else if (target.matches('.delete-link')) { ui.deleteModal.classList.add('open'); ui.deleteModal.dataset.type = target.dataset.type; ui.deleteModal.dataset.id = target.dataset.id; }
+                    else if (target.matches('.add-subcategory-link')) { resetCategoryForm('add', null, target.dataset.parentId); }
+                    else if (target.matches('#upload-media-btn')) { const url = prompt('请输入图片URL:'); if(url) { state.db.media.push({id: Date.now(), url}); renderMediaLibrary(); saveDatabase();} }
+                });
+                
+                slideOver.panel.addEventListener('click', e => {
+                    const target = e.target.closest('#open-media-library-btn, #insert-code-btn');
+                    if(!target) return; e.preventDefault();
+                    if (target.id === 'open-media-library-btn') { renderMediaLibrary(); ui.mediaModal.classList.add('open'); }
+                    else if (target.id === 'insert-code-btn') { $('#post-content').value += "\n```\n在此处输入代码\n```\n"; }
+                });
+
+                slideOver.form.addEventListener('submit', e => {
+                    e.preventDefault();
+                    const { editingType, editingId } = state;
+                    if (editingType === 'article') {
+                        const article = { id: editingId ? parseInt(editingId) : Date.now(), title: $('#article-title').value, categoryId: parseInt($('#article-category-select-value').value), authorId: parseInt($('#article-author-select-value').value), content: $('#post-content').value, date: new Date().toISOString().split('T')[0] };
+                        if (editingId) { state.db.articles[state.db.articles.findIndex(a => a.id == editingId)] = article; } else { state.db.articles.push(article); }
+                        showView('articles');
+                    }
+                    saveDatabase();
+                    closeSlideOver();
+                });
+
+                [slideOver.cancel, slideOver.close, slideOver.backdrop].forEach(el => el.addEventListener('click', closeSlideOver));
+
+                mediaModal.addEventListener('click', e => {
+                    const target = e.target.closest('[data-modal-close], .media-item');
+                    if (!target) return;
+                    e.preventDefault();
+                    if (target.matches('[data-modal-close]')) { ui.mediaModal.classList.remove('open'); }
+                    else if (target.matches('.media-item')) {
+                        $('#post-content').value += `\n![Image](${target.dataset.url})\n`;
+                        ui.mediaModal.classList.remove('open');
+                    }
+                });
+
+                deleteModal.addEventListener('click', e => {
+                    const target = e.target.closest('[data-modal-close], #confirm-delete');
+                    if (!target) return;
+                    if(target.id === 'confirm-delete') {
+                        const { type, id } = ui.deleteModal.dataset; 
+                        state.db[type] = state.db[type].filter(item => item.id != id);
+                        if(type === 'categories' || type === 'navLinks') { showView('appearance'); }
+                        else if (type === 'authors') { showView('settings'); }
+                        else { showView(type); }
                         saveDatabase();
-                        closeSlideOver();
-                    });
-    
-                    [slideOver.cancel, slideOver.close, slideOver.backdrop].forEach(el => el.addEventListener('click', closeSlideOver));
-    
-                    mediaModal.addEventListener('click', e => {
-                        const target = e.target.closest('[data-modal-close], .media-item');
-                        if (!target) return;
-                        e.preventDefault();
-                        if (target.matches('[data-modal-close]')) { ui.mediaModal.classList.remove('open'); }
-                        else if (target.matches('.media-item')) {
-                            $('#post-content').value += `\n![Image](${target.dataset.url})\n`;
-                            ui.mediaModal.classList.remove('open');
-                        }
-                    });
-    
-                    deleteModal.addEventListener('click', e => {
-                        const target = e.target.closest('[data-modal-close], #confirm-delete');
-                        if (!target) return;
-                        if(target.id === 'confirm-delete') {
-                            const { type, id } = ui.deleteModal.dataset; 
-                            state.db[type] = state.db[type].filter(item => item.id != id);
-                            if(type === 'categories') { renderCategories(); }
-                            else if (type === 'authors') { renderTable('authors'); }
-                            else if (type === 'navLinks') { renderNavLinks(); }
-                            else { showView(type); }
-                            saveDatabase();
-                        }
-                        ui.deleteModal.classList.remove('open');
-                    });
-                    
-                    $(document).on('submit', '#category-form', e => {
-                        e.preventDefault(); const id = $('#category-id').value; const parentId = $('#category-parentId').value;
+                    }
+                    ui.deleteModal.classList.remove('open');
+                });
+                
+                ui.mainContentBody.addEventListener('submit', e => {
+                    e.preventDefault();
+                    if (e.target.id === 'category-form') {
+                        const id = $('#category-id').value; const parentId = $('#category-parentId').value;
                         const name = $('#category-name').value;
                         if (id) { state.db.categories.find(c => c.id == id).name = name; } 
                         else { state.db.categories.push({ id: Date.now(), name, parentId: parentId ? parseInt(parentId) : null }); }
                         renderCategories(); resetCategoryForm(); saveDatabase();
-                    });
-    
-                    $(document).on('submit', '#author-form', e => { e.preventDefault(); const name = $('#author-name').value; if(name.trim()){ state.db.authors.push({id: Date.now(), name}); renderTable('authors'); e.target.reset(); saveDatabase();} });
-                    
-                    $(document).on('submit', '#nav-link-form', e => {
-                        e.preventDefault();
+                    }
+                    else if (e.target.id === 'author-form') {
+                        const name = $('#author-name').value; if(name.trim()){ state.db.authors.push({id: Date.now(), name}); renderTable('authors'); e.target.reset(); saveDatabase();}
+                    }
+                    else if (e.target.id === 'nav-link-form') {
                         const id = $('#nav-link-id').value; const type = $('#nav-link-type-select-value').value;
                         const link = {
                             id: id ? parseInt(id) : Date.now(), text: $('#nav-link-text').value, type,
@@ -472,40 +644,64 @@
                         };
                         if(id) { state.db.navLinks[state.db.navLinks.findIndex(l=>l.id==id)] = link; } else { state.db.navLinks.push(link); }
                         renderNavLinks(); resetNavLinkForm(); saveDatabase();
-                    });
-                    
-                    $(document).on('click', '#appearance-tabs .tab-btn, #settings-tabs .tab-btn', e => {
-                        const parent = e.target.closest('.tabs');
-                        parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                        e.target.classList.add('active');
-                        parent.nextElementSibling.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                        $(`#tab-${e.target.dataset.tab}`).classList.add('active');
-                    });
-    
-                    let draggedItem = null;
-                    $(document).on('dragstart', '#nav-links-container .draggable-item', e => { draggedItem = e.target; setTimeout(() => e.target.classList.add('dragging'), 0); });
-                    $(document).on('dragend', '#nav-links-container .draggable-item', e => { if (draggedItem) { draggedItem.classList.remove('dragging'); } });
-                    $(document).on('dragover', '#nav-links-container', e => {
-                        e.preventDefault();
-                        const afterElement = [...$$('#nav-links-container .draggable-item:not(.dragging)')].reduce((closest, child) => { const box = child.getBoundingClientRect(); const offset = e.clientY - box.top - box.height / 2; return offset < 0 && offset > closest.offset ? { offset: offset, element: child } : closest; }, { offset: Number.NEGATIVE_INFINITY }).element;
-                        if (draggedItem) { if (afterElement == null) { $('#nav-links-container').appendChild(draggedItem); } else { $('#nav-links-container').insertBefore(draggedItem, afterElement); } }
-                    });
-                    $(document).on('drop', '#nav-links-container', () => {
-                        const newOrder = [...$$('#nav-links-container .draggable-item')].map(item => parseInt(item.dataset.id));
-                        state.db.navLinks.forEach(link => { link.order = newOrder.indexOf(link.id) + 1; });
-                        saveDatabase();
-                    });
-                    
-                    $(document).on('submit', '#config-form, #proxy-form', e => {
-                        e.preventDefault();
+                    }
+                    else if (e.target.matches('#config-form, #proxy-form')) {
                         Object.keys(state.db.config).forEach(key => { const input = $(`#config-${key.replace(/_/g, '-')}`); if (input) state.db.config[key] = input.type === 'checkbox' ? input.checked : input.value; });
+                        const proxyEnabled = $(`#proxy-enabled`); if(proxyEnabled) state.db.config.proxyEnabled = proxyEnabled.checked;
                         saveDatabase();
+                    }
+                });
+                
+                const initAppearanceTabs = () => {
+                    const tabs = $('#appearance-tabs');
+                    if(!tabs) return;
+                    tabs.addEventListener('click', e => {
+                        if(e.target.matches('.tab-btn')){
+                            tabs.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                            e.target.classList.add('active');
+                            tabs.nextElementSibling.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                            $(`#tab-${e.target.dataset.tab}`).classList.add('active');
+                        }
                     });
                 };
                 
-                initEventListeners();
-                init();
-            });
-        </script>
-    </body>
-    </html>
+                const initSettingsTabs = () => {
+                    const tabs = $('#settings-tabs');
+                    if(!tabs) return;
+                    tabs.addEventListener('click', e => {
+                        if(e.target.matches('.tab-btn')){
+                            tabs.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                            e.target.classList.add('active');
+                            tabs.nextElementSibling.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                            $(`#tab-${e.target.dataset.tab}`).classList.add('active');
+                        }
+                    });
+                };
+
+                let draggedItem = null;
+                ui.mainContentBody.addEventListener('dragstart', e => { if (e.target.matches('.draggable-item')) { draggedItem = e.target; setTimeout(() => e.target.classList.add('dragging'), 0); } });
+                ui.mainContentBody.addEventListener('dragend', e => { if (draggedItem) { draggedItem.classList.remove('dragging'); } });
+                ui.mainContentBody.addEventListener('dragover', e => {
+                    const container = e.target.closest('#nav-links-container');
+                    if(container) {
+                        e.preventDefault();
+                        const afterElement = [...container.querySelectorAll('.draggable-item:not(.dragging)')].reduce((closest, child) => { const box = child.getBoundingClientRect(); const offset = e.clientY - box.top - box.height / 2; return offset < 0 && offset > closest.offset ? { offset: offset, element: child } : closest; }, { offset: Number.NEGATIVE_INFINITY }).element;
+                        if (draggedItem) { if (afterElement == null) { container.appendChild(draggedItem); } else { container.insertBefore(draggedItem, afterElement); } }
+                    }
+                });
+                ui.mainContentBody.addEventListener('drop', e => {
+                    const container = e.target.closest('#nav-links-container');
+                    if(container) {
+                        const newOrder = [...container.querySelectorAll('.draggable-item')].map(item => parseInt(item.dataset.id));
+                        state.db.navLinks.forEach(link => { link.order = newOrder.indexOf(link.id) + 1; });
+                        saveDatabase();
+                    }
+                });
+            };
+            
+            initEventListeners();
+            init();
+        });
+    </script>
+</body>
+</html>
