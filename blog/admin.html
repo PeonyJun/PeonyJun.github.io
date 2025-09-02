@@ -243,7 +243,7 @@
                 
                 const state = {
                     db: null, dbSha: null, github: null, activeView: 'dashboard',
-                    editingType: null, editingId: null, customSelects: {}
+                    editingType: null, editingId: null, customSelects: {}, basePath: ''
                 };
     
                 const ui = {
@@ -284,51 +284,53 @@
                             body: JSON.stringify({ message: `[CMS] Create ${path}`, content: btoa(unescape(encodeURIComponent(content))), branch: this.branch })
                         });
                     }
-                    async checkAndCreateDirs() {
+                    async checkAndCreateDirs(basePath) {
                         const dirs = ['img', 'music', 'resource'];
                         for (const dir of dirs) {
-                            try { await this.getFile(`${dir}/.gitkeep`); } catch (err) { if (err.response && err.response.status === 404) { await this.createFile(`${dir}/.gitkeep`, ''); } }
+                            const fullPath = `${basePath}/${dir}/.gitkeep`.replace(/^\//, '');
+                            try { await this.getFile(fullPath); } catch (err) { if (err.response && err.response.status === 404) { await this.createFile(fullPath, ''); } }
                         }
                     }
                 }
                 
                 function getRepoFromURL() {
                     const { hostname, pathname } = window.location;
-                    if (!hostname.endsWith('github.io')) return null;
-                    const parts = pathname.split('/').filter(p => p);
+                    if (!hostname.endsWith('github.io')) return { repo: null, basePath: '' };
                     const user = hostname.split('.')[0];
-                    if (parts.length === 0 || (parts.length === 1 && parts[0] === 'admin.html')) {
-                        return `${user}/${user}.github.io`;
-                    } else {
-                        return `${user}/${parts[0]}`;
-                    }
+                    const repoName = `${user}/${user}.github.io`;
+                    const pathParts = pathname.split('/').filter(p => p && p !== 'admin.html');
+                    const basePath = pathParts.join('/');
+                    return { repo: repoName, basePath };
                 }
     
                 async function init() {
                     const token = localStorage.getItem('gh_token');
-                    const repo = getRepoFromURL();
-    
+                    const { repo, basePath } = getRepoFromURL();
+                    
                     if (!token || !repo) {
                         ui.loginScreen.style.display = 'flex'; ui.adminContainer.style.display = 'none';
                         if (!repo && token) showToast('无法自动检测仓库。请确保此页面通过 GitHub Pages 访问。', 'danger');
                         return;
                     }
     
+                    state.basePath = basePath;
+
                     try {
                         state.github = new GitHubService(token, repo);
                         ui.repoDisplay.textContent = repo;
-                        const dbFile = await state.github.getFile('db.json');
+                        const dbPath = `${basePath}/db.json`.replace(/^\//, '');
+                        const dbFile = await state.github.getFile(dbPath);
     
                         if (dbFile) {
                             state.db = dbFile.content; state.dbSha = dbFile.sha;
                         } else {
                             state.db = { articles: [], wallpapers: [], authors: [{id: 1, name: 'Admin'}], categories: [], navLinks: [], media: [], config: {} };
-                            await state.github.createFile('db.json', JSON.stringify(state.db, null, 2));
-                            const newDbFile = await state.github.getFile('db.json');
+                            await state.github.createFile(dbPath, JSON.stringify(state.db, null, 2));
+                            const newDbFile = await state.github.getFile(dbPath);
                             state.dbSha = newDbFile.sha;
                         }
                         
-                        await state.github.checkAndCreateDirs();
+                        await state.github.checkAndCreateDirs(basePath);
     
                         ui.loginScreen.style.display = 'none'; ui.adminContainer.style.display = 'block';
                         showView('dashboard');
@@ -344,7 +346,8 @@
                 async function saveDatabase() {
                     if (!state.github || !state.db) return;
                     try {
-                        const res = await state.github.updateFile('db.json', state.db, state.dbSha);
+                        const dbPath = `${state.basePath}/db.json`.replace(/^\//, '');
+                        const res = await state.github.updateFile(dbPath, state.db, state.dbSha);
                         const data = await res.json();
                         state.dbSha = data.content.sha;
                         showToast('数据已成功同步到GitHub！');
@@ -658,7 +661,12 @@
                         saveDatabase();
                     });
                     
-                    $$('#config-form, #proxy-form').forEach(form => form.addEventListener('submit', e => { e.preventDefault(); loadSettings(); saveDatabase(); }));
+                    $$('#config-form, #proxy-form').forEach(form => form.addEventListener('submit', e => {
+                        e.preventDefault();
+                        Object.keys(state.db.config).forEach(key => { const input = $(`#config-${key.replace(/_/g, '-')}`); if (input) state.db.config[key] = input.value; });
+                        const proxyEnabled = $(`#proxy-enabled`); if(proxyEnabled) state.db.config.proxyEnabled = proxyEnabled.checked;
+                        saveDatabase();
+                    }));
                 };
                 
                 initEventListeners();
