@@ -1,68 +1,459 @@
-{
-  "site": {
-    "title": "Peony King",
-    "logoText": "PEONY KING",
-    "author": "牡丹君",
-    "copyrightYear": "2025"
-  },
-  "navigation": {
-    "main": [
-      { "id": "home", "text": "网站首页", "icon": "<svg viewBox=\"0 0 24 24\"><path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"></path><polyline points=\"9 22 9 12 15 12 15 22\"></polyline></svg>" },
-      { "id": "news", "text": "前沿资讯", "icon": "<svg viewBox=\"0 0 24 24\"><rect x=\"2\" y=\"3\" width=\"20\" height=\"14\" rx=\"2\" ry=\"2\"></rect><line x1=\"8\" y1=\"21\" x2=\"16\" y2=\"21\"></line><line x1=\"12\" y1=\"17\" x2=\"12\" y2=\"21\"></line></svg>" },
-      { "id": "travel", "text": "车与出行", "icon": "<svg viewBox=\"0 0 24 24\"><path d=\"M18 8h1a4 4 0 0 1 0 8h-1\"></path><path d=\"M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z\"></path><line x1=\"6\" y1=\"1\" x2=\"6\" y2=\"4\"></line><line x1=\"10\" y1=\"1\" x2=\"10\" y2=\"4\"></line><line x1=\"14\" y1=\"1\" x2=\"14\" y2=\"4\"></line></svg>" },
-      { "id": "recommend", "text": "网站推荐", "icon": "<svg viewBox=\"0 0 24 24\"><polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"></polygon></svg>" },
-      { 
-        "id": "wallpaper", 
-        "text": "精选壁纸", 
-        "icon": "<svg viewBox=\"0 0 24 24\"><rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\"></rect><circle cx=\"8.5\" cy=\"8.5\" r=\"1.5\"></circle><polyline points=\"21 15 16 10 5 21\"></polyline></svg>",
-        "children": [
-          { "id": "landscape", "text": "风景壁纸" },
-          { 
-            "id": "anime", 
-            "text": "动漫壁纸",
-            "children": [
-              { "id": "new-anime", "text": "新番壁纸" },
-              { "id": "classic-anime", "text": "经典壁纸" }
-            ]
-          },
-          { "id": "celebrity", "text": "明星壁纸" }
-        ]
-      }
-    ],
-    "secondary": [
-      { "id": "admin", "text": "后台管理", "icon": "<svg viewBox=\"0 0 24 24\"><line x1=\"22\" y1=\"2\" x2=\"11\" y2=\"13\"></line><polygon points=\"22 2 15 22 11 13 2 9 22 2\"></polygon></svg>" },
-      { "id": "about", "text": "关于本站", "icon": "<svg viewBox=\"0 0 24 24\"><path d=\"M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48\"></path></svg>" }
-    ]
-  },
-  "articles": [
-    {"id": 0, "title": "Sinner主题开售", "category": "主题发布", "date": "2025年5月20日", "content": "这是关于Sinner主题的详细内容，它是一款功能强大、设计简洁的主题。", "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/1.jpg", "type": "latest"},
-    {"id": 1, "title": "后台界面截图", "category": "开发日志", "date": "2025年5月18日", "content": "后台界面经过了全新的设计，操作更加直观便捷。", "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/2.jpg", "type": "latest"},
-    {"id": 2, "title": "Plain主题预览", "category": "主题发布", "date": "2025年5月15日", "content": "Plain主题追求极致的简约，为阅读提供最佳体验。", "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/3.jpg", "type": "latest"},
-    {"id": 3, "title": "晨露凝在叶尖，阳光漫过窗棂", "category": "生活随笔", "date": "2025年5月12日", "content": "清晨的阳光总是能带来希望，新的一天开始了。", "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/4.jpg", "type": "latest"},
-    {"id": 4, "title": "晚风拂过竹林，叶声沙沙", "category": "生活随笔", "date": "2025年5月10日", "content": "夏夜的凉风，是自然的馈赠，能吹走一天的疲惫。", "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/5.jpg", "type": "latest"},
-    {"id": 5, "title": "雨打芭蕉，滴答成韵", "category": "生活随笔", "date": "2025年5月8日", "content": "雨天不总是烦闷的，静下心来，也能听到美妙的旋律。", "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/6.jpg", "type": "latest"},
-    {"id": 6, "title": "雪落无声，覆盖了屋檐", "category": "摄影作品", "date": "2025年1月20日", "content": "白雪皑皑的世界，纯净而又安详。", "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/7.jpg", "type": "latest"},
-    {"id": 7, "title": "微风拂过湖面，涟漪圈圈", "category": "摄影作品", "date": "2024年12月5日", "content": "湖边的景色总是让人心旷神怡。", "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/8.jpg", "type": "latest"},
-    {"id": 8, "title": "古寺钟声悠远，穿过山林", "category": "旅行见闻", "date": "2024年11月11日", "content": "山中古寺，一份宁静，一份禅意。", "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/9.jpg", "type": "latest"},
-    {"id": 9, "title": "新增文章一，用于分页测试", "category": "开发日志", "date": "2024年10月3日", "content": "这是为了测试分页功能而新增的文章内容。", "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/10.jpg", "type": "latest"},
-    {"id": 10, "title": "新增文章二，用于分页测试", "category": "开发日志", "date": "2024年10月2日", "content": "这是为了测试分页功能而新增的另一篇文章内容。", "img": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/1.jpg", "type": "latest"}
-  ],
-  "wallpapers": [
-    {"id": "chuike", "title": "锤科壁纸", "thumb": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/1.jpg", "date": "2024年02月01日", "views": 398, "images": ["https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/4.jpg", "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/5.jpg"], "type": "wallpaper"},
-    {"id": "apple", "title": "Apple壁纸", "thumb": "https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/2.jpg", "date": "2023年11月15日", "views": 520, "images": ["https://gh-proxy.com/https://raw.githubusercontent.com/rjdsq/rjdsq.github.io/main/img/blog/9.jpg"], "type": "wallpaper"}
-  ],
-  "uiText": {
-    "home": "网站首页",
-    "latestArticles": "最新文章",
-    "sceneryWallpapers": "风景壁纸",
-    "more": "more+",
-    "prevPage": "上一页",
-    "nextPage": "下一页",
-    "prevArticle": "上一篇",
-    "nextArticle": "下一篇",
-    "recommendedReading": "推荐阅读",
-    "searchPlaceholder": "搜索文章和壁纸...",
-    "article": "文章",
-    "wallpaper": "壁纸"
-  }
-}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peony King</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <style>
+        :root {
+            --bg1: #0f172a; --bg2: #1e293b; --t1: #e2e8f0; --t2: #94a3b8;
+            --ac: #38bdf8; --ph: #334155; --bd: rgba(148, 163, 184, 0.2);
+            --sw: 210px; --hh: 49px;
+        }
+        body.light {
+            --bg1: #f8fafc; --bg2: #ffffff; --t1: #212529; --t2: #6c757d;
+            --ac: #0d6efd; --ph: #e9ecef; --bd: rgba(0, 0, 0, 0.1);
+        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg1); color: var(--t1); overflow-x: hidden; transition: background .3s, color .3s; }
+        a { text-decoration: none; cursor: pointer; color: var(--t1); }
+        ul { list-style: none; padding: 0; margin: 0; }
+        main { flex-grow: 1; padding: 24px 12px 30px; }
+        .c { max-width: 980px; margin: 0 auto; }
+        #v2, #v3, #v4 { display: none; }
+        .pw { display: flex; flex-direction: column; min-height: 100vh; }
+        .logo { display: flex; align-items: center; font-weight: bold; font-family: 'Playfair Display', serif; }
+        .logo svg { width: 24px; height: 24px; margin-right: 10px; stroke: var(--t1); stroke-width: 1.5; fill: none; transition: stroke .3s; }
+        header { display: flex; justify-content: space-between; align-items: center; height: var(--hh); padding: 0 16px; background: var(--bg1); position: sticky; top: 0; z-index: 500; border-bottom: 1px solid var(--bd); transition: background .3s, border-color .3s; }
+        header .logo { font-size: 20px; letter-spacing: 1px; }
+        .ni { display: flex; align-items: center; gap: 18px; }
+        .ni svg { width: 18px; height: 18px; cursor: pointer; stroke-width: 1.5; fill: none; stroke: var(--t2); stroke-linecap: round; stroke-linejoin: round; }
+        .ni .on { stroke: var(--ac); }
+        #s { position: fixed; top: 0; left: 0; width: var(--sw); height: 100%; background: var(--bg2); padding: 25px 16px 16px; display: flex; flex-direction: column; z-index: 1000; transform: translateX(-100%); transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1), background .3s; }
+        #s.on { transform: translateX(0); }
+        #s .logo { font-size: 18px; margin-bottom: 40px; }
+        #s ul:first-of-type { flex-grow: 1; overflow-y: auto; }
+        #s li a { display: flex; align-items: center; padding: 12px 8px; color: var(--t2); font-size: 14px; font-weight: 500; border-radius: 6px; position: relative; }
+        #s li a:hover { background: rgba(0,0,0,0.05); color: var(--ac); }
+        #s li a.on { color: var(--ac); }
+        #s li a.on svg { stroke: var(--ac); }
+        #s li a svg { width: 18px; height: 18px; margin-right: 12px; stroke: var(--t2); fill: none; }
+        #s .ar { transition: transform .2s; position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(-90deg); width: 14px; height: 14px; }
+        #s li.on > a .ar { transform: translateY(-50%) rotate(0deg); }
+        .sub { padding-left: 15px; max-height: 0; overflow: hidden; transition: max-height .3s ease-out; }
+        li.on > .sub { max-height: 500px; transition: max-height .4s ease-in; }
+        #o { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 900; opacity: 0; visibility: hidden; transition: all .3s ease; }
+        #o.on { opacity: 1; visibility: visible; }
+        .ip { position: relative; overflow: hidden; background: var(--ph); border-radius: 8px; transition: background .3s; }
+        .ip img { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s ease-in-out; }
+        .ip.ld img { opacity: 1; }
+        .ld .ldr { opacity: 0; }
+        .ldr { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); display: flex; gap: 5px; transition: opacity .3s; }
+        .ldr span { width: 8px; height: 8px; background: var(--t2); border-radius: 50%; animation: p 1.4s infinite ease-in-out both; }
+        .ldr span:nth-child(1) { animation-delay: -.32s; } .ldr span:nth-child(2) { animation-delay: -.16s; }
+        @keyframes p { 0%,80%,100%{transform:scale(0)} 40%{transform:scale(1.0)} }
+        .feat { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0 24px; }
+        .arts { margin-top: 30px; }
+        .arts h2 { font-size: 20px; margin-bottom: 24px; padding-left: 4px; display: flex; justify-content: space-between; align-items: center; }
+        .arts h2 .more { font-size: 14px; color: var(--t2); font-weight: 400; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 12px; }
+        .card .ip { margin-bottom: 8px; }
+        .card p { padding: 0 4px; margin: 0; font-size: 14px; line-height: 1.4; }
+        .bnr .ip, .feat .ip, .a-img { aspect-ratio: 16 / 9; }
+        .grid .ip { aspect-ratio: 4 / 3; }
+        .a-main { max-width: 768px; margin: 0 auto; padding: 0 10px; }
+        .a-main h3 { font-size: 22px; line-height: 1.45; margin: 0 0 18px; }
+        .meta { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 15px; font-size: 13px; color: var(--t2); margin-bottom: 40px; }
+        .meta .cat { color: var(--ac); font-weight: 500; }
+        .cont { font-size: 14px; line-height: 1.85; } .cont p { margin: 0 0 24px; }
+        .a-img { margin: 32px 0; }
+        .separator { border: none; height: 1px; background-color: var(--bd); }
+        .separator + .arts { margin-top: 0; }
+        #home-separator { margin: 40px 0 25px; }
+        .nav-links { margin: 40px 0; display: grid; gap: 12px; }
+        .nav-links a { background-color: var(--ph); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M-10 10 L10 -10 M0 40 L40 0 M30 50 L50 30' stroke='rgba(148, 163, 184, 0.1)' stroke-width='2'/%3E%3C/svg%3E"); display: flex; align-items: center; padding: 16px; border-radius: 12px; transition: background-color .3s; }
+        .nav-links a.hidden { display: none; }
+        .nav-links a:hover { background-color: #3f5169; }
+        body.light .nav-links a:hover { background-color: #dee2e6; }
+        .nav-links .nav-arrow { font-size: 20px; font-weight: bold; }
+        .nav-links .nav-text { flex-grow: 1; padding: 0 12px; }
+        .nav-links .nav-text span { display: block; color: var(--t2); font-size: 13px; margin-bottom: 4px; font-weight: 400; }
+        .nav-links .nav-text .nav-title { color: var(--t1); font-size: 14px; font-weight: 500; line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .nav-links .nav-next { flex-direction: row-reverse; }
+        .nav-links .nav-next .nav-text { text-align: right; }
+        .pagination { display: flex; justify-content: space-between; max-width: 240px; margin: 20px auto 0; }
+        .page-btn { padding: 6px 18px; background-color: transparent; border: 1px solid var(--bd); border-radius: 8px; color: var(--t2); font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s; }
+        .page-btn:hover { background-color: var(--ph); color: var(--t1); }
+        .page-btn.hidden { visibility: hidden; }
+        footer { text-align: center; padding: 30px 15px; font-size: 13px; color: var(--t2); transition: color .3s; }
+        #search-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 1100; opacity: 0; visibility: hidden; transition: opacity .3s; }
+        #search-overlay.on { opacity: 1; visibility: visible; }
+        .search-modal { position: absolute; top: 12vh; left: 50%; transform: translateX(-50%); width: 90%; max-width: 550px; background: var(--bg2); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .search-bar { position: relative; }
+        #search-input { width: 100%; background: transparent; border: none; outline: none; color: var(--t1); padding: 16px 45px 16px 16px; font-size: 15px; }
+        #search-close { position: absolute; top: 50%; transform: translateY(-50%); right: 14px; width: 20px; height: 20px; stroke: var(--t2); cursor: pointer; }
+        #search-results { border-top: 1px solid var(--bd); padding: 8px; max-height: 60vh; overflow-y: auto; }
+        .search-result { display: block; padding: 12px; border-radius: 6px; font-size: 14px; line-height: 1.4; }
+        .search-result:hover { background: var(--ph); }
+        .search-result span { color: var(--t2); font-size: 12px; margin-top: 2px; display: block; }
+    </style>
+</head>
+<body>
+    <aside id="s">
+        <div class="logo"></div>
+        <ul id="nav-main"></ul>
+        <ul id="nav-secondary"></ul>
+    </aside>
+    <div id="o"></div>
+    <div class="pw">
+        <header>
+            <div class="logo-w"><div class="logo"></div></div>
+            <div class="ni">
+                <svg id="search-trigger" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <div id="tt" style="cursor:pointer;line-height:0">
+                    <svg id="m" class="on" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <svg id="n" style="display:none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </div>
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                <svg id="st" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            </div>
+        </header>
+        <main>
+            <div id="v1">
+                <div class="c">
+                    <a href="#" class="lk bnr" data-article-id="0"><div class="ip"><div class="ldr"><span></span><span></span><span></span></div><img src="" alt=""></div></a>
+                    <section class="feat">
+                        <a href="#" class="lk" data-article-id="1"><div class="ip"><div class="ldr"><span></span><span></span><span></span></div><img loading="lazy" src="" alt=""></div></a>
+                        <a href="#" class="lk" data-article-id="2"><div class="ip"><div class="ldr"><span></span><span></span><span></span></div><img loading="lazy" src="" alt=""></div></a>
+                    </section>
+                    <section class="arts">
+                        <h2 id="home-articles-title"></h2>
+                        <div class="grid" id="home-articles-grid"></div>
+                        <div class="pagination" id="home-pagination">
+                            <a href="#" id="prev-page" class="page-btn"></a>
+                            <a href="#" id="next-page" class="page-btn"></a>
+                        </div>
+                    </section>
+                    <hr class="separator" id="home-separator">
+                    <section class="arts">
+                        <h2 id="home-wallpapers-title"></h2>
+                        <div class="grid" id="home-wallpapers-grid"></div>
+                    </section>
+                </div>
+            </div>
+            <div id="v2">
+                <div class="a-main">
+                    <h3 id="article-title"></h3>
+                    <div class="meta"><span id="article-date"></span>/ <span class="cat" id="article-category"></span>/ <span id="article-author"></span></div>
+                    <div class="cont" id="article-content"></div>
+                    <div class="ip a-img"><div class="ldr"><span></span><span></span><span></span></div><img loading="lazy" id="article-image" alt=""></div>
+                    <div class="nav-links">
+                        <a href="#" class="lk nav-prev" id="prev-article"><span class="nav-arrow">←</span><div class="nav-text"><span id="prev-article-text"></span><div class="nav-title"></div></div></a>
+                        <a href="#" class="lk nav-next" id="next-article"><span class="nav-arrow">→</span><div class="nav-text"><span id="next-article-text"></span><div class="nav-title"></div></div></a>
+                    </div>
+                    <hr class="separator">
+                    <section class="arts">
+                        <h2 id="recommend-title"></h2>
+                        <div class="grid" id="article-recommend-grid"></div>
+                    </section>
+                </div>
+            </div>
+            <div id="v3">
+                 <div class="a-main">
+                    <h3 id="wallpaper-title"></h3>
+                    <div class="meta" id="wallpaper-meta"></div>
+                    <div class="grid" id="wallpaper-grid"></div>
+                    <div class="nav-links">
+                        <a href="#" class="wallpaper-link nav-prev" id="prev-wallpaper"><span class="nav-arrow">←</span><div class="nav-text"><span id="prev-wallpaper-text"></span><div class="nav-title"></div></div></a>
+                        <a href="#" class="wallpaper-link nav-next" id="next-wallpaper"><span class="nav-arrow">→</span><div class="nav-text"><span id="next-wallpaper-text"></span><div class="nav-title"></div></div></a>
+                    </div>
+                 </div>
+            </div>
+            <div id="v4">
+                <div class="a-main">
+                    <section class="arts" style="margin-top:0;">
+                        <h2 id="more-title"></h2>
+                        <div class="grid" id="more-grid"></div>
+                        <div class="pagination" id="more-pagination">
+                            <a href="#" id="more-prev-page" class="page-btn"></a>
+                            <a href="#" id="more-next-page" class="page-btn"></a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+        <footer id="footer"></footer>
+    </div>
+    <div id="search-overlay">
+        <div class="search-modal">
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="" autocomplete="off">
+                <svg id="search-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </div>
+            <div id="search-results"></div>
+        </div>
+    </div>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', () => {
+            const D = document;
+            const gi = id => D.getElementById(id);
+            const qs = s => D.querySelector(s);
+            const qsa = s => D.querySelectorAll(s);
+
+            const v1 = gi('v1'), v2 = gi('v2'), v3 = gi('v3'), v4 = gi('v4');
+            const sideMenu = gi('s'), overlay = gi('o');
+            const lightSwitch = gi('tt'), moonIcon = gi('m'), sunIcon = gi('n');
+
+            let db = {};
+            let homeCurrentPage = 1, moreCurrentPage = 1;
+            const homeArticlesPerPage = 6, moreArticlesPerPage = 10, homeWallpaperLimit = 2;
+            let isHomepageRendered = false;
+
+            const loadImg = c => { 
+                const i = c.querySelector('img'); 
+                if (i && i.src && !i.complete) { 
+                    i.onload = () => c.classList.add('ld');
+                } else if (i && i.src) { 
+                    c.classList.add('ld'); 
+                } 
+            };
+            
+            const setNavLinks = (el, data, index) => {
+                const pLink = gi(`prev-${el}`), nLink = gi(`next-${el}`);
+                pLink.classList.toggle('hidden', index <= 0);
+                nLink.classList.toggle('hidden', index >= data.length - 1);
+                if (index > 0) {
+                    const prev = data[index - 1];
+                    pLink.dataset[`${el}Id`] = prev.id;
+                    pLink.querySelector('.nav-title').textContent = prev.title;
+                }
+                if (index < data.length - 1) {
+                    const next = data[index + 1];
+                    nLink.dataset[`${el}Id`] = next.id;
+                    nLink.querySelector('.nav-title').textContent = next.title;
+                }
+            };
+            
+            const renderHomepage = () => {
+                const articlesData = db.articles;
+                const wallpaperData = db.wallpapers;
+                
+                const bannerArticle = articlesData[0];
+                const bannerLink = qs('.bnr');
+                bannerLink.dataset.articleId = bannerArticle.id;
+                const bannerImg = bannerLink.querySelector('img');
+                bannerImg.src = bannerArticle.img;
+                bannerImg.alt = bannerArticle.title;
+                
+                const featArticles = articlesData.slice(1, 3);
+                const featLinks = qsa('.feat .lk');
+                featLinks.forEach((link, i) => {
+                    link.dataset.articleId = featArticles[i].id;
+                    const featImg = link.querySelector('img');
+                    featImg.src = featArticles[i].img;
+                    featImg.alt = featArticles[i].title;
+                });
+                
+                const articlesForGrid = articlesData.filter(a => a.id >= 3);
+                const totalArticles = articlesForGrid.length;
+                const articlesGrid = gi('home-articles-grid');
+                
+                if (!isHomepageRendered) {
+                    articlesGrid.innerHTML = articlesForGrid.map(item => `
+                        <div class="card" data-pageable="true"><a class="lk" href="#" data-article-id="${item.id}"><div class="ip"><div class="ldr"><span></span><span></span><span></span></div><img loading="lazy" src="${item.img}" alt="${item.title}"></div><p>${item.title}</p></a></div>
+                    `).join('');
+
+                    const wallpapersGrid = gi('home-wallpapers-grid');
+                    const wallpapersForGrid = wallpaperData.slice(0, homeWallpaperLimit);
+                    wallpapersGrid.innerHTML = wallpapersForGrid.map(item => `
+                        <div class="card"><a class="wallpaper-link" href="#" data-wallpaper-id="${item.id}"><div class="ip"><div class="ldr"><span></span><span></span><span></span></div><img loading="lazy" src="${item.thumb}" alt="${item.title}"></div><p>${item.title}</p></a></div>
+                    `).join('');
+                }
+
+                gi('home-pagination').style.display = totalArticles > homeArticlesPerPage ? 'flex' : 'none';
+                if (totalArticles > homeArticlesPerPage) {
+                    const homeTotalPages = Math.ceil(totalArticles / homeArticlesPerPage);
+                    const start = (homeCurrentPage - 1) * homeArticlesPerPage;
+                    qsa('#home-articles-grid .card[data-pageable="true"]').forEach((card, index) => {
+                        card.style.display = (index >= start && index < start + homeArticlesPerPage) ? '' : 'none';
+                    });
+                    gi('prev-page').classList.toggle('hidden', homeCurrentPage === 1);
+                    gi('next-page').classList.toggle('hidden', homeCurrentPage >= homeTotalPages);
+                }
+                
+                qs('.arts h2 a[data-more-category="wallpaper"]').style.display = wallpaperData.length > homeWallpaperLimit ? '' : 'none';
+                isHomepageRendered = true;
+            };
+
+            const renderArticle = id => {
+                const article = db.articles.find(a => a.id === parseInt(id, 10));
+                if (!article) return;
+                gi('article-title').textContent = article.title;
+                gi('article-date').textContent = article.date;
+                gi('article-category').textContent = article.category;
+                gi('article-author').textContent = db.site.author;
+                gi('article-image').src = article.img;
+                gi('article-image').alt = article.title;
+                gi('article-content').innerHTML = `<p>${article.content}</p>`;
+                setNavLinks('article', db.articles, db.articles.findIndex(a => a.id === article.id));
+                gi('article-recommend-grid').innerHTML = db.articles.slice(0, 2).map(rec => `<div class="card"><a class="lk" href="#" data-article-id="${rec.id}"><div class="ip"><div class="ldr"><span></span><span></span><span></span></div><img loading="lazy" src="${rec.img}" alt="${rec.title}"/></div><p>${rec.title}</p></a></div>`).join('');
+                qsa('#v2 .ip').forEach(loadImg);
+            };
+
+            const renderWallpaper = id => {
+                const gal = db.wallpapers.find(g => g.id === id);
+                if (!gal) return;
+                gi('wallpaper-title').textContent = gal.title;
+                gi('wallpaper-meta').innerHTML = `<span><svg viewBox="0 0 24 24" width="14" height="14" style="vertical-align:-2px;stroke:currentColor;stroke-width:2;fill:none;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> ${gal.date}</span><span><svg viewBox="0 0 24 24" width="14" height="14" style="vertical-align:-2px;stroke:currentColor;stroke-width:2;fill:none;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> ${gal.views}</span>`;
+                gi('wallpaper-grid').innerHTML = gal.images.map(src => `<div class="card"><div class="ip"><div class="ldr"><span></span><span></span><span></span></div><img src="${src}" alt="${gal.title}"/></div></div>`).join('');
+                setNavLinks('wallpaper', db.wallpapers, db.wallpapers.findIndex(g => g.id === id));
+                qsa('#v3 .ip').forEach(loadImg);
+            };
+
+            const renderMorePage = (cat, page) => {
+                const isArt = cat === 'latest';
+                const data = isArt ? db.articles : db.wallpapers;
+                const totalItems = data.length;
+                const moreTotalPages = Math.ceil(totalItems / moreArticlesPerPage);
+                const pageItems = data.slice((page - 1) * moreArticlesPerPage, page * moreArticlesPerPage);
+                gi('more-title').textContent = isArt ? db.uiText.latestArticles : db.uiText.sceneryWallpapers;
+                gi('more-grid').innerHTML = pageItems.map(item => {
+                    const linkClass = isArt ? 'lk' : 'wallpaper-link';
+                    const dataAttr = isArt ? `data-article-id="${item.id}"` : `data-wallpaper-id="${item.id}"`;
+                    const imgSrc = isArt ? item.img : item.thumb;
+                    return `<div class="card"><a class="${linkClass}" href="#" ${dataAttr}><div class="ip"><div class="ldr"><span></span><span></span><span></span></div><img loading="lazy" src="${imgSrc}" alt="${item.title}"/></div><p>${item.title}</p></a></div>`;
+                }).join('');
+                gi('more-pagination').style.display = moreTotalPages > 1 ? 'flex' : 'none';
+                gi('more-prev-page').classList.toggle('hidden', page === 1);
+                gi('more-next-page').classList.toggle('hidden', page >= moreTotalPages);
+                qsa('#v4 .ip').forEach(loadImg);
+            };
+            
+            const setView = (view, id = null, replace = false) => {
+                window.scrollTo(0, 0);
+                [v1, v2, v3, v4].forEach(v => v.style.display = 'none');
+                let state = { view, id }, url = `#${view}` + (id ? `-${id}` : '');
+                if (view === 'home') {
+                    v1.style.display = 'block';
+                    homeCurrentPage = 1;
+                    renderHomepage();
+                    qsa('#v1 .ip').forEach(loadImg);
+                    url = window.location.pathname;
+                } else if (view === 'article') { v2.style.display = 'block'; renderArticle(id); }
+                else if (view === 'wallpaper') { v3.style.display = 'block'; renderWallpaper(id); }
+                else if (view === 'more') {
+                    v4.style.display = 'block';
+                    moreCurrentPage = 1;
+                    renderMorePage(id, moreCurrentPage);
+                }
+                if (replace) { history.replaceState(state, '', url); } else { history.pushState(state, '', url); }
+            };
+
+            const createNavItem = (item, isSub = false) => {
+                const hasChildren = item.children && item.children.length > 0;
+                let li = `<li class="${hasChildren ? 'sm' : ''}">`;
+                let link = `<a href="#">`;
+                if (item.icon) link += item.icon;
+                link += item.text;
+                if (hasChildren && !isSub) link += `<svg class="ar" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+                if (hasChildren && isSub) link += `<svg class="ar" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+                link += `</a>`;
+                li += link;
+                if (hasChildren) {
+                    li += `<ul class="sub">`;
+                    item.children.forEach(child => li += createNavItem(child, true));
+                    li += `</ul>`;
+                }
+                li += `</li>`;
+                return li;
+            };
+
+            const initApp = (data) => {
+                db = data;
+                
+                document.title = db.site.title;
+                const logoHTML = `<svg viewBox="0 0 24 24"><path d="M12 2 L17.5 11 L12 22 L6.5 11 Z M2 12 L12 17 L22 12"></path></svg>${db.site.logoText}`;
+                qsa('.logo').forEach(el => el.innerHTML = logoHTML);
+                
+                gi('nav-main').innerHTML = db.navigation.main.map(item => createNavItem(item)).join('');
+                gi('nav-secondary').innerHTML = db.navigation.secondary.map(item => createNavItem(item)).join('');
+                qs('a[href="#"]').classList.add('on');
+                
+                gi('home-articles-title').innerHTML = `${db.uiText.latestArticles}<a href="#" class="more" data-more-category="latest">${db.uiText.more}</a>`;
+                gi('home-wallpapers-title').innerHTML = `${db.uiText.sceneryWallpapers}<a href="#" class="more" data-more-category="wallpaper">${db.uiText.more}</a>`;
+                gi('prev-page').textContent = db.uiText.prevPage;
+                gi('next-page').textContent = db.uiText.nextPage;
+                gi('more-prev-page').textContent = db.uiText.prevPage;
+                gi('more-next-page').textContent = db.uiText.nextPage;
+                gi('prev-article-text').textContent = db.uiText.prevArticle;
+                gi('next-article-text').textContent = db.uiText.nextArticle;
+                gi('prev-wallpaper-text').textContent = db.uiText.prevArticle;
+                gi('next-wallpaper-text').textContent = db.uiText.nextArticle;
+                gi('recommend-title').textContent = db.uiText.recommendedReading;
+                gi('search-input').placeholder = db.uiText.searchPlaceholder;
+                gi('footer').innerHTML = `Copyright © ${db.site.copyrightYear}&nbsp;&nbsp;${db.site.author} 本站总访问量：<span id="busuanzi_value_site_pv">00</span>`;
+
+                D.body.addEventListener('click', e => {
+                    const link = e.target.closest('a');
+                    if (!link) return;
+                    const ds = link.dataset;
+                    if (ds.articleId) { e.preventDefault(); setView('article', ds.articleId, !!link.closest('.nav-links')); }
+                    else if (ds.wallpaperId) { e.preventDefault(); setView('wallpaper', ds.wallpaperId, !!link.closest('.nav-links')); }
+                    else if (ds.moreCategory) { e.preventDefault(); setView('more', ds.moreCategory); }
+                    else if (link.id === 'prev-page' || link.id === 'next-page') {
+                        e.preventDefault();
+                        homeCurrentPage += (link.id === 'next-page' ? 1 : -1);
+                        renderHomepage();
+                    }
+                    else if (link.id === 'more-prev-page' || link.id === 'more-next-page') {
+                        e.preventDefault();
+                        const cat = qs('#more-title').textContent === db.uiText.latestArticles ? 'latest' : 'wallpaper';
+                        const total = Math.ceil((cat === 'latest' ? db.articles.length : db.wallpapers.length) / moreArticlesPerPage);
+                        moreCurrentPage += (link.id === 'more-next-page' ? 1 : -1);
+                        if(moreCurrentPage > 0 && moreCurrentPage <= total) renderMorePage(cat, moreCurrentPage);
+                    }
+                });
+
+                window.onpopstate = e => setView(e.state?.view || 'home', e.state?.id, true);
+                qsa('#st, #o').forEach(el => el.onclick = () => { sideMenu.classList.toggle('on'); overlay.classList.toggle('on'); });
+                qsa('.sm > a').forEach(t => t.onclick = e => { e.preventDefault(); t.parentElement.classList.toggle('on'); });
+                lightSwitch.onclick = () => { const isLight = D.body.classList.toggle('light'); moonIcon.style.display = isLight ? 'none' : 'block'; sunIcon.style.display = isLight ? 'block' : 'none'; };
+                
+                const searchOverlay = gi('search-overlay'), searchInput = gi('search-input'), searchResults = gi('search-results');
+                const searchableData = [...db.articles, ...db.wallpapers];
+                const closeSearch = () => { searchOverlay.classList.remove('on'); searchInput.value = ''; searchResults.innerHTML = ''; };
+                gi('search-trigger').onclick = () => { searchOverlay.classList.add('on'); searchInput.focus(); };
+                gi('search-close').onclick = closeSearch;
+                searchOverlay.onclick = e => { if (e.target === searchOverlay) closeSearch(); };
+                searchInput.oninput = () => {
+                    const query = searchInput.value.trim().toLowerCase();
+                    if (!query) { searchResults.innerHTML = ''; return; }
+                    const results = searchableData.filter(item => item.title.toLowerCase().includes(query));
+                    searchResults.innerHTML = results.map(item => {
+                        const isArt = item.type === 'latest';
+                        const linkClass = isArt ? 'lk' : 'wallpaper-link';
+                        const dataAttr = isArt ? `data-article-id="${item.id}"` : `data-wallpaper-id="${item.id}"`;
+                        return `<a href="#" class="search-result ${linkClass}" ${dataAttr}>${item.title}<span>${isArt ? db.uiText.article : db.uiText.wallpaper}</span></a>`;
+                    }).join('');
+                };
+                searchResults.onclick = e => {
+                    const link = e.target.closest('a');
+                    if (link) { e.preventDefault(); e.stopPropagation(); if (link.dataset.articleId) setView('article', link.dataset.articleId); else setView('wallpaper', link.dataset.wallpaperId); closeSearch(); }
+                };
+                
+                history.replaceState({ view: 'home' }, '', window.location.pathname);
+                setView('home', null, true);
+            };
+            
+            fetch('db.json')
+                .then(response => response.json())
+                .then(data => initApp(data))
+                .catch(error => console.error('Error loading data:', error));
+        });
+    </script>
+</body>
+</html>
